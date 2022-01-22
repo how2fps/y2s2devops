@@ -1,0 +1,38 @@
+label {
+  color: white;
+  font-size: 1.1rem;
+}
+
+input {
+  outline: none;
+  border-radius: 15px;
+  padding: 10px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.lni-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.add-item-container {
+  width: 70%;
+  padding: 3.5%;
+  background-color: #ff5d73;
+  border-radius: 15px;
+}
+
+.add-item-btn {
+  background-color: #494949;
+  color: white;
+  padding: 5px 45px;
+}
+
+.aic-left {
+  width: 50%;
+}
+
+.aic-right {
+  width: 50%;
+}

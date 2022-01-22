@@ -1,0 +1,39 @@
+.items-bought-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.in-title,
+.a-title,
+.dt-title {
+  font-weight: 700;
+}
+
+.item-block {
+  width: 100%;
+  height: 90px;
+  border-top: 3px solid black;
+}
+
+.item-pic {
+  width: 70px;
+  height: 70px;
+  background-color: greenyellow;
+  margin-right: 30px;
+}
+
+.item-info {
+  width: 33%;
+}
+
+.amount-item-bought {
+  margin-right: 10px;
+}
+
+.datetime-bought {
+  width: 33%;
+}
+
+.amount-bought {
+  width: 33%;
+}
