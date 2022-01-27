@@ -1,5 +1,5 @@
-
-.sign-up-container {
+@charset "ISO-8859-1";
+.login-container {
   background: #fafafa;
   padding: 3rem;
   box-shadow: 3px 3px 5px 3px rgba(128, 128, 128, 0.329);
@@ -16,4 +16,18 @@
 
 .btn-primary:hover {
   background-color: rgba(255, 93, 93, 0.774) !important;
+}
+
+.btn-secondary,
+.btn-secondary:active,
+.btn-secondary:visited {
+  outline: none;
+  border: 1px solid #ff5d73;
+  color: black;
+  background: white;
+}
+
+.btn-secondary:hover {
+  border: 1px solid #ff5d73;
+  background-color: #ff5d73 !important;
 }
