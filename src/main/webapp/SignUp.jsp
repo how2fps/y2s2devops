@@ -35,10 +35,6 @@
 								class="form-control" />
 						</div>
 						<div class="form-group mb-3">
-							<label for="">Username</label> <input type="text"
-								class="form-control" />
-						</div>
-						<div class="form-group mb-3">
 							<label for="">Password</label> <input type="password"
 								class="form-control" />
 						</div>
