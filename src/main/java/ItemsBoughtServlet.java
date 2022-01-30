@@ -87,19 +87,19 @@ public class ItemsBoughtServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		String action = request.getServletPath();
-		try {
-			switch (action) {
-			case "/read":
-				break;
-			default:
-				listItems(request, response);
-				break;
-			}
-		} catch (SQLException ex) {
-			throw new ServletException(ex);
-		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		String action = request.getServletPath();
+//		try {
+//			switch (action) {
+//			case "/read":
+//				break;
+//			default:
+//				listItems(request, response);
+//				break;
+//			}
+//		} catch (SQLException ex) {
+//			throw new ServletException(ex);
+//		}
 	}
 
 	/**
