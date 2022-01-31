@@ -22,12 +22,16 @@ public class ItemsBoughtServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Database Connection Variables
-	private String jdbcURL = "jdbc:mysql://localhost:3306/itemsbought";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
-	// SQL Command Variables
-	private static final String SELECT_ALL_ITEMS_BOUGHT = "select * from UserDetails ";
+	// Need to get the userId here to add to our SQL Statement String
+
+	// Prepared SQL Statements to perform CRUD operations
+	private static int userId = 1;
+	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE Id = "
+			+ Integer.toString(userId) + " AND transactiontype = 'Buy'";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -45,7 +49,7 @@ public class ItemsBoughtServlet extends HttpServlet {
 	// The function to get all items that the user bought
 	private void listItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Item> itemsList = new ArrayList<>();
+		List<Item> itemsBoughtList = new ArrayList<>();
 		try (Connection connection = getConnection();
 				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ITEMS_BOUGHT);) {
@@ -61,14 +65,14 @@ public class ItemsBoughtServlet extends HttpServlet {
 				int quantity = rs.getInt("quantity");
 				int userId = rs.getInt("userid");
 				java.sql.Date dateListed = rs.getDate("dateListed");
-				itemsList.add(new Item(itemId, name, description, image, pricing, quantity, userId, dateListed));
+				itemsBoughtList.add(new Item(itemId, name, description, image, pricing, quantity, userId, dateListed));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
 		// ItemsBought.jsp
-		request.setAttribute("listItems", itemsList);
+		request.setAttribute("itemsBoughtList", itemsBoughtList);
 		request.getRequestDispatcher("/ItemsBought.jsp").forward(request, response);
 	}
 
@@ -88,18 +92,13 @@ public class ItemsBoughtServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-//		String action = request.getServletPath();
-//		try {
-//			switch (action) {
-//			case "/read":
-//				break;
-//			default:
-//				listItems(request, response);
-//				break;
-//			}
-//		} catch (SQLException ex) {
-//			throw new ServletException(ex);
-//		}
+		String action = request.getServletPath();
+		try {
+			System.out.println("in the try block");
+			listItems(request, response);
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 	}
 
 	/**
