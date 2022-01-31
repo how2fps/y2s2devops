@@ -23,7 +23,7 @@
 	<br>
 
 	<div class="card" style="width: 20rem;">
-		<img class="card-img-top" width= 100px height= 200px src="..." alt="Item Image">
+		<img class="card-img-top" width= 150px height= 200px src="..." alt="Item Image">
 		<div class="card-body">
 			<h5 class="shopitemtitle">ItemName</h5>
 			<p class="card-text shoppricemargin">(Price/item)</p>
