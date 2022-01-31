@@ -1,0 +1,25 @@
+.fontcenterShop {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.card {
+	box-shadow: 10px 15px 10px 0 rgba(0, 0, 0, 0.3);
+	max-width: 300px;
+	margin-left: 200px;
+}
+
+.shopitemtitle {
+	text-align: left;
+	font-family: arial;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.shoppricemargin {
+	margin-bottom: 50px;
+}
+
+.shopitembutton {
+	width: 250px;
+}
