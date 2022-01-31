@@ -21,6 +21,7 @@
 	</div>
 	<br>
 	<br>
+
 	<div class="card" style="width: 20rem;">
 		<img class="card-img-top" width= 100px height= 200px src="..." alt="Item Image">
 		<div class="card-body">
