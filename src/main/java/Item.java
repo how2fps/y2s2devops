@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.sql.Date;
 
 public class Item {
 
@@ -12,9 +12,11 @@ public class Item {
 
 	protected double Pricing;
 
+	protected int Quantity;
+
 	protected int UserId;
 
-	// I dont know if we need to import Date from Java or SQL, i just imported Java
+	// I'll use SQL Date instead of Java Date. This means that there will only
 	protected Date DateListed;
 
 	public int getId() {
@@ -53,12 +55,20 @@ public class Item {
 		return Pricing;
 	}
 
-	public void setPricing(float pricing) {
+	public void setPricing(int pricing) {
 		Pricing = pricing;
 	}
 
+	public double getQuantity() {
+		return Pricing;
+	}
+
+	public void setQuantity(int quantity) {
+		Quantity = quantity;
+	}
+
 	public int getUserId() {
-		return UserId;
+		return Quantity;
 	}
 
 	public void setUserId(int userId) {
@@ -73,13 +83,15 @@ public class Item {
 		DateListed = dateListed;
 	}
 
-	public Item(int id, String name, String description, String image, double pricing, int userId, Date dateListed) {
+	public Item(int id, String name, String description, String image, double pricing, int quantity, int userId,
+			Date dateListed) {
 		super();
 		Id = id;
 		Name = name;
 		Description = description;
 		Image = image;
 		Pricing = pricing;
+		Quantity = quantity;
 		UserId = userId;
 		DateListed = dateListed;
 	}

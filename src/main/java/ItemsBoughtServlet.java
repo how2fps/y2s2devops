@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -25,7 +24,7 @@ public class ItemsBoughtServlet extends HttpServlet {
 	// Database Connection Variables
 	private String jdbcURL = "jdbc:mysql://localhost:3306/itemsbought";
 	private String jdbcUsername = "root";
-	private String jdbcPassword = "password";
+	private String jdbcPassword = "";
 
 	// SQL Command Variables
 	private static final String SELECT_ALL_ITEMS_BOUGHT = "select * from UserDetails ";
@@ -59,9 +58,10 @@ public class ItemsBoughtServlet extends HttpServlet {
 				String description = rs.getString("description");
 				String image = rs.getString("image");
 				double pricing = rs.getDouble("pricing");
+				int quantity = rs.getInt("quantity");
 				int userId = rs.getInt("userid");
-				Date dateListed = rs.getDate("dateListed");
-				itemsList.add(new Item(itemId, name, description, image, pricing, userId, dateListed));
+				java.sql.Date dateListed = rs.getDate("dateListed");
+				itemsList.add(new Item(itemId, name, description, image, pricing, quantity, userId, dateListed));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
