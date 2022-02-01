@@ -27,7 +27,7 @@
 	<div class="container d-flex flex-column align-items-center">
 		<p class="my-4 h1">Sign Up</p>
 		<div class="sign-up-container">
-			<form action="">
+			<form action="RegisterServlet" method="post">
 				<div class="d-flex">
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
