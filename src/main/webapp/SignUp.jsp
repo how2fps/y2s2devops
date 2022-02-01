@@ -25,6 +25,7 @@
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
+		{{}}
 		<p class="my-4 h1">Sign Up</p>
 		<div class="sign-up-container">
 			<form action="RegisterServlet" method="post">
@@ -43,7 +44,7 @@
 								class="form-control" />
 						</div>
 						<div class="form-group mb-3">
-							<label for="fullName">Full Name</label> <input type="text" name="fullName"
+							<label for="displayName">Full Name</label> <input type="text" name="displayName"
 								class="form-control" />
 						</div>
 						<div class="form-group mb-4">

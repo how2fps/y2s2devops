@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,28 +51,44 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 		String email = request.getParameter("email");
+		String displayName = request.getParameter("displayName");
 		String phoneNumber = request.getParameter("phoneNumber");
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
 			 "jdbc:mysql://localhost:3306/devops", "how2fps", "l0l0ksql");
-			 PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)");
+			 PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			 ps.setInt(1, 0);
 			 ps.setString(2, email);
 			 ps.setString(3, password);
 			 int i = ps.executeUpdate();
-			 if (i > 0){
-				 RequestDispatcher view = request.getRequestDispatcher("/SignUp.jsp");
-				 view.forward(request, response);
-//				 PrintWriter writer = response.getWriter();
-//				 writer.println("<h1>" + "You have successfully registered an account!" +
-//						 "</h1>");
-//				 writer.close();
-			 }
+			 ResultSet rs = ps.getGeneratedKeys();
+		        if (rs.next()) {
+		            int userId = rs.getInt(1);
+		            if (i > 0){
+						 PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
+						 ps2.setInt(1, 0);
+						 ps2.setString(2, displayName);
+						 ps2.setString(3, phoneNumber);
+						 ps2.setInt(4, userId);
+						 int x = ps2.executeUpdate();
+						 if (x > 0){
+							request.setAttribute("alert", "Registration Successful!");
+							RequestDispatcher view = request.getRequestDispatcher("/SignUp.jsp");
+							view.forward(request, response);
+//						 	PrintWriter writer = response.getWriter();
+//							writer.println("<h1>" + "You have successfully registered an account!" +
+//								 "</h1>");
+//							writer.close();
+						 }
+					 }
+		        }
+			 
 		}
 		//Step 8: catch and print out any exception
 		catch (Exception exception) {
-		 System.out.println(exception);
+		 PrintWriter writer = response.getWriter();
+		 request.setAttribute("alert", exception);
 		 out.close();
 		}
 		doGet(request, response);
