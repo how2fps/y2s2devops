@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -59,10 +60,12 @@ public class RegisterServlet extends HttpServlet {
 			 ps.setString(3, password);
 			 int i = ps.executeUpdate();
 			 if (i > 0){
-				 PrintWriter writer = response.getWriter();
-				 writer.println("<h1>" + "You have successfully registered an account!" +
-						 "</h1>");
-				 writer.close();
+				 RequestDispatcher view = request.getRequestDispatcher("/SignUp.jsp");
+				 view.forward(request, response);
+//				 PrintWriter writer = response.getWriter();
+//				 writer.println("<h1>" + "You have successfully registered an account!" +
+//						 "</h1>");
+//				 writer.close();
 			 }
 		}
 		//Step 8: catch and print out any exception
