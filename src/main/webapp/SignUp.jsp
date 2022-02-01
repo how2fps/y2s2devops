@@ -31,23 +31,23 @@
 				<div class="d-flex">
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
-							<label for="">Email</label> <input type="text"
+							<label for="email">Email</label> <input type="text" name="email"
 								class="form-control" />
 						</div>
 						<div class="form-group mb-3">
-							<label for="">Password</label> <input type="password"
+							<label for="password">Password</label> <input type="password" name="password"
 								class="form-control" />
 						</div>
 						<div class="form-group mb-3">
-							<label for="">Confirm Password</label> <input type="password"
+							<label for="confirmPassword">Confirm Password</label> <input type="password" name="confirmPassword"
 								class="form-control" />
 						</div>
 						<div class="form-group mb-3">
-							<label for="">Full Name</label> <input type="text"
+							<label for="fullName">Full Name</label> <input type="text" name="fullName"
 								class="form-control" />
 						</div>
 						<div class="form-group mb-4">
-							<label for="">Phone Number</label> <input type="text"
+							<label for="phoneNumber">Phone Number</label> <input type="text" name="phoneNumber"
 								class="form-control" />
 						</div>
 						<button class="btn btn-primary"
