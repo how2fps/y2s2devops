@@ -49,7 +49,7 @@
 								required />
 						</div>
 						<div class="form-group mb-3">
-							<label for="displayName">Full Name</label> <input type="text"
+							<label for="displayName">Display Name</label> <input type="text"
 								name="displayName" class="form-control" required />
 						</div>
 						<div class="form-group mb-4">
