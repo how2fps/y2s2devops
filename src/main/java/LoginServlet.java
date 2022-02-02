@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
-			 "jdbc:mysql://localhost:3306/devops", "how2fps", "l0l0ksql");
+			 "jdbc:mysql://localhost:3306/devops", "root", "");
 			 PreparedStatement ps = con.prepareStatement("select id, password from user_login_information where email = ?", PreparedStatement.RETURN_GENERATED_KEYS);
 			 ps.setString(1, email);
 			 ResultSet rs = ps.executeQuery();
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 						 String displayName = rs2.getString("displayName");
 						 String phoneNumber = rs2.getString("phoneNumber");
 						 HttpSession session = request.getSession();
-						 session.setAttribute("userDisplyName", displayName);
+						 session.setAttribute("userDisplayName", displayName);
 						 session.setAttribute("userPhoneNumber", phoneNumber);
 						 session.setAttribute("userEmail", email);
 						 request.setAttribute("alert", "Successful login!");
