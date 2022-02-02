@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +52,15 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String displayName = request.getParameter("displayName");
 		String phoneNumber = request.getParameter("phoneNumber");
+		
+		if (password.length() < 8) {
+			request.setAttribute("alert", "Password needs to have at least 8 characters!");
+			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+		}
+		if (password != confirmPassword) {
+			request.setAttribute("alert", "Passwords are not the same!");
+			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+		}
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
@@ -74,8 +82,7 @@ public class RegisterServlet extends HttpServlet {
 						 int x = ps2.executeUpdate();
 						 if (x > 0){
 							request.setAttribute("alert", "Registration Successful!");
-							RequestDispatcher view = request.getRequestDispatcher("/SignUp.jsp");
-							view.forward(request, response);
+							request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 //						 	PrintWriter writer = response.getWriter();
 //							writer.println("<h1>" + "You have successfully registered an account!" +
 //								 "</h1>");
@@ -87,9 +94,15 @@ public class RegisterServlet extends HttpServlet {
 		}
 		//Step 8: catch and print out any exception
 		catch (Exception exception) {
-		 PrintWriter writer = response.getWriter();
-		 request.setAttribute("alert", exception);
-		 out.close();
+		 if(exception.toString().contains("Duplicate entry")) {
+			 request.setAttribute("alert", email + "already in use!");
+			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+		 }
+		 else 
+		 {
+			 request.setAttribute("alert", exception);
+			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+		 }
 		}
 		doGet(request, response);
 	}
