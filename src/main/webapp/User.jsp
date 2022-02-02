@@ -19,31 +19,18 @@
 		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
 		<ul class="nav">
 			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="./SignUp.jsp">Sign Up</a></li>
+				style="color: black;" href="#">Shop</a></li>
 			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="./Login.jsp">Login</a></li>
+				style="color: black;" href="#">Your Cart</a></li>
+			<li class="nav-item"><a class="nav-link nav-hover"
+				style="color: black;" href="#">Profile</a></li>
+			<li class="nav-item"><a class="nav-link nav-hover"
+				style="color: black;" href="#">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
-		<p class="my-4 h1">Login</p>
-		<div class="login-container">
-			<form action="">
-				<div class="d-flex">
-					<section class="aic-right d-flex flex-column">
-						<div class="form-group mb-3">
-							<label for="">Email</label> <input type="text"
-								class="form-control" />
-						</div>
-						<div class="form-group mb-4">
-							<label for="">Password</label> <input type="text"
-								class="form-control" />
-						</div>
-						<button class="btn btn-primary mt-2 mb-0"
-							style="background: #FF5D73; color: white">Login</button>
-					</section>
-				</div>
-			</form>
-		</div>
+		<p class="my-4 h1">User</p>
+		
 	</div>
 </body>
 </html>
