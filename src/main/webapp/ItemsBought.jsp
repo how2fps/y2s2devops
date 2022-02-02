@@ -36,17 +36,15 @@
 			class="items-bought-container container d-flex flex-column justify-content-center">
 			<article class="d-flex flex-row">
 				<div class="col d-flex justify-content-center in-title">
-					<p>Item Name</p>
+					<p>Amount & Item Name</p>
 				</div>
 				<div class="col d-flex justify-content-center dt-title">
-					<p>DateTime Bought</p>
+					<p>Date Bought</p>
 				</div>
 				<div class="col d-flex justify-content-center a-title">
 					<p>Amount</p>
 				</div>
 			</article>
-			<p class="d-flex align-self-center row">You have not bought any
-				items yet!</p>
 			<c:forEach var="item" items="${itemsBoughtList}">
 				<div
 					class="item-block d-flex flex-row align-self-center align-items-center">
@@ -57,33 +55,19 @@
 						</div>
 						<c:out value="${item.name}" />
 					</div>
+					<div class="datetime-bought d-flex justify-content-center align-items-center">
+						<button class="btn btn-primary">Add Review</button>
+					</div>
 					<div
 						class="datetime-bought d-flex justify-content-center align-items-center">
 						<c:out value="${item.dateListed}" />
 					</div>
 					<div
 						class="amount-bought d-flex justify-content-center align-items-center">
-						<c:out value="${item.price}" />
+						<c:out value="${item.pricing}" />
 					</div>
 				</div>
 			</c:forEach>
-
-			<!--<div
-				class="item-block d-flex flex-row align-self-center align-items-center">
-				<div class="item-info d-flex flex-row align-items-center">
-					<img class="item-pic" />
-					<p class="amount-item-bought">100</p>
-					<p class="item-name">Mini Film Camera</p>
-				</div>
-				<div
-					class="datetime-bought d-flex justify-content-center align-items-center">
-					<p>21 December 2021</p>
-				</div>
-				<div
-					class="amount-bought d-flex justify-content-center align-items-center">
-					<p>13.50</p>
-				</div>
-			</div>-->
 		</section>
 	</div>
 </body>

@@ -55,12 +55,12 @@ public class Item {
 		return Pricing;
 	}
 
-	public void setPricing(int pricing) {
+	public void setPricing(double pricing) {
 		Pricing = pricing;
 	}
 
 	public double getQuantity() {
-		return Pricing;
+		return Quantity;
 	}
 
 	public void setQuantity(int quantity) {
@@ -68,7 +68,7 @@ public class Item {
 	}
 
 	public int getUserId() {
-		return Quantity;
+		return UserId;
 	}
 
 	public void setUserId(int userId) {

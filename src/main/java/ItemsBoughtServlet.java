@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,9 +30,9 @@ public class ItemsBoughtServlet extends HttpServlet {
 	// Need to get the userId here to add to our SQL Statement String
 
 	// Prepared SQL Statements to perform CRUD operations
-	private static int userId = 1;
-	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE Id = "
-			+ Integer.toString(userId) + " AND transactiontype = 'Buy'";
+	private static int userId = 2;
+	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE BuyingUserId = "
+			+ Integer.toString(userId);
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -57,21 +58,24 @@ public class ItemsBoughtServlet extends HttpServlet {
 			ResultSet rs = preparedStatement.executeQuery();
 			// Step 5.3: Process the ResultSet object.
 			while (rs.next()) {
-				int itemId = rs.getInt("userid");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-				String image = rs.getString("image");
-				double pricing = rs.getDouble("pricing");
+				int itemId = rs.getInt("itemid");
+				String name = rs.getString("itemname");
+				String image = rs.getString("itemimage");
+				double amountPaid = rs.getDouble("amountdealt");
+				System.out.println(amountPaid);
 				int quantity = rs.getInt("quantity");
-				int userId = rs.getInt("userid");
-				java.sql.Date dateListed = rs.getDate("dateListed");
-				itemsBoughtList.add(new Item(itemId, name, description, image, pricing, quantity, userId, dateListed));
+				System.out.println(quantity);
+				int userId = rs.getInt("buyinguserid");
+				java.sql.Date date = rs.getDate("date");
+				itemsBoughtList.add(new Item(itemId, name, "", image, amountPaid, quantity, userId, date));
 			}
 		} catch (SQLException e) {
+			System.out.println(SELECT_ALL_ITEMS_BOUGHT);
 			System.out.println(e.getMessage());
 		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
 		// ItemsBought.jsp
+		System.out.println(Arrays.deepToString(itemsBoughtList.toArray()));
 		request.setAttribute("itemsBoughtList", itemsBoughtList);
 		request.getRequestDispatcher("/ItemsBought.jsp").forward(request, response);
 	}
