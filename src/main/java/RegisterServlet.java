@@ -1,6 +1,5 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.RequestDispatcher;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -43,10 +41,6 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		//Step 1: Initialize a PrintWriter object to return the html values via the response
-		PrintWriter out = response.getWriter();
-		//Step 2: retrieve the four parameters from the request from the web form
-		String fullName = request.getParameter("username");
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 		String email = request.getParameter("email");
@@ -83,10 +77,6 @@ public class RegisterServlet extends HttpServlet {
 						 if (x > 0){
 							request.setAttribute("alert", "Registration Successful!");
 							request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-//						 	PrintWriter writer = response.getWriter();
-//							writer.println("<h1>" + "You have successfully registered an account!" +
-//								 "</h1>");
-//							writer.close();
 						 }
 					 }
 		        }
