@@ -29,8 +29,6 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
-<<<<<<< HEAD
-
 		<dependency>
 			<groupId>${selenium.groupId}</groupId>
 			<artifactId>${selenium.artifactId}</artifactId>
@@ -41,19 +39,7 @@
 			<artifactId>${testng.artifactId}</artifactId>
 			<version>${testng.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.25</version>
-		</dependency>
-=======
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -64,9 +50,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-
->>>>>>> refs/heads/master
 	</dependencies>
 	<build>
 		<plugins>

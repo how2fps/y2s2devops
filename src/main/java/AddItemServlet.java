@@ -1,12 +1,9 @@
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-=======
->>>>>>> refs/heads/master
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,47 +24,18 @@ public class AddItemServlet extends HttpServlet {
 	public AddItemServlet() {
 		super();
 		// TODO Auto-generated constructor stub
-<<<<<<< HEAD
 	}
 
 	// Prepared SQL Statements to perform CRUD operations
 	private static final String INSERT_ITEM_SQL = "INSERT INTO item"
 			+ " (id, name, description, image, pricing, userid, datelisted) VALUES " + " (?,?,?,?,?,?,?) ";
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// do a routing here to invoke the create function
-		// TODO Auto-generated method stub
-
-=======
->>>>>>> refs/heads/master
-	}
-
-	/**
-<<<<<<< HEAD
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-=======
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
->>>>>>> refs/heads/master
-	 *      response)
-	 */
-<<<<<<< HEAD
-=======
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: afasddfasfdasfasfasfasf").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
->>>>>>> refs/heads/master
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
