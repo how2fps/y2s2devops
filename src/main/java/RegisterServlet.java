@@ -85,7 +85,7 @@ public class RegisterServlet extends HttpServlet {
 		//Step 8: catch and print out any exception
 		catch (Exception exception) {
 		 if(exception.toString().contains("Duplicate entry")) {
-			 request.setAttribute("alert", email + "already in use!");
+			 request.setAttribute("alert", email + " is already in use!");
 			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 		 }
 		 else 

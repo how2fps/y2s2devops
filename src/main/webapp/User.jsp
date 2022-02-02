@@ -30,7 +30,12 @@
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
 		<p class="my-4 h1">User</p>
-		
+		<form action="UserServlet" method="post">
+			<div class="d-flex">
+				<button class="btn btn-primary mt-2 mb-0"
+					style="background: #FF5D73; color: white">Login</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
