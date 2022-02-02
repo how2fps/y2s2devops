@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -25,18 +26,21 @@
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
+		<c:if test="${alert != null}">
+			<div class="alert alert-dark mt-4" role="alert">${alert}</div>
+		</c:if>
 		<p class="my-4 h1">Login</p>
 		<div class="login-container">
-			<form action="">
+			<form action="LoginServlet" method="post">
 				<div class="d-flex">
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
 							<label for="">Email</label> <input type="text"
-								class="form-control" />
+								class="form-control" name="email" required />
 						</div>
 						<div class="form-group mb-4">
-							<label for="">Password</label> <input type="text"
-								class="form-control" />
+							<label for="">Password</label> <input type="password"
+								class="form-control" name="password" required />
 						</div>
 						<button class="btn btn-primary mt-2 mb-0"
 							style="background: #FF5D73; color: white">Login</button>
