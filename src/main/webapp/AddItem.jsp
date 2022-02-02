@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>List New Item</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -31,26 +30,26 @@
 	<div class="d-flex flex-column align-items-center">
 		<p class="lni-title mt-5">List New Item</p>
 		<div class="add-item-container">
-			<form action="">
+			<form action="AddItemServlet" method="post">
 				<div class="d-flex">
 					<section class="aic-left d-flex flex-column">
-						<label for="">Add Image</label> <input type="file" />
+						<label for="">Add Image</label> <input type="file" name="itemImage"/>
 					</section>
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group">
-							<label for="">Item Name</label> <input type="text"
+							<label for="">Item Name</label> <input type="text" name="itemName"
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="">Item Description</label> <input type="text"
+							<label for="">Item Description</label> <input type="text" name="itemDescription"
 								class="form-control" />
 						</div>
 						<div class="form-group">
 							<label for="">Pricing</label> <input type="number" step="any"
-								placeholder="12.55" class="form-control" />
+								placeholder="12.55" class="form-control" name="itemPricing" />
 						</div>
 						<div class="form-group">
-							<label for="">Quantity</label> <input type="number"
+							<label for="">Quantity</label> <input type="number" name="itemQuantity"
 								class="form-control" />
 						</div>
 						<button class="btn add-item-btn mt-5 w-50 align-self-end">

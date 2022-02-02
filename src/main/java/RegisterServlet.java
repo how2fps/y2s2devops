@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("alert", "Password needs to have at least 8 characters!");
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 		}
-		if (password != confirmPassword) {
+		if (!password.equals(confirmPassword)) {
 			request.setAttribute("alert", "Passwords are not the same!");
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 		}

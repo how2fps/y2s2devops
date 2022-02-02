@@ -17,4 +17,13 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ItemsBoughtServlet</servlet-name>
+		<servlet-class>ItemsBoughtServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemsBoughtServlet</servlet-name>
+		<url-pattern>/ItemsBoughtServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
