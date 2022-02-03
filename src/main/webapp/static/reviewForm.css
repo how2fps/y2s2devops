@@ -1,0 +1,30 @@
+.review-form-card {
+	height: 350px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+	background-color: #FAFAFA;
+}
+
+.review-form-btn {
+	color: white;
+	background: #EF6F6C;
+	width: 250px;
+	margin: 60px 0px 25px 0px;
+}
+
+h3 {
+	margin: 90px 0px 40px 0px;
+	font-weight: bold;
+}
+
+textarea {
+	height: 100px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+label {
+	margin: 10px 0px 10px 0px;
+}
