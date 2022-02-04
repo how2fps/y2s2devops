@@ -1,0 +1,32 @@
+.fontcenterTransaction {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.fontcenterMessageTransaction {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.transactionImage {
+	margin-top: 20px;
+	height: 300px;
+	width: 200px;
+	border: 5px solid black;
+}
+
+.divcenter {
+	margin-top: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.transactionitembutton {
+	margin-top: 30px;
+	width: 150px;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	background-color: #ff5d73;
+	border-radius: 20px;
+}
