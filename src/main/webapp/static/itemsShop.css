@@ -21,5 +21,10 @@
 }
 
 .shopitembutton {
-	width: 250px;
+	width: 150px;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	background-color: #ff5d73;
+	border-radius: 20px;
 }

@@ -10,6 +10,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="static/itemsShop.css" />
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>Items Shop</title>
 </head>
 <br>
@@ -17,20 +18,26 @@
 <br>
 <body>
 	<div class="col d-flex justify-content-center in-title">
-		<h1 class="fontcenterShop">Shop</h1>
+		<h1 class="fontcenterTransaction">Shop</h1>
 	</div>
 	<br>
 	<br>
-
 	<div class="card" style="width: 20rem;">
-		<img class="card-img-top" width= 100px height= 200px src="..." alt="Item Image">
-		<div class="card-body">
-			<h5 class="shopitemtitle">ItemName</h5>
-			<p class="card-text shoppricemargin">(Price/item)</p>
-			<div class="col-md-12 text-center">
-				<a href="#" class="btn btn-danger shopitembutton">Reviews</a>
+		<c:forEach var="item" items="${listItems}">
+			<img class="card-img-top" width=100px height=200px src="${item.Image}"
+				alt="Item Image">
+			<div class="card-body">
+				<h5 class="shopitemtitle">
+					<c:out value="${item.Name}" />
+				</h5>
+				<p class="card-text shoppricemargin">
+					<c:out value="${item.Pricing}" />
+				</p>
+				<div class="col-md-12 text-center">
+					<a href="#" class="btn btn-danger shopitembutton">Reviews</a>
+				</div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 </body>
 </html>
