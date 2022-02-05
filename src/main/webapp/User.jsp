@@ -8,7 +8,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="static/login.css" />
+<link rel="stylesheet" href="static/user.css" />
 <link rel="stylesheet" href="static/navbar.css" />
 <meta charset="ISO-8859-1">
 <title>Login</title>
@@ -29,13 +29,28 @@
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
-		<p class="my-4 h1">User</p>
-		<form action="UserServlet" method="post">
-			<div class="d-flex">
-				<button class="btn btn-primary mt-2 mb-0"
-					style="background: #FF5D73; color: white">Login</button>
+		<h1 class="mt-5 mb-4 h1">Welcome back, User1</h1>
+		<div class="buttons-container d-flex flex-row w-75">
+			<div class="d-flex flex-column w-100 align-items-center">
+				<button class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;">
+					Items Sold</button>
+				<button class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;">
+					Items Bought</button>
+				<button class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;">
+					List New Item</button>
+				<button class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;">
+					Manage Reviews</button>
 			</div>
-		</form>
+			<div class="d-flex flex-column w-100 align-items-center">
+				<button class="btn btn-primary m-3 w-75"
+					style="background: #EF6F6C; color: white; font-size: 18px;">
+					Edit Profile</button>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
