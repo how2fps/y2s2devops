@@ -1,0 +1,30 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous" />
+<link rel="stylesheet" href="static/reviewsPage.css">
+<title>Reviews Management</title>
+</head>
+<body>
+  <h3 class="text-center">Reviews Management</h3>
+  <div class="container col-md-6">
+    <p><a href="">Back</a></p>
+    <div class="card review-card">
+      <div class="card-body">
+        <p>Name</p>
+        <p>Comment</p>
+        <p>DateTime</p>
+        <button type="submit" class="btn edit-review-btn">Edit</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
