@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="static/user.css" />
 <link rel="stylesheet" href="static/navbar.css" />
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Shop-Wijs</title>
 </head>
 <body style="font-family: 'Roboto', sans-serif;">
 	<nav class="navbar px-3 bg-light"
