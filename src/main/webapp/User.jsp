@@ -29,7 +29,7 @@
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
-		<h1 class="mt-5 mb-4 h1">Welcome back, User1</h1>
+		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
 		<div class="buttons-container d-flex flex-row w-75">
 			<div class="d-flex flex-column w-100 align-items-center">
 				<button class="btn btn-primary m-3 w-75"
