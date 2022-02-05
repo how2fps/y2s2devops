@@ -25,7 +25,7 @@
 			<li class="nav-item"><a class="nav-link nav-hover"
 				style="color: black;" href="#">Profile</a></li>
 			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Logout</a></li>
+				style="color: black;" href="/devopsproject/LogoutServlet">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
