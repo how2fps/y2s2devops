@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,22 +30,26 @@
 		</article>
 		<p class="d-flex align-self-center row">You have no items sold
 			yet!</p>
-		<div
-			class="item-block d-flex flex-row align-self-center align-items-center">
-			<div class="item-info d-flex flex-row align-items-center">
-				<img class="item-pic" />
-				<p class="amount-item-sold">100</p>
-				<p class="item-name">Mini Film Camera</p>
-			</div>
-			<div
-				class="datetime-sold d-flex justify-content-center align-items-center">
-				<p>21 December 2021</p>
-			</div>
-			<div
-				class="amount-sold d-flex justify-content-center align-items-center">
-				<p>13.50</p>
-			</div>
-		</div>
+		<c:forEach var="item" items="${itemsSoldList}">
+				<div
+					class="item-block d-flex flex-row align-self-center align-items-center">
+					<div class="item-info d-flex flex-row align-items-center">
+						<img class="item-pic" />
+						<div class="amount-item-sold">
+							<c:out value="${item.quantity}" />
+						</div>
+						<c:out value="${item.name}" />
+					</div>
+					<div
+						class="datetime-sold d-flex justify-content-center align-items-center">
+						<c:out value="${item.dateListed}" />
+					</div>
+					<div
+						class="amount-sold d-flex justify-content-center align-items-center">
+						<c:out value="${item.pricing}" />
+					</div>
+				</div>
+			</c:forEach>
 	</section>
 </body>
 </html>
