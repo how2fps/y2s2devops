@@ -26,5 +26,15 @@
 		<servlet-name>ItemsBoughtServlet</servlet-name>
 		<url-pattern>/ItemsBoughtServlet</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>AddReviewServlet</servlet-name>
+		<servlet-class>AddReviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddReviewServlet</servlet-name>
+		<url-pattern>/AddReviewServlet</url-pattern>
+	</servlet-mapping>
+	
   <display-name>devopsproject</display-name>
 </web-app>

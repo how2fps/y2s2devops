@@ -17,7 +17,7 @@
 <div class="container col-md-6">
 <div class="card review-form-card">
 <div class="card-body">
-     <form action="/AddReviewServlet" method="post">
+     <form action="AddReviewServlet" method="post">
        <fieldset class="form-group">
          <label for="">Comment</label>
          <textarea name="comment" class="form-control"></textarea>
