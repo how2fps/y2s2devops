@@ -25,8 +25,7 @@ public class EditItemServlet extends HttpServlet {
 	private String jdbcPassword = "";
 
 	// Prepared SQL Statements to perform CRUD operations
-	private static int itemId = 0;
-	private static final String GET_ITEM_INFORMATION = "SELECT * FROM item WHERE Id = " + Integer.toString(itemId);
+	private static final String GET_ITEM_INFORMATION = "SELECT * FROM item WHERE Id = ?";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -46,21 +45,20 @@ public class EditItemServlet extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		// I definetly need to change this
-		// get parameter passed in the URL
-		String name = request.getParameter("name");
+		// This is the itemId we get from the previous page.
+		int itemId = Integer.parseInt(request.getParameter("itemId"));
 
 		Item existingItem = new Item(0, "", "", "", 0.0, 0, 0, new java.sql.Date(System.currentTimeMillis()));
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
 				// Step 2:Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(GET_ITEM_INFORMATION);) {
-			preparedStatement.setString(1, name);
+			// we are passing in the Int in teh SQL query so that
+			preparedStatement.setInt(1, itemId);
 			// Step 3: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 			// Step 4: Process the ResultSet object
 			while (rs.next()) {
-				int itemId = rs.getInt("id");
 				String itemName = rs.getString("name");
 				String itemDescription = rs.getString("description");
 				String itemImage = rs.getString("image");
@@ -76,7 +74,7 @@ public class EditItemServlet extends HttpServlet {
 		}
 		// Step 5: Set existingUser to request and serve up the userEdit form
 		request.setAttribute("item", existingItem);
-		request.getRequestDispatcher("/userEdit.jsp").forward(request, response);
+		request.getRequestDispatcher("/EditItemDetails.jsp").forward(request, response);
 	}
 
 	/**
@@ -95,6 +93,12 @@ public class EditItemServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		try {
+			System.out.println("in the try block");
+			showEditForm(request, response);
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 	}
 
 	/**
