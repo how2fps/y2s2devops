@@ -32,8 +32,6 @@ public class AddItemServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: afasddfasfdasfasfasfasf").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,7 +48,7 @@ public class AddItemServlet extends HttpServlet {
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
 		double itemPricing = Double.parseDouble(request.getParameter("itemPricing"));
-		String itemQuantity = request.getParameter("itemQuantity");
+		int itemQuantity = Integer.parseInt(request.getParameter("itemQuantity"));
 
 		// Fill up item parameters with those that are not in the WebForm
 		int itemUserId = 1;// gotta get this from user after login
@@ -70,7 +68,7 @@ public class AddItemServlet extends HttpServlet {
 			ps.setString(3, itemDescription);
 			ps.setString(4, itemImage);
 			ps.setDouble(5, itemPricing);
-			ps.setString(6, itemQuantity);
+			ps.setInt(6, itemQuantity);
 			ps.setInt(7, itemUserId);
 			ps.setDate(8, itemDateListed);
 

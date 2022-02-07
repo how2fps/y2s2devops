@@ -41,10 +41,10 @@
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="">Item Description</label> <input type="text" name="itemDescription"
-								class="form-control" />
+							<label for="">Item Description</label> <textarea  type="text" name="itemDescription"
+								class="form-control" /></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group mt-2">
 							<label for="">Pricing</label> <input type="number" step="any"
 								placeholder="12.55" class="form-control" name="itemPricing" />
 						</div>

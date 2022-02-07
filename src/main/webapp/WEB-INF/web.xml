@@ -31,6 +31,16 @@ id="WebApp_ID" version="3.1">
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>EditItemServlet</servlet-name>
+		<servlet-class>EditItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditItemServlet</servlet-name>
+		<url-pattern>/EditItemServlet</url-pattern>
+		<url-pattern>/EditItemServlet/update</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
 		<servlet-name>ItemsShopServlet</servlet-name>
 		<servlet-class>ItemsShopServlet</servlet-class>
 	</servlet>
