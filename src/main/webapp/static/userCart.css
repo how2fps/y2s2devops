@@ -1,0 +1,43 @@
+.fontcenterUserCart {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+.tablemargin {
+	margin-top: 500px;
+}
+
+.buttoncentertable {
+	background-color: #ff5d73;
+	border-radius: 15px;
+}
+
+.buttoncentertable2 {
+	width: 200px;
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	background-color: #ff5d73;
+	border-radius: 20px;
+}
+
+.thnoborder {
+	border-top: 1px black solid;;
+}
+
+table {
+	margin: 0 auto;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 50%;
+}
+
+td, th {
+	border-bottom: 1px black solid;
+	text-align: center;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: white;
+}

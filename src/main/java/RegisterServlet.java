@@ -58,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
-			 "jdbc:mysql://localhost:3306/devops", "how2fps", "l0l0ksql");
+			 "jdbc:mysql://localhost:3306/devops", "root", "");
 			 PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			 ps.setInt(1, 0);
 			 ps.setString(2, email);
@@ -85,7 +85,7 @@ public class RegisterServlet extends HttpServlet {
 		//Step 8: catch and print out any exception
 		catch (Exception exception) {
 		 if(exception.toString().contains("Duplicate entry")) {
-			 request.setAttribute("alert", email + "already in use!");
+			 request.setAttribute("alert", email + " is already in use!");
 			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 		 }
 		 else 
