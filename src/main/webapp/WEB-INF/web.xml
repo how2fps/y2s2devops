@@ -26,4 +26,14 @@
 		<servlet-name>ItemsBoughtServlet</servlet-name>
 		<url-pattern>/ItemsBoughtServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EditItemServlet</servlet-name>
+		<servlet-class>EditItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditItemServlet</servlet-name>
+		<url-pattern>/EditItemServlet</url-pattern>
+		<url-pattern>/EditItemServlet/update</url-pattern>
+	</servlet-mapping>
 </web-app>

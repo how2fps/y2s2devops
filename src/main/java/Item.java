@@ -59,7 +59,7 @@ public class Item {
 		Pricing = pricing;
 	}
 
-	public double getQuantity() {
+	public int getQuantity() {
 		return Quantity;
 	}
 

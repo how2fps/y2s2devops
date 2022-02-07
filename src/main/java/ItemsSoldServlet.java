@@ -30,9 +30,7 @@ public class ItemsSoldServlet extends HttpServlet {
 	// Need to get the userId here to add to our SQL Statement String
 
 	// Prepared SQL Statements to perform CRUD operations
-	private static int userId = 1;
-	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE SellingUserId = "
-			+ Integer.toString(userId);
+	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE SellingUserId = ?";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -50,6 +48,10 @@ public class ItemsSoldServlet extends HttpServlet {
 	// The function to get all items that the user bought
 	private void listItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+
+		// This is the itemId we get from the previous page.
+		int userId = Integer.parseInt(request.getParameter("userId"));
+
 		List<Item> itemsSoldList = new ArrayList<>();
 		try (Connection connection = getConnection();
 				// Step 5.1: Create a statement using connection object
@@ -65,7 +67,6 @@ public class ItemsSoldServlet extends HttpServlet {
 				System.out.println(amountPaid);
 				int quantity = rs.getInt("quantity");
 				System.out.println(quantity);
-				int userId = rs.getInt("buyinguserid");
 				java.sql.Date date = rs.getDate("date");
 				itemsSoldList.add(new Item(itemId, name, "", image, amountPaid, quantity, userId, date));
 			}

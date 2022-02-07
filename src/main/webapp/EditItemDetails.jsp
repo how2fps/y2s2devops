@@ -31,27 +31,27 @@
 	
 	<div class="d-flex flex-column align-items-center">
 		<p class="ei-title mt-5">Edit Item Details</p> 
-		<div class="edit-item-container"><form action="EditItemServlet" action="update">
+		<div class="edit-item-container"><form action="EditItemServlet/update" action="update">
 			<div class="d-flex">
 				<section class="aic-left d-flex flex-column">
-					<label for="">Add Image</label> <input type="file" />"/>
+					<label for="">Add Image</label> <input type="file" name="itemImage"/>
 				</section>
 				<section class="aic-right d-flex flex-column">
 					<div class="form-group">
-						<label for="">Item Name</label> <input type="text"
+						<label for="">Item Name</label> <input type="text" name="itemName"
 							class="form-control" value="<c:out value='${item.name}' />" />
 					</div>
 					<div class="form-group">
-						<label for="">Item Description</label> <input type="text"
-							class="form-control" value="<c:out value='${item.description}' />"/>
+						<label for="">Item Description</label> <textarea type="text"
+							class="form-control" name="itemDescription" value="<c:out value='${item.description}' />"/></textarea>
 					</div>
-					<div class="form-group">
+					<div class="form-group mt-2">
 						<label for="">Pricing</label> <input type="number" step="any"
-							placeholder="12.55" class="form-control" value="<c:out value='${item.pricing}' />"/>
+							placeholder="12.55" name="itemPricing" class="form-control" value="<c:out value='${item.pricing}' />"/>
 					</div>
 					<div class="form-group">
-						<label for="">Quantity</label> <input type="number"
-							class="form-control" value="<c:out value='${item.quantity}' />"/>
+						<label for="">Quantity</label> <input type="text"
+							class="form-control" name="itemQuantity" value="<c:out value='${item.quantity}' />"/>
 					</div>
 					<button class="btn edit-item-btn mt-5 w-50 align-self-end">
 						Confirm Changes</button>

@@ -30,7 +30,6 @@ public class ItemsBoughtServlet extends HttpServlet {
 	// Need to get the userId here to add to our SQL Statement String
 
 	// Prepared SQL Statements to perform CRUD operations
-	private static int userId = 2;
 	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE BuyingUserId = ?";
 
 	protected Connection getConnection() {
