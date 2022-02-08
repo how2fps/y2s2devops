@@ -14,10 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ItemsBoughtServlet
- */
 @WebServlet("/ItemsBoughtServlet")
 public class ItemsBoughtServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,8 +24,6 @@ public class ItemsBoughtServlet extends HttpServlet {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
-
-	// Need to get the userId here to add to our SQL Statement String
 
 	// Prepared SQL Statements to perform CRUD operations
 	private static final String SELECT_ALL_ITEMS_BOUGHT = "SELECT * FROM transaction WHERE BuyingUserId = ?";
@@ -49,18 +45,15 @@ public class ItemsBoughtServlet extends HttpServlet {
 	private void listItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		// This is the itemId we get from the previous page.
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		HttpSession session = request.getSession();
+		int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
 
 		List<Item> itemsBoughtList = new ArrayList<>();
 		try (Connection connection = getConnection();
-				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ITEMS_BOUGHT);) {
 			// sets the userId into the SQL statement
 			preparedStatement.setInt(1, userId);
-			// Step 5.2: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
-			// Step 5.3: Process the ResultSet object.
 			while (rs.next()) {
 				int itemId = rs.getInt("itemid");
 				String name = rs.getString("itemname");
@@ -76,28 +69,17 @@ public class ItemsBoughtServlet extends HttpServlet {
 			System.out.println(SELECT_ALL_ITEMS_BOUGHT);
 			System.out.println(e.getMessage());
 		}
-		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
-		// ItemsBought.jsp
 		System.out.println(Arrays.deepToString(itemsBoughtList.toArray()));
 		request.setAttribute("itemsBoughtList", itemsBoughtList);
 		request.getRequestDispatcher("/ItemsBought.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ItemsBoughtServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getServletPath();
 		try {
@@ -108,13 +90,8 @@ public class ItemsBoughtServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 
 	}

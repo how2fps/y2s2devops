@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class EditItemServlet
- */
 @WebServlet("/EditItemServlet")
 public class EditItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -44,8 +41,6 @@ public class EditItemServlet extends HttpServlet {
 		return connection;
 	}
 
-	// method to get parameter, query database for existing user data and redirect
-	// to user edit page
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
@@ -76,10 +71,13 @@ public class EditItemServlet extends HttpServlet {
 				existingItem = new Item(itemId, itemName, itemDescription, itemImage, itemPrice, itemQuantity,
 						itemUserId, itemDateListed);
 			}
+
+			// We also need to check for the userId from Session if its the correct user.
+			// If not the same user, then we simply return unauthorised page
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		// Step 5: Set existingUser to request and serve up the userEdit form
 		request.setAttribute("item", existingItem);
 		request.getRequestDispatcher("/EditItemDetails.jsp").forward(request, response);
 	}
@@ -132,21 +130,12 @@ public class EditItemServlet extends HttpServlet {
 		response.sendRedirect("http://localhost:8081/devopsproject/ItemsListed.jsp");
 	}
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public EditItemServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getServletPath();
 
@@ -167,13 +156,8 @@ public class EditItemServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

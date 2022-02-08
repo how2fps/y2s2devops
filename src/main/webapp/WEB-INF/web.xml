@@ -50,6 +50,15 @@ id="WebApp_ID" version="3.1">
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<servlet-class>ItemsListedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<url-pattern>/ItemsListedServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>UserCartServlet</servlet-name>
 		<servlet-class>UserCartServlet</servlet-class>
 	</servlet>
