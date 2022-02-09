@@ -30,7 +30,7 @@
 	<div class="d-flex flex-column align-items-center">
 		<p class="lni-title mt-5">List New Item</p>
 		<div class="add-item-container">
-			<form action="AddItemServlet" method="post">
+			<form action="AddItemServlet" method="post" enctype="multipart/form-data">
 				<div class="d-flex">
 					<section class="aic-left d-flex flex-column">
 						<label for="">Add Image</label> <input type="file" name="itemImage"/>

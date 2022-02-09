@@ -27,7 +27,7 @@ public class AddItemTest {
 	@Test
 	public void checkTitle() {
 		// Load website as a new page
-		webDriver.navigate().to("https://devopsessentials.github.io");
+		webDriver.navigate().to("localhost:8081/devopsproject/AddItem.jsp");
 
 		// Assert the title to check that we are indeed in the correct website
 		Assert.assertEquals(webDriver.getTitle(), "Home");

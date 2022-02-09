@@ -86,9 +86,6 @@ public class EditItemServlet extends HttpServlet {
 	private void updateItem(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		// This is the itemId we get from the previous page.
-//		int itemId = Integer.parseInt(request.getParameter("itemId"));
-//		System.out.println(itemId);
 		System.out.println(globalItemId);
 		int itemId = globalItemId;
 
@@ -99,13 +96,6 @@ public class EditItemServlet extends HttpServlet {
 		double newItemPrice = Double.parseDouble(request.getParameter("itemPricing"));
 		int newItemQuantity = Integer.parseInt(request.getParameter("itemQuantity"));
 		java.sql.Date newItemDateListed = new java.sql.Date(System.currentTimeMillis());
-
-		System.out.println(newItemName);
-		System.out.println(newItemDescription);
-		System.out.println(newItemImage);
-//		System.out.println(newItemPrice);
-//		System.out.println(newItemQuantity);
-//		System.out.println(itemId);
 
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_ITEM_INFORMATION);) {
@@ -118,16 +108,8 @@ public class EditItemServlet extends HttpServlet {
 			statement.setInt(7, itemId);
 			int i = statement.executeUpdate();
 
-			System.out.println(newItemName);
-			System.out.println(newItemDescription);
-			System.out.println(newItemImage);
-//			System.out.println(newItemPrice);
-//			System.out.println(newItemQuantity);
-//			System.out.println(itemId);
 		}
-		// Step 3: redirect back to UserServlet (note: remember to change the url to
-		// your project name)
-		response.sendRedirect("http://localhost:8081/devopsproject/ItemsListed.jsp");
+		response.sendRedirect("http://localhost:8081/devopsproject/ItemsListedServlet");
 	}
 
 	public EditItemServlet() {

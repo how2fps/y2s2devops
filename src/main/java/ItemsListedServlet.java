@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ItemsListedServlet
@@ -55,8 +56,8 @@ public class ItemsListedServlet extends HttpServlet {
 	private void listItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
-		// This is the itemId we get from the previous page.
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		HttpSession session = request.getSession();
+		int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
 
 		List<Item> itemsListedList = new ArrayList<>();
 		try (Connection connection = getConnection();

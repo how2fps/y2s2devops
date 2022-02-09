@@ -56,6 +56,7 @@ id="WebApp_ID" version="3.1">
 	<servlet-mapping>
 		<servlet-name>ItemsListedServlet</servlet-name>
 		<url-pattern>/ItemsListedServlet</url-pattern>
+		<url-pattern>/ItemsListedServlet/deleteItem</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -70,4 +71,14 @@ id="WebApp_ID" version="3.1">
 		<url-pattern>/UserCartServlet/delete</url-pattern>
 		<url-pattern>/UserCartServlet/wipe</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<servlet-class>DeleteItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<url-pattern>/DeleteItemServlet</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

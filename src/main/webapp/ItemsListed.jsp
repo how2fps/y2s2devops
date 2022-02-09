@@ -57,6 +57,9 @@
 					<div class="datetime-bought d-flex justify-content-center align-items-center">
 						<a class="btn btn-primary" href="EditItemServlet?itemId=${item.id}">Edit Details</a>
 					</div>
+					<div class="datetime-bought d-flex justify-content-center align-items-center">
+						<a class="btn btn-danger" href="DeleteItemServlet?itemId=${item.id}">Delete Item</a>
+					</div>
 					<div
 						class="datetime-bought d-flex justify-content-center align-items-center">
 						<c:out value="${item.dateListed}" />
