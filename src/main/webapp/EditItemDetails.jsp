@@ -42,8 +42,8 @@
 							class="form-control" value="<c:out value='${item.name}' />" />
 					</div>
 					<div class="form-group">
-						<label for="">Item Description</label> <textarea type="text"
-							class="form-control" name="itemDescription" value="<c:out value='${item.description}' />"/></textarea>
+						<label for="">Item Description</label> <textarea
+							class="form-control" name="itemDescription"><c:out value='${item.description}' /></textarea>
 					</div>
 					<div class="form-group mt-2">
 						<label for="">Pricing</label> <input type="number" step="any"
