@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-//import necessary Selenium WebDriver classes
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,35 +11,30 @@ public class AddItemTest {
 	// declare Selenium WebDriver
 	private WebDriver webDriver;
 
+	// I want to enter all form fields to create a new item
 	@Test
-	public void checkId() {
+	public void fillAddItemForm() {
 		// Load website as a new page
 		webDriver.navigate().to("localhost:8081/devopsproject/AddItem.jsp");
 
-		// Declaring and initialising every individual HTML element
-		WebElement we = webDriver.findElement(By.id("content"));
+		// Declares the form inputs.
+		WebElement itemName = webDriver.findElement(By.name("itemName"));
+		WebElement itemImage = webDriver.findElement(By.name("itemImage"));
+		WebElement itemDescription = webDriver.findElement(By.name("itemDescription"));
+		WebElement itemPricing = webDriver.findElement(By.name("itemPricing"));
+		WebElement itemQuantity = webDriver.findElement(By.name("itemQuantity"));
 
-		System.out.println("id we: " + we.getAttribute("role"));
-		Assert.assertEquals(we.getAttribute("role"), "contentinfo");
-	}
+		// Adds things in the form.
+		itemName.sendKeys("KELL Keyboard");
+		itemImage.sendKeys("C:\\Users\\User\\Pictures\\aesthetically pleasing background.png");
+		itemDescription.sendKeys("This is a very nice keyboard. 75% layout. Membrane Switches");
+		itemPricing.sendKeys("12.89");
+		itemQuantity.sendKeys("3");
 
-	@Test
-	public void checkTitle() {
-		// Load website as a new page
-		webDriver.navigate().to("localhost:8081/devopsproject/AddItem.jsp");
-
+		// After adding the item, we want to check if we are redirected back to the
+		// correct page.
 		// Assert the title to check that we are indeed in the correct website
-		Assert.assertEquals(webDriver.getTitle(), "Home");
-
-		System.out.println("title: " + webDriver.getTitle());
-
-		// Retrieve link using it's class name and click on it
-		webDriver.findElement(By.className("link")).click();
-
-		// Assert the new title to check that the title contain Wikipedia and the button
-		// had successfully bring us to the new page
-		Assert.assertTrue(webDriver.getTitle().contains("Wikipedia"));
-		System.out.println("new title: " + webDriver.getTitle());
+		Assert.assertEquals(webDriver.getTitle(), "Items Listed");
 	}
 
 	@BeforeTest

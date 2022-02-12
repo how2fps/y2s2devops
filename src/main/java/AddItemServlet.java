@@ -60,6 +60,26 @@ public class AddItemServlet extends HttpServlet {
 //			// ...
 //		}
 
+//		Part filePart = request.getPart("itemImage");
+//		InputStream fileContent = filePart.getInputStream();
+//		File f = new File(getServletContext() + "temp");
+//		OutputStream outputStream = null;
+//		try {
+//			outputStream = new FileOutputStream(f);
+//
+//			int read = 0;
+//			byte[] bytes = new byte[1024];
+//			while ((read = fileContent.read(bytes)) != -1) {
+//				outputStream.write(bytes, 0, read);
+//			}
+//			String itemImage = Base64.getEncoder().encodeToString(outputStream);
+//		} finally {
+//			if (outputStream != null) {
+//				outputStream.close();
+//				f.delete();
+//			}
+//		}
+
 		String itemImage = request.getParameter("itemImage");
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");

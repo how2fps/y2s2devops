@@ -14,7 +14,7 @@
 		<selenium.version>2.53.1</selenium.version>
 		<testng.groupId>org.testng</testng.groupId>
 		<testng.artifactId>testng</testng.artifactId>
-		<testng.version>6.9.10</testng.version>
+		<testng.version>7.0.0</testng.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
