@@ -15,7 +15,7 @@ public class AddItemTest {
 	@Test
 	public void fillAddItemForm() {
 		// Load website as a new page
-		webDriver.navigate().to("localhost:8081/devopsproject/AddItem.jsp");
+		webDriver.navigate().to("http://localhost:8081/devopsproject/AddItem.jsp");
 
 		// Declares the form inputs.
 		WebElement itemName = webDriver.findElement(By.name("itemName"));
