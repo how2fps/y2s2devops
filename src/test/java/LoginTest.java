@@ -8,25 +8,26 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class LoginTest {
-	 private WebDriver webDriver;		
-	  
-	  @Test
-	  public void checkTitle() {
-		  //Load website as a new page
-		  webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
-		  
-		  //Assert the title to check that we are indeed in the correct website
-		  Assert.assertEquals(webDriver.getTitle(), "Login");
-		  
-		  System.out.println("title: "+webDriver.getTitle());
-		  Assert.assertTrue(webDriver.getTitle().contains("Login"));
-		  
+	private WebDriver webDriver;
+
+	@Test
+	public void checkTitle() {
+		// Load website as a new page
+		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
+
+		// Assert the title to check that we are indeed in the correct website
+		Assert.assertEquals(webDriver.getTitle(), "Login");
+
+		System.out.println("title: " + webDriver.getTitle());
+		Assert.assertTrue(webDriver.getTitle().contains("Login"));
+
 //		  //Retrieve link using it's class name and click on it
 //		  webDriver.findElement(By.className("link")).click();
 //
 //		  //Assert the new title to check that the title contain Wikipedia and the button had successfully bring us to the new page
 //		  Assert.assertTrue(webDriver.getTitle().contains("Wikipedia"));
 //		  System.out.println("new title: "+webDriver.getTitle());
+
 	  }
 	  
 	  @Test
@@ -50,9 +51,9 @@ public class LoginTest {
 		  //initialize FirefoxDriver at the start of test
 		  webDriver = new ChromeDriver();  
 	  }
-
-	  @AfterTest
-	  public void afterTest() {
-		  //Quit the ChromeDriver and close all associated window at the end of test
-	  }
+	@AfterTest
+	public void afterTest() {
+		// Quit the ChromeDriver and close all associated window at the end of test
+		webDriver.quit();
+	}
 }
