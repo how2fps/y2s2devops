@@ -41,7 +41,7 @@
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="">Item Description</label> <textarea  type="text" name="itemDescription"
+							<label for="">Item Description</label> <textarea name="itemDescription"
 								class="form-control" /></textarea>
 						</div>
 						<div class="form-group mt-2">
