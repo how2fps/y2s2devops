@@ -30,7 +30,7 @@
 	<div class="d-flex flex-column align-items-center">
 		<p class="lni-title mt-5">List New Item</p>
 		<div class="add-item-container">
-			<form action="AddItemServlet" method="post">
+			<form action="AddItemServlet" method="post" enctype="multipart/form-data">
 				<div class="d-flex">
 					<section class="aic-left d-flex flex-column">
 						<label for="">Add Image</label> <input type="file" name="itemImage"/>
@@ -41,10 +41,10 @@
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="">Item Description</label> <input type="text" name="itemDescription"
-								class="form-control" />
+							<label for="">Item Description</label> <textarea name="itemDescription"
+								class="form-control" /></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group mt-2">
 							<label for="">Pricing</label> <input type="number" step="any"
 								placeholder="12.55" class="form-control" name="itemPricing" />
 						</div>

@@ -31,12 +31,32 @@ id="WebApp_ID" version="3.1">
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>EditItemServlet</servlet-name>
+		<servlet-class>EditItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditItemServlet</servlet-name>
+		<url-pattern>/EditItemServlet</url-pattern>
+		<url-pattern>/EditItemServlet/update</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
 		<servlet-name>ItemsShopServlet</servlet-name>
 		<servlet-class>ItemsShopServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ItemsShopServlet</servlet-name>
 		<url-pattern>/ItemsShopServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<servlet-class>ItemsListedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<url-pattern>/ItemsListedServlet</url-pattern>
+		<url-pattern>/ItemsListedServlet/deleteItem</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -51,4 +71,14 @@ id="WebApp_ID" version="3.1">
 		<url-pattern>/UserCartServlet/delete</url-pattern>
 		<url-pattern>/UserCartServlet/wipe</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<servlet-class>DeleteItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<url-pattern>/DeleteItemServlet</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
