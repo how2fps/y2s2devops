@@ -36,6 +36,8 @@ public class LoginTest {
 		  WebElement password = webDriver.findElement(By.name("password"));
 		  email.sendKeys("hearthstonesigh@gmail.com");
 		  password.sendKeys("password");
+		  //add press button login
+		  webDriver.findElement(By.id("submit")).submit();
 		  Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
 	  }
 	  
@@ -44,9 +46,7 @@ public class LoginTest {
 		  //Setting system properties of ChromeDriver
 		  //to amend directory path base on your local file path
 		  String chromeDriverDir = "C:\\Program Files\\Google\\Chrome\\chromedriver.exe";
-
 		  System.setProperty("webdriver.chrome.driver", chromeDriverDir);
-
 		  //initialize FirefoxDriver at the start of test
 		  webDriver = new ChromeDriver();  
 	  }
