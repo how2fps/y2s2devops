@@ -43,7 +43,7 @@ public class LoginTest {
 	  public void beforeTest() {
 		  //Setting system properties of ChromeDriver
 		  //to amend directory path base on your local file path
-		  String chromeDriverDir = "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe";
+		  String chromeDriverDir = "C:\\Program Files\\Google\\Chrome\\chromedriver.exe";
 
 		  System.setProperty("webdriver.chrome.driver", chromeDriverDir);
 
@@ -54,6 +54,5 @@ public class LoginTest {
 	  @AfterTest
 	  public void afterTest() {
 		  //Quit the ChromeDriver and close all associated window at the end of test
-		  webDriver.quit();			
 	  }
 }
