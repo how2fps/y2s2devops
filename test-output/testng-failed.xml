@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="AddItemTest">
+      <class name="y2s2devops.AddItemTest">
         <methods>
-          <include name="beforeTest"/>
           <include name="fillAddItemForm"/>
           <include name="afterTest"/>
+          <include name="beforeTest"/>
         </methods>
-      </class> <!-- AddItemTest -->
+      </class> <!-- y2s2devops.AddItemTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

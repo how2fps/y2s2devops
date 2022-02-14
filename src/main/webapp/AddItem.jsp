@@ -17,13 +17,13 @@
 		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
 		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
 		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
+			<li class="nav-item" id="navbar-shop"><a class="nav-link nav-hover"
+				style="color: black;" href="#" >Shop</a></li>
+			<li class="nav-item" id="navbar-cart"><a class="nav-link nav-hover"
 				style="color: black;" href="#">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
+			<li class="nav-item" id="navbar-profile"><a class="nav-link nav-hover"
 				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
+			<li class="nav-item" id="navbar-logout"><a class="nav-link nav-hover"
 				style="color: black;" href="#">Logout</a></li>
 		</ul>
 	</nav>
@@ -52,7 +52,7 @@
 							<label for="">Quantity</label> <input type="number" name="itemQuantity"
 								class="form-control" />
 						</div>
-						<button class="btn add-item-btn mt-5 w-50 align-self-end">
+						<button class="btn add-item-btn mt-5 w-50 align-self-end" name="confirmListingBtn">
 							Confirm Listing</button>
 					</section>
 				</div>

@@ -45,7 +45,7 @@ public class DeleteItemServlet extends HttpServlet {
 			statement.setString(1, itemId);
 			int i = statement.executeUpdate();
 		}
-		response.sendRedirect("http://localhost:8081/devopsproject/ItemsListedServlet");
+		response.sendRedirect("http://localhost:8090/devopsproject/ItemsListedServlet");
 	}
 
 	public DeleteItemServlet() {
