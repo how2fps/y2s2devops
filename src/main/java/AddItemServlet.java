@@ -1,22 +1,16 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class AddItemServlet
- */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 @WebServlet("/AddItemServlet")
 public class AddItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +35,9 @@ public class AddItemServlet extends HttpServlet {
 		int itemUserId = Integer.parseInt(session.getAttribute("userAuthId").toString());
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+
+		// @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 *
+		// 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 
 //		if (ServletFileUpload.isMultipartContent(request)) {
 //
@@ -81,6 +77,7 @@ public class AddItemServlet extends HttpServlet {
 //		}
 
 		String itemImage = request.getParameter("itemImage");
+		System.out.println(itemImage);
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
 		double itemPricing = Double.parseDouble(request.getParameter("itemPricing"));
@@ -94,7 +91,7 @@ public class AddItemServlet extends HttpServlet {
 
 			PreparedStatement ps = con.prepareStatement("insert into ITEM values(?,?,?,?,?,?,?,?)");
 
-			// This is the userid
+			// This is the itemId that will auto-increment
 			ps.setInt(1, 0);
 			ps.setString(2, itemName);
 			ps.setString(3, itemDescription);
@@ -111,13 +108,12 @@ public class AddItemServlet extends HttpServlet {
 //				writer.println("<h1>" + "You have successfully added a new Item!" + "</h1>");
 //				writer.close();
 				// I want to redirect to the ItemsListed Page.
-				request.getRequestDispatcher("/ItemsListedServlet").forward(request, response);
+				response.sendRedirect("http://localhost:8090/devopsproject/ItemsListedServlet");
 			}
 		}
 
 		catch (Exception exception) {
 			System.out.println(exception);
-			out.close();
 		}
 	}
 
