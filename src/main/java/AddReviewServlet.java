@@ -76,7 +76,7 @@ public class AddReviewServlet extends HttpServlet {
 			//Perform the query on the database using the prepared statement
 			 int i = ps.executeUpdate();
 			 
-			//Check if the query had been successfully executed, return “You have successfully posted” via the response,
+			//Check if the query had been successfully executed, return "You have successfully posted" via the response,
 			 if (i > 0){
 				 PrintWriter writer = response.getWriter();
 				 writer.println("<h1>" + "You have successfully posted a Review!" + 
