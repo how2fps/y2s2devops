@@ -19,21 +19,20 @@
 		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
 		<div class="buttons-container d-flex flex-row w-75">
 			<div class="d-flex flex-column w-100 align-items-center">
-				<button class="btn btn-primary m-3 w-75"
+				<a class="btn btn-primary m-3 w-75" style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsSoldServlet">
+					Items Sold</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsBoughtServlet">
+					Items Bought</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/AddItem.jsp">
+					List New Item</a>
+				<a class="btn btn-primary m-3 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;">
-					Items Sold</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					Items Bought</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					List New Item</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					Manage Reviews</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					Manage Items</button>
+					Manage Reviews</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsListedServlet">
+					Manage Items</a>
 			</div>
 			<div class="d-flex flex-column w-100 align-items-center">
 				<button class="btn btn-primary m-3 w-75"
