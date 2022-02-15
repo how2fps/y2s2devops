@@ -19,9 +19,9 @@
 		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
 		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
 		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
+			<li class="nav-item" id="navbar-signup"><a class="nav-link nav-hover"
 				style="color: black;" href="./SignUp.jsp">Sign Up</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
+			<li class="nav-item" id="navbar-login"><a class="nav-link nav-hover"
 				style="color: black;" href="./Login.jsp">Login</a></li>
 		</ul>
 	</nav>
