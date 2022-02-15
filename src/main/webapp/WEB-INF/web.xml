@@ -20,7 +20,7 @@ id="WebApp_ID" version="3.1">
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
-
+		
 	<servlet>
 		<servlet-name>ItemsBoughtServlet</servlet-name>
 		<servlet-class>ItemsBoughtServlet</servlet-class>
@@ -81,4 +81,14 @@ id="WebApp_ID" version="3.1">
 		<url-pattern>/DeleteItemServlet</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>AddReviewServlet</servlet-name>
+		<servlet-class>AddReviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddReviewServlet</servlet-name>
+		<url-pattern>/AddReviewServlet</url-pattern>
+	</servlet-mapping>
+	
+  <display-name>devopsproject</display-name>
 </web-app>
