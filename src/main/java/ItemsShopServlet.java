@@ -30,7 +30,7 @@ public class ItemsShopServlet extends HttpServlet {
 
 	private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
 	private String jdbcUsername = "root";
-	private String jdbcPassword = "password";
+	private String jdbcPassword = "";
 
 	private static final String SELECT_ITEM_BY_ID = "SELECT id, name, description, image, pricing, quantity, userId, dateListed FROM item WHERE id =?";
 	private static final String SELECT_ALL_ITEMS_LISTED = "SELECT * FROM item";
