@@ -42,7 +42,7 @@
 							<label for="">Password</label> <input type="password"
 								class="form-control" name="password" required />
 						</div>
-						<button class="btn btn-primary mt-2 mb-0"
+						<button id="submit" class="btn btn-primary mt-2 mb-0"
 							style="background: #FF5D73; color: white">Login</button>
 					</section>
 				</div>
