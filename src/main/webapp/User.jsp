@@ -14,36 +14,25 @@
 <title>Shop-Wijs</title>
 </head>
 <body style="font-family: 'Roboto', sans-serif;">
-	<nav class="navbar px-3 bg-light"
-		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
-		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
-		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="/devopsproject/LogoutServlet">Logout</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="/NavBar.jsp"/>
 	<div class="container d-flex flex-column align-items-center">
 		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
 		<div class="buttons-container d-flex flex-row w-75">
 			<div class="d-flex flex-column w-100 align-items-center">
-				<button class="btn btn-primary m-3 w-75"
+				<a class="btn btn-primary m-3 w-75" style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsSoldServlet">
+					Items Sold</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsBoughtServlet">
+					Items Bought</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/AddItem.jsp">
+					List New Item</a>
+				<a class="btn btn-primary m-3 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;">
-					Items Sold</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					Items Bought</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					List New Item</button>
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
-					Manage Reviews</button>
+					Manage Reviews</a>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsListedServlet">
+					Manage Items</a>
 			</div>
 			<div class="d-flex flex-column w-100 align-items-center">
 				<button class="btn btn-primary m-3 w-75"
