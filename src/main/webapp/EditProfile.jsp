@@ -37,10 +37,6 @@
 							<label for="">Display Name</label> <input type="text"
 								class="form-control" />
 						</div>
-						<div class="form-group mb-3">
-							<label for="">Full Name</label> <input type="text"
-								class="form-control" />
-						</div>
 						<div class="form-group mb-4">
 							<label for="">Phone Number</label> <input type="text"
 								class="form-control" />
