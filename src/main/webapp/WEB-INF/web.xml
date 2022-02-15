@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+id="WebApp_ID" version="3.1">
   <display-name>devopsproject</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -17,7 +20,7 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ItemsBoughtServlet</servlet-name>
 		<servlet-class>ItemsBoughtServlet</servlet-class>
@@ -26,7 +29,6 @@
 		<servlet-name>ItemsBoughtServlet</servlet-name>
 		<url-pattern>/ItemsBoughtServlet</url-pattern>
 	</servlet-mapping>
-	
 		<servlet>
 		<servlet-name>AddReviewServlet</servlet-name>
 		<servlet-class>AddReviewServlet</servlet-class>
@@ -35,6 +37,54 @@
 		<servlet-name>AddReviewServlet</servlet-name>
 		<url-pattern>/AddReviewServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EditItemServlet</servlet-name>
+		<servlet-class>EditItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditItemServlet</servlet-name>
+		<url-pattern>/EditItemServlet</url-pattern>
+		<url-pattern>/EditItemServlet/update</url-pattern>
+  </servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemsShopServlet</servlet-name>
+		<servlet-class>ItemsShopServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemsShopServlet</servlet-name>
+		<url-pattern>/ItemsShopServlet</url-pattern>
+	</servlet-mapping>
 	
-  <display-name>devopsproject</display-name>
+	<servlet>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<servlet-class>ItemsListedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemsListedServlet</servlet-name>
+		<url-pattern>/ItemsListedServlet</url-pattern>
+		<url-pattern>/ItemsListedServlet/deleteItem</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UserCartServlet</servlet-name>
+		<servlet-class>UserCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserCartServlet</servlet-name>
+		<url-pattern>/UserCartServlet</url-pattern>
+		<url-pattern>/UserCartServlet/edit</url-pattern>
+		<url-pattern>/UserCartServlet/update</url-pattern>
+		<url-pattern>/UserCartServlet/delete</url-pattern>
+		<url-pattern>/UserCartServlet/wipe</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<servlet-class>DeleteItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteItemServlet</servlet-name>
+		<url-pattern>/DeleteItemServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

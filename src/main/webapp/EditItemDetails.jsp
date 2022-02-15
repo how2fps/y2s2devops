@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,36 +13,38 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="static/editItemDetails.css" />
 </head>
-<body class="d-flex flex-column align-items-center">
-	<p class="ei-title mt-5">Edit Item Details</p>
-	<div class="edit-item-container">
-		<form action="">
+<body>
+	<jsp:include page="/NavBar.jsp"/>
+	<div class="d-flex flex-column align-items-center">
+		<p class="ei-title mt-5">Edit Item Details</p> 
+		<div class="edit-item-container"><form action="EditItemServlet/update" action="update">
 			<div class="d-flex">
 				<section class="aic-left d-flex flex-column">
-					<label for="">Add Image</label> <input type="file" />
+					<label for="">Add Image</label> <input type="file" name="itemImage"/>
 				</section>
 				<section class="aic-right d-flex flex-column">
 					<div class="form-group">
-						<label for="">Item Name</label> <input type="text"
-							class="form-control" />
+						<label for="">Item Name</label> <input type="text" name="itemName"
+							class="form-control" value="<c:out value='${item.name}' />" />
 					</div>
 					<div class="form-group">
-						<label for="">Item Description</label> <input type="text"
-							class="form-control" />
+						<label for="">Item Description</label> <textarea
+							class="form-control" name="itemDescription"><c:out value='${item.description}' /></textarea>
 					</div>
-					<div class="form-group">
+					<div class="form-group mt-2">
 						<label for="">Pricing</label> <input type="number" step="any"
-							placeholder="12.55" class="form-control" />
+							placeholder="12.55" name="itemPricing" class="form-control" value="<c:out value='${item.pricing}' />"/>
 					</div>
 					<div class="form-group">
-						<label for="">Quantity</label> <input type="number"
-							class="form-control" />
+						<label for="">Quantity</label> <input type="text"
+							class="form-control" name="itemQuantity" value="<c:out value='${item.quantity}' />"/>
 					</div>
 					<button class="btn edit-item-btn mt-5 w-50 align-self-end">
 						Confirm Changes</button>
 				</section>
 			</div>
 		</form>
+		</div>
 	</div>
 </body>
 </html>

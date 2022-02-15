@@ -13,20 +13,7 @@
 <link rel="stylesheet" href="static/navbar.css" />
 </head>
 <body>
-	<nav class="navbar px-3 bg-light"
-		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
-		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
-		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Logout</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="/NavBar.jsp"/>
 	<div class="d-flex flex-column align-items-center">
 		<p class="lni-title mt-5">List New Item</p>
 		<div class="add-item-container">
@@ -41,10 +28,10 @@
 								class="form-control" />
 						</div>
 						<div class="form-group">
-							<label for="">Item Description</label> <input type="text" name="itemDescription"
-								class="form-control" />
+							<label for="">Item Description</label> <textarea name="itemDescription"
+								class="form-control" /></textarea>
 						</div>
-						<div class="form-group">
+						<div class="form-group mt-2">
 							<label for="">Pricing</label> <input type="number" step="any"
 								placeholder="12.55" class="form-control" name="itemPricing" />
 						</div>
@@ -52,7 +39,7 @@
 							<label for="">Quantity</label> <input type="number" name="itemQuantity"
 								class="form-control" />
 						</div>
-						<button class="btn add-item-btn mt-5 w-50 align-self-end">
+						<button class="btn add-item-btn mt-5 w-50 align-self-end" name="confirmListingBtn">
 							Confirm Listing</button>
 					</section>
 				</div>
