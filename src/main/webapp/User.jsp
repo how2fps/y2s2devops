@@ -13,7 +13,7 @@
 <meta charset="ISO-8859-1">
 <title>Shop-Wijs</title>
 </head>
-<body style="font-family: 'Roboto', sans-serif;">
+<body>
 	<jsp:include page="/NavBar.jsp"/>
 	<div class="container d-flex flex-column align-items-center">
 		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
@@ -35,9 +35,9 @@
 					Manage Items</a>
 			</div>
 			<div class="d-flex flex-column w-100 align-items-center">
-				<button class="btn btn-primary m-3 w-75"
-					style="background: #EF6F6C; color: white; font-size: 18px;">
-					Edit Profile</button>
+				<a class="btn btn-primary m-3 w-75"
+					style="background: #EF6F6C; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/EditProfile.jsp">
+					Edit Profile</a>
 			</div>
 		</div>
 	</div>
