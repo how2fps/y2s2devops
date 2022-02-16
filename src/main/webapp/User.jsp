@@ -17,9 +17,9 @@
 	<jsp:include page="/NavBar.jsp" />
 	<div class="container d-flex flex-column align-items-center">
 		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
-		<div class="buttons-container d-flex flex-row w-75">
+		<div class="buttons-container d-flex flex-row w-75" style="min-width: 700px;">
 			<div class="d-flex flex-column w-100 align-items-center">
-				<a class="btn btn-primary m-3 w-75"
+				<a class="btn btn-primary m-3 mt-0 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;"
 					href="http://localhost:8090/devopsproject/ItemsSoldServlet">
 					Items Sold</a> <a class="btn btn-primary m-3 w-75"
@@ -30,26 +30,27 @@
 					href="http://localhost:8090/devopsproject/AddItem.jsp"> List
 					New Item</a> <a class="btn btn-primary m-3 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;">
-					Manage Reviews</a> <a class="btn btn-primary m-3 w-75"
+					Manage Reviews</a> <a class="btn btn-primary m-3 mb-0 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;"
 					href="http://localhost:8090/devopsproject/ItemsListedServlet">
 					Manage Items</a>
 			</div>
-			<div class="d-flex flex-column w-100 align-items-center">
-				<div class="w-75">
-					<div class="form-group m-3">hearthstonesigh@lol.com
-					</div>
-					<div class="form-group m-3">
-						<label for="">Display Name: Fin aYas AidnA d</label>
-					</div>
-					<div class="form-group m-3">
-						<label for="">Phone Number: 92381923</label>
+			<div
+				class="d-flex flex-column w-100 align-items-center justify-content-center">
+				<div class="card align-items-center w-100 h-100">
+					<div class="card-body w-100">
+						<h5 class="card-title">Email:</h5>
+						<p class="card-text">hearthstoensigh@gmail.com</p>
+						<h5 class="card-title">Display Name:</h5>
+						<p class="card-text">hearthstoensigh@gmail.com</p>
+						<h5 class="card-title">Phone Number:</h5>
+						<p class="card-text">23129381209</p>
+						<a class="btn btn-primary w-100 mt-4"
+							style="background: #EF6F6C; color: white; font-size: 18px;"
+							href="http://localhost:8090/devopsproject/EditProfile.jsp">
+							Edit Profile </a>
 					</div>
 				</div>
-				<a class="btn btn-primary m-3 w-75"
-					style="background: #EF6F6C; color: white; font-size: 18px;"
-					href="http://localhost:8090/devopsproject/EditProfile.jsp">
-					Edit Profile</a>
 			</div>
 		</div>
 	</div>
