@@ -20,23 +20,8 @@ request.setAttribute("dcf", dcf);
 <title>User Cart</title>
 </head>
 <body>
-	<nav class="navbar px-3 bg-light"
-		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
-		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
-		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;"
-				href="http://localhost:8090/devopsproject/ItemsShopServlet">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Logout</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="/NavBar.jsp" />
 	<br>
-<body>
 	<div class="col d-flex justify-content-center in-title">
 		<h1 class="fontcenterUserCart">Your Cart</h1>
 	</div>
@@ -57,9 +42,13 @@ request.setAttribute("dcf", dcf);
 					alt="Item Image"></td>
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
-				<td><a href="<%=request.getContextPath()%>/UserCartServlet/edit?id=<c:out value='${cartitem.id}'/>"><button type="button" class="btn btn-info">Add $5</button></a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/UserCartServlet/edit?id=<c:out value='${cartitem.id}'/>"><button
+							type="button" class="btn btn-info">Add $5</button></a></td>
 				<td><c:out value="${cartitem.totalPrice}" /></td>
-				<td><a href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button type="button" class="btn btn-danger">X</button></a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button
+							type="button" class="btn btn-danger">X</button></a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -68,7 +57,9 @@ request.setAttribute("dcf", dcf);
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
 				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
-				<th><a href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button type="button" class="btn buttoncentertable2">Checkout</button></a></th>
+				<th><a
+					href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
+							type="button" class="btn buttoncentertable2">Checkout</button></a></th>
 			</tr>
 		</table>
 	</div>
