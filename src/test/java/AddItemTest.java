@@ -44,22 +44,20 @@ public class AddItemTest {
 		itemPricing.sendKeys("12.89");
 		itemQuantity.sendKeys("3");
 
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			System.out.println("got interrupted!");
-		}
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			System.out.println("got interrupted!");
+//		}
 
 		// Add the item by pressing the Add Item button.
 		addItemButton.click();
 
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			System.out.println("got interrupted!");
-		}
-
-		// we need to have the servlet functionality.
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			System.out.println("got interrupted!");
+//		}
 
 		// After adding the item, we want to check if we are redirected back to the
 		// correct page.
