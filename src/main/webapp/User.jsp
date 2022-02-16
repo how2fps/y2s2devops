@@ -14,29 +14,41 @@
 <title>Shop-Wijs</title>
 </head>
 <body>
-	<jsp:include page="/NavBar.jsp"/>
+	<jsp:include page="/NavBar.jsp" />
 	<div class="container d-flex flex-column align-items-center">
 		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
 		<div class="buttons-container d-flex flex-row w-75">
 			<div class="d-flex flex-column w-100 align-items-center">
-				<a class="btn btn-primary m-3 w-75" style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsSoldServlet">
-					Items Sold</a>
 				<a class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsBoughtServlet">
-					Items Bought</a>
-				<a class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/AddItem.jsp">
-					List New Item</a>
-				<a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;"
+					href="http://localhost:8090/devopsproject/ItemsSoldServlet">
+					Items Sold</a> <a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;"
+					href="http://localhost:8090/devopsproject/ItemsBoughtServlet">
+					Items Bought</a> <a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;"
+					href="http://localhost:8090/devopsproject/AddItem.jsp"> List
+					New Item</a> <a class="btn btn-primary m-3 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;">
-					Manage Reviews</a>
-				<a class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/ItemsListedServlet">
+					Manage Reviews</a> <a class="btn btn-primary m-3 w-75"
+					style="background: #FF5D73; color: white; font-size: 18px;"
+					href="http://localhost:8090/devopsproject/ItemsListedServlet">
 					Manage Items</a>
 			</div>
 			<div class="d-flex flex-column w-100 align-items-center">
+				<div class="w-75">
+					<div class="form-group m-3">hearthstonesigh@lol.com
+					</div>
+					<div class="form-group m-3">
+						<label for="">Display Name: Fin aYas AidnA d</label>
+					</div>
+					<div class="form-group m-3">
+						<label for="">Phone Number: 92381923</label>
+					</div>
+				</div>
 				<a class="btn btn-primary m-3 w-75"
-					style="background: #EF6F6C; color: white; font-size: 18px;" href="http://localhost:8090/devopsproject/EditProfile.jsp">
+					style="background: #EF6F6C; color: white; font-size: 18px;"
+					href="http://localhost:8090/devopsproject/EditProfile.jsp">
 					Edit Profile</a>
 			</div>
 		</div>
