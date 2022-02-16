@@ -40,11 +40,11 @@
 				<div class="card align-items-center w-100 h-100">
 					<div class="card-body w-100">
 						<h5 class="card-title">Email:</h5>
-						<p class="card-text">hearthstoensigh@gmail.com</p>
+						<p class="card-text">${userEmail}</p>
 						<h5 class="card-title">Display Name:</h5>
-						<p class="card-text">hearthstoensigh@gmail.com</p>
+						<p class="card-text">${userDisplayName}</p>
 						<h5 class="card-title">Phone Number:</h5>
-						<p class="card-text">23129381209</p>
+						<p class="card-text">${userPhoneNumber}</p>
 						<a class="btn btn-primary w-100 mt-4"
 							style="background: #EF6F6C; color: white; font-size: 18px;"
 							href="http://localhost:8090/devopsproject/EditProfile.jsp">
