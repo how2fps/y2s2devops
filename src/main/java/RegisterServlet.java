@@ -36,9 +36,11 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		String password = request.getParameter("password");
@@ -46,7 +48,7 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String displayName = request.getParameter("displayName");
 		String phoneNumber = request.getParameter("phoneNumber");
-		
+
 		if (password.length() < 8) {
 			request.setAttribute("alert", "Password needs to have at least 8 characters!");
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
@@ -56,43 +58,46 @@ public class RegisterServlet extends HttpServlet {
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 		}
 		try {
-			 Class.forName("com.mysql.jdbc.Driver");
-			 Connection con = DriverManager.getConnection(
-			 "jdbc:mysql://localhost:3306/devops", "root", "");
-			 PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-			 ps.setInt(1, 0);
-			 ps.setString(2, email);
-			 ps.setString(3, password);
-			 int i = ps.executeUpdate();
-			 ResultSet rs = ps.getGeneratedKeys();
-		        if (rs.next()) {
-		            int userId = rs.getInt(1);
-		            if (i > 0){
-						 PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
-						 ps2.setInt(1, 0);
-						 ps2.setString(2, displayName);
-						 ps2.setString(3, phoneNumber);
-						 ps2.setInt(4, userId);
-						 int x = ps2.executeUpdate();
-						 if (x > 0){
-							request.setAttribute("alert", "Registration Successful!");
-							request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-						 }
-					 }
-		        }
-			 
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
+			PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, 0);
+			ps.setString(2, email);
+			ps.setString(3, password);
+			int i = ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				int userId = rs.getInt(1);
+				if (i > 0) {
+					PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
+					ps2.setInt(1, 0);
+					ps2.setString(2, displayName);
+					ps2.setString(3, phoneNumber);
+					ps2.setInt(4, userId);
+					int x = ps2.executeUpdate();
+					if (x > 0) {
+						request.setAttribute("alert", "Registration Successful!");
+						request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+					}
+				}
+			}
+
 		}
-		//Step 8: catch and print out any exception
+		// Step 8: catch and print out any exception
 		catch (Exception exception) {
-		 if(exception.toString().contains("Duplicate entry")) {
-			 request.setAttribute("alert", email + " is already in use!");
-			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-		 }
-		 else 
-		 {
-			 request.setAttribute("alert", exception);
-			 request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-		 }
+			if (exception.toString().contains("Duplicate entry") && exception.toString().contains("Email")) {
+				request.setAttribute("alert", "The email " + email + " is already in use!");
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			}
+			else if (exception.toString().contains("Duplicate entry") && exception.toString().contains("DisplayName")) {
+				request.setAttribute("alert","The display name " + displayName + " is already in use!");
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			}
+			else {
+				request.setAttribute("alert", exception);
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			}
 		}
 		doGet(request, response);
 	}
