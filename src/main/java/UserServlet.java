@@ -49,7 +49,7 @@ public class UserServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		getUser(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
