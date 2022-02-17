@@ -20,12 +20,12 @@
 <div class="card-body">
      <form action="AddReviewServlet" method="post">
        <fieldset class="form-group">
-         <label for="">Comment</label>
+         <label for="comment">Comment</label>
          <textarea name="comment" class="form-control"></textarea>
        </fieldset>
        <div style="text-align:center;">
          <button type="submit" class="btn review-form-btn">Post</button>
-         <p><a href="">Back</a></p>
+         <p><a href="<%=request.getContextPath()%>/ReviewsManagement.jsp">Back</a></p>
        </div>
      </form>
    </div>

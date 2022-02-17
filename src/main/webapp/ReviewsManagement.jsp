@@ -14,18 +14,42 @@
 <title>Reviews Management</title>
 </head>
 <body>
-  <h3 class="text-center">Reviews Management</h3>
-  <div class="container col-md-6">
-    <p><a href="">Back</a></p>
-    <div class="card review-card">
-      <div class="card-body">
-        <p>Name</p>
-        <p>Comment</p>
-        <p>DateTime</p>
-        <button type="submit" class="btn edit-review-btn">Edit</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
+  <jsp:include page="/NavBar.jsp"/>
+  <div class="row"> 
+    <div class="container">
+      <h3 class="text-center">Reviews Management</h3>
+      <hr>
+        <div class="container text-left">
+          <table class="table">
+            <thead>
+              <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Date Bought</th>
+              <th>Actions</th>
+              </tr>
+             </thead>
+             <tbody>
+               <c:forEach var="item" items="${listItems}">
+               <tr>
+                 <td>
+                   <c:out value="${item.name}" />
+                 </td>
+                 <td>
+                   <c:out value="${item.quantity}" />
+                 </td>
+                 <td>
+                   <c:out value="${item.dateListed}" />
+                 </td>
+                 <td>
+                   <a href="EditReviewServlet?itemId=${item.id}" class="btn btn-primary">View All Reviews</a>
+                 </td>
+               </tr>
+               </c:forEach>
+             </tbody>
+           </table>
+         </div>
+       </div> 
+     </div>
 </body>
 </html>

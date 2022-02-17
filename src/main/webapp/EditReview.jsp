@@ -14,18 +14,18 @@
 <title>Edit Review</title>
 </head>
 <body>
-<h3 class="text-center">E Review</h3>
+<h3 class="text-center">Edit Review</h3>
 <div class="container col-md-6">
 <div class="card review-form-card">
 <div class="card-body">
       <form action="">
         <fieldset class="form-group">
-          <label for="">Comment</label>
+          <label for="comment">Comment</label>
             <textarea class="form-control"></textarea>
         </fieldset>
         <div style="text-align:center;">
           <button type="submit" class="btn review-form-btn">Confirm Changes</button>
-          <p><a href="">Back</a></p>
+          <p><a href="<%=request.getContextPath()%>/ReviewsManagement.jsp">Back</a></p>
         </div>
       </form>
       </div>
