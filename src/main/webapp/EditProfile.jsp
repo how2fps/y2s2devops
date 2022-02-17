@@ -35,17 +35,17 @@
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
 							<label for="email">Email</label> <input type="text"
-								class="form-control" name="email" value="${userEmail}" />
+								class="form-control" name="email" value="${email}" />
 						</div>
 						<div class="form-group mb-3">
 							<label for="displayName">Display Name</label> <input type="text"
 								class="form-control" name="displayName"
-								value="${userDisplayName}" />
+								value="${displayName}" />
 						</div>
 						<div class="form-group mb-4">
 							<label for="phoneNumber">Phone Number</label> <input type="text"
 								class="form-control" name="phoneNumber"
-								value="${userPhoneNumber}" />
+								value="${phoneNumber}" />
 						</div>
 						<button id="submit" class="btn btn-secondary"
 							style="background: #FF5D73; color: white">Save Changes</button>

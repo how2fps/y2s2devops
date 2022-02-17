@@ -56,7 +56,6 @@ public class LoginServlet extends HttpServlet {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-
 				String actualPassword = rs.getString("password");
 				int userAuthId = rs.getInt("id");
 				if (password.trim().equals(actualPassword)) {
@@ -67,14 +66,15 @@ public class LoginServlet extends HttpServlet {
 					while (rs2.next()) {
 						String displayName = rs2.getString("displayName");
 						String phoneNumber = rs2.getString("phoneNumber");
+						int id = rs2.getInt("id");
 						HttpSession session = request.getSession();
-						session.setAttribute("userAuthId", userAuthId);
-						session.setAttribute("userDisplayName", displayName);
-						session.setAttribute("userPhoneNumber", phoneNumber);
-						session.setAttribute("userEmail", email);
+						session.setAttribute("detailsId", id);
+						session.setAttribute("displayName", displayName);
+						session.setAttribute("phoneNumber", phoneNumber);
+						session.setAttribute("email", email);
 						request.setAttribute("alert", "Successful login!");
+						request.getRequestDispatcher("/UserServlet").forward(request, response);
 					}
-					request.getRequestDispatcher("/UserServlet").forward(request, response);
 				} else {
 					request.setAttribute("alert", "Password is invalid!");
 					request.getRequestDispatcher("/Login.jsp").forward(request, response);

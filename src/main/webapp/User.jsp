@@ -16,7 +16,7 @@
 <body>
 	<jsp:include page="/NavBar.jsp" />
 	<div class="container d-flex flex-column align-items-center">
-		<h1 class="mt-5 mb-4 h1">Welcome back, ${userDisplayName}</h1>
+		<h1 class="mt-5 mb-4 h1">Welcome back, ${displayName}</h1>
 		<div class="buttons-container d-flex flex-row w-75" style="min-width: 700px;">
 			<div class="d-flex flex-column w-100 align-items-center">
 				<a class="btn btn-primary m-3 mt-0 w-75"
@@ -40,11 +40,11 @@
 				<div class="card align-items-center w-100 h-100">
 					<div class="card-body w-100">
 						<h5 class="card-title">Email:</h5>
-						<p class="card-text">${userEmail}</p>
+						<p class="card-text">${email}</p>
 						<h5 class="card-title">Display Name:</h5>
-						<p class="card-text">${userDisplayName}</p>
+						<p class="card-text">${displayName}</p>
 						<h5 class="card-title">Phone Number:</h5>
-						<p class="card-text">${userPhoneNumber}</p>
+						<p class="card-text">${phoneNumber}</p>
 						<a class="btn btn-primary w-100 mt-4"
 							style="background: #EF6F6C; color: white; font-size: 18px;"
 							href="http://localhost:8090/devopsproject/EditProfileServlet">
