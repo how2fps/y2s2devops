@@ -16,11 +16,12 @@ request.setAttribute("dcf", dcf);
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="static/userCart.css" />
+<link rel="stylesheet" href="static/navbar.css" />
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>User Cart</title>
 </head>
 <body>
-	<jsp:include page="/NavBar.jsp" />
+	<jsp:include page="/NavBar.jsp"/>
 	<br>
 	<div class="col d-flex justify-content-center in-title">
 		<h1 class="fontcenterUserCart">Your Cart</h1>

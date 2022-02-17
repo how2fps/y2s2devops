@@ -15,7 +15,7 @@
 <meta charset="ISO-8859-1">
 <title>Sign Up</title>
 </head>
-<body style="font-family: 'Roboto', sans-serif;">
+<body>
 	<nav class="navbar px-3 bg-light"
 		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
 		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
