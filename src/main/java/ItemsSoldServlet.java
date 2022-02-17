@@ -52,7 +52,7 @@ public class ItemsSoldServlet extends HttpServlet {
 
 		// Get the userId from session
 		HttpSession session = request.getSession();
-		int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
+		int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
 
 		List<Item> itemsSoldList = new ArrayList<>();
 		try (Connection connection = getConnection();

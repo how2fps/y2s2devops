@@ -57,7 +57,7 @@ public class ItemsListedServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
+		int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
 
 		List<Item> itemsListedList = new ArrayList<>();
 		try (Connection connection = getConnection();

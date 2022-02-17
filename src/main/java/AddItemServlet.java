@@ -32,7 +32,7 @@ public class AddItemServlet extends HttpServlet {
 		doGet(request, response);
 
 		HttpSession session = request.getSession();
-		int itemUserId = Integer.parseInt(session.getAttribute("userAuthId").toString());
+		int itemUserId = Integer.parseInt(session.getAttribute("detailsId").toString()); //changed this to detailsId from userAuthId
 
 		response.setContentType("text/html");
 

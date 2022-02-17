@@ -35,21 +35,21 @@ public class UserServlet extends HttpServlet {
 	private void getUser(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		String userDisplayName = session.getAttribute("userDisplayName").toString();
-		String userPhoneNumber = session.getAttribute("userPhoneNumber").toString();
-		String userEmail = session.getAttribute("userEmail").toString();
-		int userAuthId = Integer.parseInt(session.getAttribute("userAuthId").toString());
+		String displayName = session.getAttribute("displayName").toString();
+		String phoneNumber = session.getAttribute("phoneNumber").toString();
+		String email = session.getAttribute("email").toString();
+		int detailsId = Integer.parseInt(session.getAttribute("detailsId").toString());
 
-		request.setAttribute("userDisplayName", userDisplayName);
-		request.setAttribute("userPhoneNumber", userPhoneNumber);
-		request.setAttribute("userEmail", userEmail);
-		request.setAttribute("userAuthId", userAuthId);
+		request.setAttribute("displayName", displayName);
+		request.setAttribute("phoneNumber", phoneNumber);
+		request.setAttribute("email", email);
+		request.setAttribute("detailsId", detailsId);
 		request.getRequestDispatcher("/User.jsp").forward(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		getUser(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
