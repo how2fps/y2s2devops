@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -43,28 +44,25 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		String password = request.getParameter("password");
-		String confirmPassword = request.getParameter("confirmPassword");
+		HttpSession session = request.getSession();
 		String email = request.getParameter("email");
 		String displayName = request.getParameter("displayName");
 		String phoneNumber = request.getParameter("phoneNumber");
+		int authId = (int) session.getAttribute("userAuthId");
 
-		if (password.length() < 8) {
-			request.setAttribute("alert", "Password needs to have at least 8 characters!");
-			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-		}
-		if (!password.equals(confirmPassword)) {
-			request.setAttribute("alert", "Passwords are not the same!");
-			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
-		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
-			PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)",
+			PreparedStatement ps = con.prepareStatement("UPDATE user_details SET DisplayName = ?, PhoneNumber = ? WHERE Id = ?",
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, 0);
-			ps.setString(2, email);
-			ps.setString(3, password);
+			ps.setString(1, displayName);
+			ps.setString(2, phoneNumber);
+			ps.setInt(3, authId);
+			PreparedStatement ps2 = con.prepareStatement("UPDATE user_details SET DisplayName = ?, PhoneNumber = ? WHERE Id = ?",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			ps2.setString(1, displayName);
+			ps2.setString(2, phoneNumber);
+			ps2.setInt(3, authId);
 			int i = ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {

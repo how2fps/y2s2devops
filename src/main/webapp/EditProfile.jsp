@@ -26,20 +26,20 @@
 	<div class="container d-flex flex-column align-items-center">
 		<p class="my-4 h1">Edit Profile</p>
 		<div class="edit-profile-container">
-			<form action="">
+			<form action="EditProfileServlet" method="post">
 				<div class="d-flex">
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
-							<label for="">Email</label> <input type="text"
-								class="form-control" />
+							<label for="email">Email</label> <input type="text"
+								class="form-control" name="email" value="${userEmail}"/>
 						</div>
 						<div class="form-group mb-3">
-							<label for="">Display Name</label> <input type="text"
-								class="form-control" />
+							<label for="displayName">Display Name</label> <input type="text"
+								class="form-control" name="displayName" value="${userDisplayName}"/>
 						</div>
 						<div class="form-group mb-4">
-							<label for="">Phone Number</label> <input type="text"
-								class="form-control" />
+							<label for="phoneNumber">Phone Number</label> <input type="text"
+								class="form-control" name="phoneNumber" value="${userPhoneNumber}"/>
 						</div>
 						<button class="btn btn-secondary"
 							style="background: #FF5D73; color: white">Save Changes</button>

@@ -47,8 +47,8 @@
 						<p class="card-text">${userPhoneNumber}</p>
 						<a class="btn btn-primary w-100 mt-4"
 							style="background: #EF6F6C; color: white; font-size: 18px;"
-							href="http://localhost:8090/devopsproject/EditProfile.jsp">
-							Edit Profile </a>
+							href="http://localhost:8090/devopsproject/EditProfileServlet">
+							Edit Profile</a>
 					</div>
 				</div>
 			</div>
