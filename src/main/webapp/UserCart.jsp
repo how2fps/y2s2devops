@@ -23,7 +23,6 @@ request.setAttribute("dcf", dcf);
 <body>
 	<jsp:include page="/NavBar.jsp"/>
 	<br>
-<body>
 	<div class="col d-flex justify-content-center in-title">
 		<h1 class="fontcenterUserCart">Your Cart</h1>
 	</div>
@@ -44,9 +43,13 @@ request.setAttribute("dcf", dcf);
 					alt="Item Image"></td>
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
-				<td><a href="<%=request.getContextPath()%>/UserCartServlet/edit?id=<c:out value='${cartitem.id}'/>"><button type="button" class="btn btn-info">Add $5</button></a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/UserCartServlet/edit?id=<c:out value='${cartitem.id}'/>"><button
+							type="button" class="btn btn-info">Add $5</button></a></td>
 				<td><c:out value="${cartitem.totalPrice}" /></td>
-				<td><a href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button type="button" class="btn btn-danger">X</button></a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button
+							type="button" class="btn btn-danger">X</button></a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -55,7 +58,9 @@ request.setAttribute("dcf", dcf);
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
 				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
-				<th><a href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button type="button" class="btn buttoncentertable2">Checkout</button></a></th>
+				<th><a
+					href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
+							type="button" class="btn buttoncentertable2">Checkout</button></a></th>
 			</tr>
 		</table>
 	</div>
