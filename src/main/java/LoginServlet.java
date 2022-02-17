@@ -55,7 +55,8 @@ public class LoginServlet extends HttpServlet {
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
+
 				String actualPassword = rs.getString("password");
 				int userAuthId = rs.getInt("id");
 				if (password.trim().equals(actualPassword)) {
@@ -75,21 +76,19 @@ public class LoginServlet extends HttpServlet {
 					}
 					request.getRequestDispatcher("/UserServlet").forward(request, response);
 				} else {
-					request.setAttribute("alert", "Email or password is invalid!");
+					request.setAttribute("alert", "Password is invalid!");
 					request.getRequestDispatcher("/Login.jsp").forward(request, response);
 				}
+			} else {
+				request.setAttribute("alert", "The email " + email + " is not registered!");
+				request.getRequestDispatcher("/Login.jsp").forward(request, response);
 			}
 
 		}
 		// Step 8: catch and print out any exception
 		catch (Exception exception) {
-			if (exception.toString().contains("Duplicate entry")) {
-				request.setAttribute("alert", email + "already in use!");
-				request.getRequestDispatcher("/Login.jsp").forward(request, response);
-			} else {
-				request.setAttribute("alert", exception);
-				request.getRequestDispatcher("/Login.jsp").forward(request, response);
-			}
+			request.setAttribute("alert", exception);
+			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		}
 		doGet(request, response);
 	}
