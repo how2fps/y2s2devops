@@ -50,8 +50,9 @@ public class AddReviewServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		
 		//These parameters can only be retrieved after user login
-		 int userId = 1;
-		 int itemId = 1;
+		HttpSession session = request.getSession();
+        int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
+		int itemId = 1;
 		 
 		 //Current Time parameter
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -62,7 +63,7 @@ public class AddReviewServlet extends HttpServlet {
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
-			 "jdbc:mysql://localhost:3306/devopsproject", "root", "");
+			 "jdbc:mysql://localhost:3306/devops", "root", "");
 			 
 			//Implement the sql query using prepared statement 
 			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?)");
@@ -76,13 +77,11 @@ public class AddReviewServlet extends HttpServlet {
 			//Perform the query on the database using the prepared statement
 			 int i = ps.executeUpdate();
 			 
-			//Check if the query had been successfully executed, return “You have successfully posted” via the response,
+			//Check if the query had been successfully executed and redirect
 			 if (i > 0){
-				 PrintWriter writer = response.getWriter();
-				 writer.println("<h1>" + "You have successfully posted a Review!" + 
-				 "</h1>");
-				 writer.close();
-			 } 
+				 response.sendRedirect("http://localhost:8090/devopsproject/ReviewsPageServlet");
+			 }
+			 
 		}
 		//Step 8: catch and print out any exception
 		catch (Exception exception) {

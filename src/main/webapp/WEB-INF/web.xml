@@ -90,5 +90,4 @@ id="WebApp_ID" version="3.1">
 		<url-pattern>/AddReviewServlet</url-pattern>
 	</servlet-mapping>
 	
-  <display-name>devopsproject</display-name>
 </web-app>

@@ -13,7 +13,7 @@
 <title>Edit Review</title>
 </head>
 <body>
-<h3 class="text-center">Edit Review</h3>
+<h3 class="text-center">E Review</h3>
 <div class="container col-md-6">
 <div class="card review-form-card">
 <div class="card-body">

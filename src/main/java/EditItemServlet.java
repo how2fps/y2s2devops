@@ -109,7 +109,7 @@ public class EditItemServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 
 		}
-		response.sendRedirect("http://localhost:8081/devopsproject/ItemsListedServlet");
+		response.sendRedirect("http://localhost:8090/devopsproject/ItemsListedServlet");
 	}
 
 	public EditItemServlet() {

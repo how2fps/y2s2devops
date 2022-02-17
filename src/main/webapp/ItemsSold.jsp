@@ -13,10 +13,13 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body class="d-flex flex-column align-items-center">
+<body>
+	<jsp:include page="/NavBar.jsp"/>
+	<div class="d-flex flex-column align-items-center">
 	<p class="items-sold-title">Items Sold</p>
 	<section
 		class="items-sold-container container d-flex flex-column justify-content-center">
+		
 		<article class="d-flex flex-row">
 			<div class="col d-flex justify-content-center in-title">
 				<p>Item Name</p>
@@ -31,25 +34,26 @@
 		<p class="d-flex align-self-center row">You have no items sold
 			yet!</p>
 		<c:forEach var="item" items="${itemsSoldList}">
-				<div
-					class="item-block d-flex flex-row align-self-center align-items-center">
-					<div class="item-info d-flex flex-row align-items-center">
-						<img class="item-pic" />
-						<div class="amount-item-sold">
-							<c:out value="${item.quantity}" />
-						</div>
-						<c:out value="${item.name}" />
+			<div
+				class="item-block d-flex flex-row align-self-center align-items-center">
+				<div class="item-info d-flex flex-row align-items-center">
+					<img class="item-pic" />
+					<div class="amount-item-sold">
+						<c:out value="${item.quantity}" />
 					</div>
-					<div
-						class="datetime-sold d-flex justify-content-center align-items-center">
-						<c:out value="${item.dateListed}" />
-					</div>
-					<div
-						class="amount-sold d-flex justify-content-center align-items-center">
-						<c:out value="${item.pricing}" />
-					</div>
+					<c:out value="${item.name}" />
 				</div>
-			</c:forEach>
+				<div
+					class="datetime-sold d-flex justify-content-center align-items-center">
+					<c:out value="${item.dateListed}" />
+				</div>
+				<div
+					class="amount-sold d-flex justify-content-center align-items-center">
+					<c:out value="${item.pricing}" />
+				</div>
+			</div>
+		</c:forEach>
 	</section>
+	</div>
 </body>
 </html>

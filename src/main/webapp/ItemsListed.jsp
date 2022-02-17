@@ -15,20 +15,7 @@
 	<link rel="stylesheet" href="static/navbar.css" />
 </head>
 <body>
-	<nav class="navbar px-3 bg-light"
-		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
-		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
-		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Logout</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="/NavBar.jsp"/>
 	<div class="d-flex flex-column align-items-center">
 		<p class="il-title">Items you've listed</p>
 		<section
@@ -51,7 +38,7 @@
 				<div
 					class="item-block d-flex flex-row align-self-center align-items-center">
 					<div class="item-info d-flex flex-row align-items-center">
-						<img class="item-pic" />
+						<img class="item-pic" src="${item.image}"/>
 						<c:out value="${item.name}" />
 					</div>
 					<div class="datetime-bought d-flex justify-content-center align-items-center">
