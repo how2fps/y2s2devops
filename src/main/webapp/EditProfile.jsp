@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Edit Profile</title>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -22,8 +23,11 @@
 </head>
 
 <body style="font-family: 'Roboto', sans-serif;">
-	<jsp:include page="/NavBar.jsp"/>
+	<jsp:include page="/NavBar.jsp" />
 	<div class="container d-flex flex-column align-items-center">
+		<c:if test="${alert != null}">
+			<div class="alert alert-dark mt-4" role="alert">${alert}</div>
+		</c:if>
 		<p class="my-4 h1">Edit Profile</p>
 		<div class="edit-profile-container">
 			<form action="EditProfileServlet" method="post">
@@ -31,17 +35,19 @@
 					<section class="aic-right d-flex flex-column">
 						<div class="form-group mb-3">
 							<label for="email">Email</label> <input type="text"
-								class="form-control" name="email" value="${userEmail}"/>
+								class="form-control" name="email" value="${userEmail}" />
 						</div>
 						<div class="form-group mb-3">
 							<label for="displayName">Display Name</label> <input type="text"
-								class="form-control" name="displayName" value="${userDisplayName}"/>
+								class="form-control" name="displayName"
+								value="${userDisplayName}" />
 						</div>
 						<div class="form-group mb-4">
 							<label for="phoneNumber">Phone Number</label> <input type="text"
-								class="form-control" name="phoneNumber" value="${userPhoneNumber}"/>
+								class="form-control" name="phoneNumber"
+								value="${userPhoneNumber}" />
 						</div>
-						<button class="btn btn-secondary"
+						<button id="submit" class="btn btn-secondary"
 							style="background: #FF5D73; color: white">Save Changes</button>
 					</section>
 				</div>
