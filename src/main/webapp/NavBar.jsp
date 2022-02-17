@@ -7,7 +7,7 @@
 		<li class="nav-item" id="navbar-cart"><a class="nav-link nav-hover"
 			style="color: black;" href="http://localhost:8090/devopsproject/UserCartServlet">Your Cart</a></li>
 		<li class="nav-item" id="navbar-profile"><a class="nav-link nav-hover"
-			style="color: black;" href="http://localhost:8090/devopsproject/User.jsp">Profile</a></li>
+			style="color: black;" href="http://localhost:8090/devopsproject/UserServlet">Profile</a></li>
 		<li class="nav-item" id="navbar-logout"><a class="nav-link nav-hover"
 			style="color: black;" href="http://localhost:8090/devopsproject/LogoutServlet">Logout</a></li>
 	</ul>
