@@ -23,7 +23,7 @@
 		
 		<article class="d-flex flex-row">
 			<div class="col d-flex justify-content-center in-title">
-				<p>Item Name</p>
+				<p>Quantity and Item Name</p>
 			</div>
 			<div class="col d-flex justify-content-center dt-title">
 				<p>DateTime Sold</p>
@@ -32,8 +32,6 @@
 				<p>Amount</p>
 			</div>
 		</article>
-		<p class="d-flex align-self-center row">You have no items sold
-			yet!</p>
 		<c:forEach var="item" items="${itemsSoldList}">
 			<div
 				class="item-block d-flex flex-row align-self-center align-items-center">

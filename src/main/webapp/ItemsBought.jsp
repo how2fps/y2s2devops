@@ -23,7 +23,7 @@
 			class="items-bought-container container d-flex flex-column justify-content-center">
 			<article class="d-flex flex-row">
 				<div class="col d-flex justify-content-center in-title">
-					<p>Amount & Item Name</p>
+					<p>Amount and Item Name</p>
 				</div>
 				<div class="col d-flex justify-content-center dt-title">
 					<p>Date Bought</p>
