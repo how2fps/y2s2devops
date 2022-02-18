@@ -35,7 +35,7 @@
 					<p class="card-text shoppricemargin">
 						<c:out value="${item.pricing}" />
 					<div class="col-md-12 text-center">
-						<a href="#" class="btn btn-danger shopitembutton">Reviews</a>
+						<a href="AddReviewServlet?itemId=${item.id}" class="btn btn-danger shopitembutton">Reviews</a>
 					</div>
 					<div class="col-md-12 text-center">
 						<div style="display:none">

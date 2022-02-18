@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,21 @@ public class AddReviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// Step 4: Depending on the request servlet path, determine the function to
+		// invoke using the follow switch statement.
+		String action = request.getServletPath();
+		try
+		{
+			switch (action) {
+			 case "/AddReviewServlet/reviewspage":
+			 showReviews(request, response);
+			 break;
+			}
+		}catch(
+		SQLException ex)
+		{
+			throw new ServletException(ex);
+		}
 	}
 
 	/**
@@ -47,12 +63,11 @@ public class AddReviewServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		 //Retrieve parameters from the request from the review form
-		String comment = request.getParameter("comment");
+		String content = request.getParameter("content");
 		
 		//These parameters can only be retrieved after user login
 		HttpSession session = request.getSession();
-        int userId = Integer.parseInt(session.getAttribute("userAuthId").toString());
-		int itemId = 1;
+        int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
 		 
 		 //Current Time parameter
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -69,7 +84,7 @@ public class AddReviewServlet extends HttpServlet {
 			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?)");
 			 
 			//Parsed in the data retrieved from the review form request into the prepared statement
-			 ps.setString(1, comment);
+			 ps.setString(1, content);
 			 ps.setInt(2, userId);
 			 ps.setInt(3, itemId);
 			 ps.setString(4, time);
@@ -79,7 +94,7 @@ public class AddReviewServlet extends HttpServlet {
 			 
 			//Check if the query had been successfully executed and redirect
 			 if (i > 0){
-				 response.sendRedirect("http://localhost:8090/devopsproject/ReviewsPageServlet");
+				 response.sendRedirect("http://localhost:8090/devopsproject/ReviewsPage.jsp");
 			 }
 			 
 		}
