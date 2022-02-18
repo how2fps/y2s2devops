@@ -38,7 +38,7 @@
 				<div
 					class="item-block d-flex flex-row align-self-center align-items-center">
 					<div class="item-info d-flex flex-row align-items-center">
-						<img class="item-pic" src="${item.image}"/>
+						<img class="item-pic" src="DisplayImageServlet?path=${item.image}"/>
 						<c:out value="${item.name}" />
 					</div>
 					<div class="datetime-bought d-flex justify-content-center align-items-center">
