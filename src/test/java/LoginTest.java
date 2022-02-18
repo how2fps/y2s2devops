@@ -13,28 +13,28 @@ public class LoginTest {
 	@Test
 	public void checkTitle() {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
-		Assert.assertEquals(webDriver.getTitle(), "Login");
 		System.out.println("title: " + webDriver.getTitle());
-		Assert.assertTrue(webDriver.getTitle().contains("Login"));
-	  }
-	  
-	  @Test
-	  public void fillLoginForm() {
-		  webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
-		  WebElement email = webDriver.findElement(By.name("email"));
-		  WebElement password = webDriver.findElement(By.name("password"));
-		  email.sendKeys("hearthstonesigh@gmail.com");
-		  password.sendKeys("password");
-		  webDriver.findElement(By.id("submit")).submit();
-		  Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
-	  }
-	  
-	  @BeforeTest
-	  public void beforeTest() {
-		  String chromeDriverDir = "C:\\Program Files\\Google\\Chrome\\chromedriver.exe";
-		  System.setProperty("webdriver.chrome.driver", chromeDriverDir);		  
-		  webDriver = new ChromeDriver();  
-	  }
+		Assert.assertEquals(webDriver.getTitle(), "Login");
+	}
+
+	@Test
+	public void fillLoginForm() {
+		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
+		WebElement email = webDriver.findElement(By.name("email"));
+		WebElement password = webDriver.findElement(By.name("password"));
+		email.sendKeys("hearthstonesigh@gmail.com");
+		password.sendKeys("password");
+		webDriver.findElement(By.id("submit")).submit();
+		Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
+	}
+
+	@BeforeTest
+	public void beforeTest() {
+		String chromeDriverDir = "C:\\Program Files\\Google\\Chrome\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver", chromeDriverDir);
+		webDriver = new ChromeDriver();
+	}
+
 	@AfterTest
 	public void afterTest() {
 		// Quit the ChromeDriver and close all associated window at the end of test
