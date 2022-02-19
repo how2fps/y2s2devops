@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="itemView.css" />
+<link rel="stylesheet" href="static/itemView.css" />
 </head>
 <body>
 	<jsp:include page="/NavBar.jsp" />
@@ -20,85 +20,23 @@
 			<img src="aesthetically pleasing background.png" class="item-img" />
 		</section>
 		<section class="w-50 right-hand">
-			<div class="item-name">Very good Keyboard</div>
+			<div class="item-name">${item.name}</div>
 			<div class="item-pricing d-flex flex-row">
-				$
-				<p class="item-pricing-number">45.90</p>
+			<p>$</p>
+				<p class="item-pricing-number">${item.pricing}</p>
 			</div>
 			<div class="stocks-left d-flex flex-row">
 				<p>Stocks left:</p>
-				<div>40</div>
+				<p>${item.quantity}</p>
 			</div>
-			<div class="item-description">Lorem ipsum dolor sit, amet
-				consectetur adipisicing elit. Repellendus quos hic magni eaque
-				quisquam sapiente harum ipsum architecto. Suscipit minus odio
-				aliquid quidem provident exercitationem magnam dignissimos ex ad
-				aut.</div>
-
+			<p class="item-description">${item.description}</p>
 			<div class="button-container d-flex flex-row justify-content-around">
-				<button class="btn btn-primary mt-3">Add to Cart</button>
-				<button class="btn btn-warning mt-3">Edit Item Details</button>
-				<c:if test="${isListedUser}"><button class="btn btn-danger mt-3">Delete Item</button></c:if>
-				
+				<c:if test="${isListedUser == 'false'}"><button class="btn btn-primary mt-3">Add to Cart</button></c:if>
+				<c:if test="${isListedUser == 'true'}"><a class="btn btn-warning mt-3" href="EditItemServlet?itemId=${item.id}">Edit Item Details</a></c:if>
+				<c:if test="${isListedUser == 'true'}"><a class="btn btn-danger mt-3" href="DeleteItemServlet?itemId=${item.id}" onclick="return confirm('Are you sure you want to delete this item? THIS ACTION IS IRREVERSABLE!')">Delete Item</a></c:if>				
 			</div>
-			<p class="mt-3">Reviews:</p>
+			<p class="mt-3 ar-text">All Reviews:</p>
 			<div class="review-container">
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
-				<article class="review-card border rounded">
-					<p class="review-username mr-2">user</p>
-					<p class="review-time">23/11/21</p>
-					<p class="review-content">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Magni aspernatur, obcaecati est
-						quia, iusto a voluptas molestiae maiores non vero dignissimos</p>
-				</article>
 			</div>
 		</section>
 	</div>

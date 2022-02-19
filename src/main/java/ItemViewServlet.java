@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 public class ItemViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// Global itemId
+	// Global variables
 	private static int itemId;
 	private static int userId;
 
@@ -68,12 +68,13 @@ public class ItemViewServlet extends HttpServlet {
 				int itemQuantity = rs.getInt("quantity");
 				System.out.println(itemQuantity);
 				int itemUserId = rs.getInt("userid");
+				System.out.println(itemUserId);
 				// we will be using the userId we get to check if we are actually the same user
 				// who listed the item
-				if (itemUserId == userId) {
-					boolean isListedUser = true;
+				if (userId == itemUserId) {
+					request.setAttribute("isListedUser", "true");
 				} else {
-					boolean isListedUser = false;
+					request.setAttribute("isListedUser", "false");
 				}
 				java.sql.Date itemDateListed = rs.getDate("datelisted");
 				item = new Item(itemId, itemName, itemDescription, itemImage, itemPrice, itemQuantity, itemUserId,
@@ -91,8 +92,8 @@ public class ItemViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int userId = Integer.parseInt(session.getAttribute("detailsId").toString()); // changed this to detailsId
-																						// from userAuthId
+		userId = Integer.parseInt(session.getAttribute("detailsId").toString()); // changed this to detailsId
+																					// from userAuthId
 		String action = request.getServletPath();
 
 		// I need to get the following things:
@@ -102,6 +103,7 @@ public class ItemViewServlet extends HttpServlet {
 		try {
 			System.out.println("in the try block");
 			getItemInformationAndReviews(request, response);
+			System.out.println(userId);
 
 		} catch (Exception ex) {
 			throw new ServletException(ex);
