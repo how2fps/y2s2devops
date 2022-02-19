@@ -28,7 +28,7 @@ public class ReviewsManagementServlet extends HttpServlet {
 	private String jdbcPassword = "";
 	
 	// Prepared list of SQL prepared statements to perform Retrieve from database
-	private static final String SELECT_ITEMS_BY_ID = "select * from  where UserId =?";
+	private static final String SELECT_REVIEWS_BY_USER = "select * from review where UserId =?";
 	
 	// Implement the getConnection method to facilitate connection to the database via JDBC
 	protected Connection getConnection() {
@@ -64,37 +64,35 @@ public class ReviewsManagementServlet extends HttpServlet {
 	}
 	
 	// listItems function to connect to the database and retrieve all items listed by 
-	private void listItems(HttpServletRequest request, HttpServletResponse response) 
+	private void listReviews(HttpServletRequest request, HttpServletResponse response) 
 	  throws SQLException, IOException, ServletException {
 		
 	  HttpSession session = request.getSession();
 	  int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
 		
-	  List <Item> items = new ArrayList <>();
+	  List <Review> reviews = new ArrayList <>();
 	   try (Connection connection = getConnection();
 			   
 	   // Create a statement using connection object
 	   PreparedStatement preparedStatement = 
-	  connection.prepareStatement(SELECT_ITEMS_BY_ID);) {
+	  connection.prepareStatement(SELECT_REVIEWS_BY_USER);) {
 		   
 	   // Execute the query or update query
 	   ResultSet rs = preparedStatement.executeQuery();
 	   
 	   // Process the ResultSet object.
 	   while (rs.next()) {
-	   String name = rs.getString("name");
-	   String image = rs.getString("image");
-	   double price = rs.getString("price");
-	   int quantity = rs.getString("quantity");
-	   String date = rs.getString("datetime");
-	   items.add(new Item(name, image, price, quantity, userId, date));
+	   String id = rs.getString("id")
+	   String content = rs.getString("content");
+	   String date = rs.getString("time");
+	   reviews.add(new Review(id, userId, content, itemId, date));
 	   }
 	   } catch (SQLException e) {
 	   System.out.println(e.getMessage());
 	   }
 	   
 	  // Set the items list into the listItems attribute to be pass to the ReviewsManagement.jsp
-	  request.setAttribute("listItems", items);
+	  request.setAttribute("listReviews", reviews);
 	  request.getRequestDispatcher("/ReviewsManagement.jsp").forward(request, response);
 	  }
 	

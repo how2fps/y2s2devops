@@ -23,26 +23,23 @@
           <table class="table">
             <thead>
               <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Date Bought</th>
+              <th>Review</th>
+              <th>Date Posted</th>
               <th>Actions</th>
               </tr>
              </thead>
              <tbody>
-               <c:forEach var="item" items="${listItems}">
+               <c:forEach var="review" reviews="${listReviews}">
                <tr>
                  <td>
-                   <c:out value="${item.name}" />
+                   <c:out value="${review.content}" />
                  </td>
                  <td>
-                   <c:out value="${item.quantity}" />
+                   <c:out value="${review.dateListed}" />
                  </td>
                  <td>
-                   <c:out value="${item.dateListed}" />
-                 </td>
-                 <td>
-                   <a href="ReviewsManagementServlet?itemId=${item.id}" class="btn btn-primary">View All Reviews</a>
+                   <a href="#" class="btn btn-primary">Edit Review</a>
+                   <a href="#" class="btn btn-danger">Delete Review</a>
                  </td>
                </tr>
                </c:forEach>
