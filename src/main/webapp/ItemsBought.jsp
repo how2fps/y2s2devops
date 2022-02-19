@@ -16,27 +16,14 @@
 
 </head>
 <body>
-	<nav class="navbar px-3 bg-light"
-		style="box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.233)">
-		<a class="navbar-brand nav-hover" style="color: black;" href="#">Shop-Wijs</a>
-		<ul class="nav">
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Shop</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Your Cart</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Profile</a></li>
-			<li class="nav-item"><a class="nav-link nav-hover"
-				style="color: black;" href="#">Logout</a></li>
-		</ul>
-	</nav>
+	<jsp:include page="/NavBar.jsp"/>
 	<div class="d-flex flex-column align-items-center">
 		<p class="items-bought-title">Items Bought</p>
 		<section
 			class="items-bought-container container d-flex flex-column justify-content-center">
 			<article class="d-flex flex-row">
 				<div class="col d-flex justify-content-center in-title">
-					<p>Amount & Item Name</p>
+					<p>Amount and Item Name</p>
 				</div>
 				<div class="col d-flex justify-content-center dt-title">
 					<p>Date Bought</p>

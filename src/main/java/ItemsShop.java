@@ -1,3 +1,4 @@
+import java.sql.Date;
 
 public class ItemsShop {
 
@@ -5,13 +6,13 @@ public class ItemsShop {
 	protected String Name;
 	protected String Description;
 	protected String Image;
-	protected String Pricing;
+	protected double Pricing;
 	protected Integer Quantity;
 	protected Integer UserId;
-	protected String DateListed;
+	protected Date DateListed;
 	
-	public ItemsShop(Integer id, String name, String description, String image, String pricing, Integer quantity,
-			Integer userId, String dateListed) {
+	public ItemsShop(Integer id, String name, String description, String image, double pricing, Integer quantity,
+			Integer userId, Date dateListed) {
 		super();
 		Id = id;
 		Name = name;
@@ -47,10 +48,10 @@ public class ItemsShop {
 	public void setImage(String image) {
 		Image = image;
 	}
-	public String getPricing() {
+	public double getPricing() {
 		return Pricing;
 	}
-	public void setPricing(String pricing) {
+	public void setPricing(double pricing) {
 		Pricing = pricing;
 	}
 	public Integer getQuantity() {
@@ -65,10 +66,10 @@ public class ItemsShop {
 	public void setUserId(Integer userId) {
 		UserId = userId;
 	}
-	public String getDateListed() {
+	public Date getDateListed() {
 		return DateListed;
 	}
-	public void setDateListed(String dateListed) {
+	public void setDateListed(Date dateListed) {
 		DateListed = dateListed;
 	}
 

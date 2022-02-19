@@ -12,25 +12,23 @@
 <link rel="stylesheet" href="static/userTransaction.css" />
 <title>Transaction</title>
 </head>
-<br>
-<br>
-<br>
 <body>
+	<jsp:include page="/NavBar.jsp" />
+	<br>
 	<div class="col d-flex justify-content-center in-title">
 		<h1 class="fontcenterTransaction">Transaction</h1>
 	</div>
-	<br>
 	<br>
 	<div class="col d-flex justify-content-center">
 		<p class="fontcenterMessageTransaction">You have successfully made
 			recent purchases today!</p>
 	</div>
-		<div class="divcenter">
-			<img class="img-fluid transactionImage" src="..." alt="Item Image">
-		</div>
+	<div class="divcenter">
+		<img width=450 height=450 src="images/checkmarksuccesstransaction.png">
+	</div>
 	<div class="col-md-12 text-center">
-		<a href="#" class="btn btn-danger transactionitembutton">Go To
-			Shop</a>
+		<a href="http://localhost:8090/devopsproject/ItemsShopServlet"
+			class="btn btn-danger transactionitembutton">Go To Shop</a>
 	</div>
 </body>
 </html>
