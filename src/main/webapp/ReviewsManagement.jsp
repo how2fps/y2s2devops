@@ -42,7 +42,7 @@
                    <c:out value="${item.dateListed}" />
                  </td>
                  <td>
-                   <a href="EditReviewServlet?itemId=${item.id}" class="btn btn-primary">View All Reviews</a>
+                   <a href="ReviewsManagementServlet?itemId=${item.id}" class="btn btn-primary">View All Reviews</a>
                  </td>
                </tr>
                </c:forEach>

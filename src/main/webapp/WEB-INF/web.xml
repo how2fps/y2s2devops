@@ -89,5 +89,29 @@ id="WebApp_ID" version="3.1">
 		<servlet-name>AddReviewServlet</servlet-name>
 		<url-pattern>/AddReviewServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ReviewsManagementServlet</servlet-name>
+		<servlet-class>ReviewsManagementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReviewsManagementServlet</servlet-name>
+		<url-pattern>/ReviewsManagementServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-class>RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterServlet</servlet-name>
+		<url-pattern>/RegisterServlet</url-pattern>
+	</servlet-mapping>
 	
 </web-app>

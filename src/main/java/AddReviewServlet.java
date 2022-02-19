@@ -35,22 +35,7 @@ public class AddReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		// Step 4: Depending on the request servlet path, determine the function to
-		// invoke using the follow switch statement.
-		String action = request.getServletPath();
-		try
-		{
-			switch (action) {
-			 case "/AddReviewServlet/reviewspage":
-			 showReviews(request, response);
-			 break;
-			}
-		}catch(
-		SQLException ex)
-		{
-			throw new ServletException(ex);
-		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());}
 	}
 
 	/**
