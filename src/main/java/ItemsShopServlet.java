@@ -34,6 +34,7 @@ public class ItemsShopServlet extends HttpServlet {
 
 	private static final String SELECT_ITEM_BY_ID = "SELECT id, name, description, image, pricing, quantity, userId, dateListed FROM item WHERE id =?";
 	private static final String SELECT_ALL_ITEMS_LISTED = "SELECT * FROM item";
+	private static final String UPDATE_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -79,6 +80,7 @@ public class ItemsShopServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		updateItem(request, response);
 		String action = request.getServletPath();
 		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
 
@@ -120,6 +122,47 @@ public class ItemsShopServlet extends HttpServlet {
 	 *      response)
 	 */
 	
+	// To update the quantity of a selected item by user after adding to their user cart
+	private void updateItem(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		// Step 1: Retrieve value from the request
+
+		String oriId = request.getParameter("oriId");
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");			
+		String description = request.getParameter("description");
+		String image = request.getParameter("image");
+		String pricing = request.getParameter("pricing");
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+		String userId = request.getParameter("userId");
+		String dateListed = request.getParameter("dateListed");
+		
+		Integer minusquantity = Integer.parseInt(request.getParameter("additemquantityofuser"));
+		
+		Integer calculatedquantity = Math.subtractExact(quantity, minusquantity);
+		
+		String resultquantity = String.valueOf(calculatedquantity);
+		
+		// Step 2: Attempt connection with database and execute update user SQL query
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_ITEM_BY_ID);) {
+
+			statement.setString(1, id);
+			statement.setString(2, name);
+			statement.setString(3, description);
+			statement.setString(4, image);
+			statement.setString(5, pricing);
+			statement.setString(6, resultquantity);
+			statement.setString(7, userId);
+			statement.setString(8, dateListed);
+			statement.setString(9, oriId);
+
+			int i = statement.executeUpdate();
+
+		}
+		
+	}
+	
 	// the function to add cart item by user to their user cart
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -129,24 +172,32 @@ public class ItemsShopServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
+		//To get user id of the current user logged in
 		Integer shoppingcartid = Integer.parseInt(request.getParameter("shoppingcartid"));
+		
+		//To get the current quantity of item
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+		
+		//To get one item information after user add the item to their user cart
+		Integer sellinguserid = Integer.parseInt(request.getParameter("sellinguserid"));
 		Integer itemid = Integer.parseInt(request.getParameter("itemid"));
 		String pricing = request.getParameter("pricing");
-		String totalamount = request.getParameter("totalamount");
+		
+		//To get input quantity set by the current user from item quantity
+		Integer additemquantity = Integer.parseInt(request.getParameter("additemquantityofuser"));
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "password");
-
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
+			
 			PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
 			PreparedStatement ps2 = con.prepareStatement("INSERT into shopping_cart values(?,?)");
-
+			
 			ps.setInt(1, 0);
-			ps.setInt(2, shoppingcartid);
+			ps.setInt(2, sellinguserid);
 			ps.setInt(3, itemid);
-			ps.setString(4, pricing);
-			ps.setString(5, totalamount);
-
+			ps.setInt(4, additemquantity);
+			ps.setString(5, pricing);
 			
 			// to insert the current user of their shopping cart id to shopping_cart table for key relationships
 			ps2.setInt(1, 0);

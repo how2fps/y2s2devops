@@ -33,7 +33,6 @@ request.setAttribute("dcf", dcf);
 			<th>Item Photo</th>
 			<th>Item Name</th>
 			<th>Item Amount</th>
-			<th>Add Delivery Charge</th>
 			<th>Total Price of Item</th>
 			<th>Remove Item</th>
 		</tr>
@@ -43,14 +42,24 @@ request.setAttribute("dcf", dcf);
 					alt="Item Image"></td>
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
-				<td><a
-					href="<%=request.getContextPath()%>/UserCartServlet/edit?id=<c:out value='${cartitem.id}'/>"><button
-							type="button" class="btn btn-info">Add $5</button></a></td>
 				<td><c:out value="${cartitem.totalPrice}" /></td>
 				<td><a
 					href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button
 							type="button" class="btn btn-danger">X</button></a></td>
 			</tr>
+			<form action="UserCartServlet/wipe" method="post">
+			<div style="display:none">
+				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
+				<input type="text" name="sellinguserid" value="${cartitem.userId}">
+				<input type="text" name="itemid" value="${cartitem.itemId}">
+				<input type="text" name="itemname" value="${cartitem.name}">
+				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+				<input type="text" name="itemimage" value="${cartitem.image}">
+				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
+				<!-- <button type="submit">CHECKOUT</button> -->
+			</div>
+			
+			</form>
 		</c:forEach>
 	</table>
 

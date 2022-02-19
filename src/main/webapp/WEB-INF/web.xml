@@ -73,7 +73,6 @@ id="WebApp_ID" version="3.1">
 	<servlet-mapping>
 		<servlet-name>UserCartServlet</servlet-name>
 		<url-pattern>/UserCartServlet</url-pattern>
-		<url-pattern>/UserCartServlet/edit</url-pattern>
 		<url-pattern>/UserCartServlet/update</url-pattern>
 		<url-pattern>/UserCartServlet/delete</url-pattern>
 		<url-pattern>/UserCartServlet/wipe</url-pattern>
