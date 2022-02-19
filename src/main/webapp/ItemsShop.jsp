@@ -41,36 +41,6 @@
 						<a href="ItemViewServlet?itemId=${item.id}" class="btn btn-danger shopitembutton">See Item Details</a>
 					</div>
 					<br>
-					<div class="col-md-12 text-center">
-						<form action="ItemsShopServlet?id=<c:out value='${item.id}'/>"
-							method="post">
-							<div style="display: none">
-								<!-- Fetch user ID of current user logged in -->
-								<input type="text" name="shoppingcartid" value="${item.userId}">
-								<!-- --------------------------------------- -->
-								<!-- Fetch current item information to update the quantity-->
-								<input type="text" name="oriId" value="${item.id}"> <input
-									type="text" name="id" value="${item.id}"> <input
-									type="text" name="name" value="${item.name}"> <input
-									type="text" name="description" value="${item.description}">
-								<input type="text" name="image" value="${item.image}"> <input
-									type="text" name="pricing" value="${item.pricing}"> <input
-									type="text" name="quantity" value="${item.quantity}"> <input
-									type="text" name="userId" value="${item.userId}"> <input
-									type="text" name="dateListed" value="${item.dateListed}">
-								<!-- ---------------------------------------- -->
-								<!-- Insert current item information to cart_item table -->
-								<input type="text" name="sellinguserid" value="${item.userId}">
-								<input type="text" name="itemid" value="${item.id}"> 
-								<input type="text" name="pricing" value="${item.pricing}"> 
-							</div>
-							<label for="additemamount">How Many? </label>
-							<input type="number" min="0" max="99" class="shopadditemamount" name="additemquantityofuser" required>
-							<br>
-								<!-- ---------------------------------------- -->
-							<input type="submit" class="btn btn-danger shopitembutton2" value="Add to Cart" />
-						</form>
-					</div>
 				</div>
 				<br>
 			</div>
