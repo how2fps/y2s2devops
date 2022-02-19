@@ -39,13 +39,11 @@
 						</div>
 						<div class="form-group mb-3">
 							<label for="displayName">Display Name</label> <input type="text"
-								class="form-control" name="displayName"
-								value="${displayName}" />
+								class="form-control" name="displayName" value="${displayName}" />
 						</div>
 						<div class="form-group mb-4">
 							<label for="phoneNumber">Phone Number</label> <input type="text"
-								class="form-control" name="phoneNumber"
-								value="${phoneNumber}" />
+								class="form-control" name="phoneNumber" value="${phoneNumber}" />
 						</div>
 						<button id="submit" class="btn btn-secondary"
 							style="background: #FF5D73; color: white">Save Changes</button>
@@ -53,6 +51,11 @@
 				</div>
 			</form>
 		</div>
+		<form action="DeleteUserServlet" method="get">
+			<button type="submit" value="delete" class="btn btn-danger mt-4"
+				onclick="return confirm('Are you sure you want to delete your account? This action is IRREVERSIBLE!')">Delete
+				Account</button>
+		</form>
 	</div>
 </body>
 </html>
