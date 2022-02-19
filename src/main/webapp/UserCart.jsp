@@ -33,7 +33,7 @@ request.setAttribute("dcf", dcf);
 			<th>Item Photo</th>
 			<th>Item Name</th>
 			<th>Item Amount</th>
-			<th>Total Price of Item</th>
+			<th>Price of Item</th>
 			<th>Remove Item</th>
 		</tr>
 		<c:forEach var="cartitem" items="${listCartItems}">
