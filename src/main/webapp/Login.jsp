@@ -27,7 +27,7 @@
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
 		<c:if test="${alert != null}">
-			<div class="alert alert-dark mt-4" role="alert">${alert}</div>
+			<div id="alert" class="alert alert-dark mt-4" role="alert">${alert}</div>
 		</c:if>
 		<p class="my-4 h1">Login</p>
 		<div class="login-container">

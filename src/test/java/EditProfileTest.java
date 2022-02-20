@@ -19,18 +19,14 @@ public class EditProfileTest {
 		System.setProperty("webdriver.chrome.driver", chromeDriverDir);
 		webDriver = new ChromeDriver();
 	}
-	
-	@Test
-	public void checkEnterLoginPage() {
-		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
-		Assert.assertEquals(webDriver.getTitle(), "Login");
-	}
 
-	@Test
+
+	@Test(priority=1)
 	public void editProfileCheck() {
+		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("hearthstonesigh@gmail.com");
+		email.sendKeys("test@test.com");
 		password.sendKeys("password");
 		webDriver.findElement(By.id("submit")).submit();
 		Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
@@ -43,12 +39,22 @@ public class EditProfileTest {
 		emailEdit.clear();
 		displayNameEdit.clear();
 		phoneNumberEdit.clear();
-		emailEdit.sendKeys("hearthstonesigh@gmail.com");
-		displayNameEdit.sendKeys("Finn Yap Jun Hun");
-		phoneNumberEdit.sendKeys("97423488");
+		emailEdit.sendKeys("test@test.com");
+		displayNameEdit.sendKeys("testName1234");
+		phoneNumberEdit.sendKeys("99999998");
 		webDriver.findElement(By.id("submit")).submit();
+		Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
 	}
-	
+
+	@Test(priority=2)
+	public void checkSuccessfulEdit() {
+		WebElement emailDisplay = webDriver.findElement(By.id("emailDisplay"));
+		WebElement displayNameDisplay = webDriver.findElement(By.id("displayNameDisplay"));
+		WebElement phoneNumberDisplay = webDriver.findElement(By.id("phoneNumberDisplay"));
+		Assert.assertEquals(emailDisplay.getText(), "test@test.com");
+		Assert.assertEquals(displayNameDisplay.getText(), "testName1234");
+		Assert.assertEquals(phoneNumberDisplay.getText(), "99999998");
+	}
 
 	@AfterTest
 	public void afterTest() {

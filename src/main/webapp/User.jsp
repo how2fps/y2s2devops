@@ -40,11 +40,11 @@
 				<div class="card align-items-center w-100 h-100">
 					<div class="card-body w-100">
 						<h5 class="card-title">Email:</h5>
-						<p class="card-text">${email}</p>
+						<p class="card-text" id="emailDisplay">${email}</p>
 						<h5 class="card-title">Display Name:</h5>
-						<p class="card-text">${displayName}</p>
+						<p class="card-text" id="displayNameDisplay">${displayName}</p>
 						<h5 class="card-title">Phone Number:</h5>
-						<p class="card-text">${phoneNumber}</p>
+						<p class="card-text" id="phoneNumberDisplay">${phoneNumber}</p>
 						<a class="btn btn-primary w-100 mt-4 edit-profile"
 							style="background: #EF6F6C; color: white; font-size: 18px;" id="edit-profile"
 							href="http://localhost:8090/devopsproject/EditProfileServlet">
