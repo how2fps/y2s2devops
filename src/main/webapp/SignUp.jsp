@@ -28,7 +28,7 @@
 	</nav>
 	<div class="container d-flex flex-column align-items-center">
 		<c:if test="${alert != null}">
-			<div class="alert alert-dark mt-4" role="alert">${alert}</div>
+			<div id="alert" class="alert alert-dark mt-4" role="alert">${alert}</div>
 		</c:if>
 		<p class="mt-4 mb-4 h1">Sign Up</p>
 		<div class="sign-up-container">
@@ -56,7 +56,7 @@
 							<label for="phoneNumber">Phone Number</label> <input type="text"
 								name="phoneNumber" class="form-control" required />
 						</div>
-						<button class="btn btn-primary"
+						<button id="submit" class="btn btn-primary"
 							style="background: #FF5D73; color: white">Sign Up</button>
 					</section>
 				</div>
