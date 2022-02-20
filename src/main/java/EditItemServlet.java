@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet("/EditItemServlet")
-@MultipartConfig
 public class EditItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

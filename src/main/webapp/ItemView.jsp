@@ -19,7 +19,7 @@
 	<c:if test="${isListedUser == 'true'}">
 		<div class="d-flex flex-row p-3">
 			<section class="w-50 d-flex flex-column left-hand">
-				<img src="${item.image}" class="item-img" />
+				<img src="DisplayImageServlet?path=${item.image}" class="item-img" />
 			</section>
 			<section class="w-50 right-hand">
 				<div class="item-name">${item.name}</div>
