@@ -36,7 +36,7 @@
 				<div
 					class="item-block d-flex flex-row align-self-center align-items-center">
 					<div class="item-info d-flex flex-row align-items-center">
-						<img class="item-pic" />
+						<img class="item-pic" src="DisplayImageServlet?path=${item.image}"/>
 						<div class="amount-item-bought">
 							<c:out value="${item.quantity}" />
 						</div>

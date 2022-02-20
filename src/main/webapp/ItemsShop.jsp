@@ -26,7 +26,7 @@
 		<c:forEach var="item" items="${itemsShopList}">
 			<div class="card">
 				<img class="card-img-top" width=100px height=200px
-					src="${item.image}" alt="Item Image">
+					src="DisplayImageServlet?path=${item.image}" alt="Item Image">
 				<div class="card-body">
 					<h5 class="shopitemtitle">
 						<c:out value="${item.name}" />
@@ -41,6 +41,7 @@
 						<a href="ItemViewServlet?itemId=${item.id}" class="btn btn-danger shopitembutton">See Item Details</a>
 					</div>
 					<br>
+<<<<<<< HEAD
 					<div class="col-md-12 text-center">
 						<form action="ItemsShopServlet?id=<c:out value='${item.id}'/>"
 							method="post">
@@ -71,6 +72,8 @@
 							<input type="submit" class="btn btn-danger shopitembutton2" value="Add to Cart" onclick="return confirm('Do you wish to proceed to add this item to your cart?')">
 							</form>
 					</div>
+=======
+>>>>>>> branch 'master' of https://github.com/how2fps/y2s2devops.git
 				</div>
 				<br>
 			</div>

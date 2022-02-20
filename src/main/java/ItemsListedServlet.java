@@ -16,19 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ItemsListedServlet
- */
 @WebServlet("/ItemsListedServlet")
 public class ItemsListedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public ItemsListedServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	// Database Connection Variables
@@ -71,6 +64,7 @@ public class ItemsListedServlet extends HttpServlet {
 			while (rs.next()) {
 				int itemId = rs.getInt("id");
 				String name = rs.getString("name");
+				// we need to get the image here.
 				String image = rs.getString("image");
 				double amountPaid = rs.getDouble("pricing");
 				int quantity = rs.getInt("quantity");
@@ -88,13 +82,8 @@ public class ItemsListedServlet extends HttpServlet {
 		request.getRequestDispatcher("/ItemsListed.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getServletPath();
 		try {
@@ -105,13 +94,8 @@ public class ItemsListedServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
