@@ -38,7 +38,8 @@ public class UserCartServlet extends HttpServlet {
 
 	private static final String SELECT_CART_ITEM_BY_ID = "SELECT cart_item.id, shoppingCartId, itemId, itemAmount, totalPrice FROM cart_item WHERE id = ?";
 	private static final String SELECT_ALL_CART_ITEMS = "SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id";
-	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE cart_item set id = ?, shoppingCartId = ?, itemId = ?, itemAmount = ?, totalPrice = ? WHERE id = ?;";
+//	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE cart_item set id = ?, shoppingCartId = ?, itemId = ?, itemAmount = ?, totalPrice = ? WHERE id = ?;";
+	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 	private static final String DELETE_CART_ITEM_BY_ID = "DELETE FROM cart_item WHERE id = ?";
 	private static final String DELETE_ALL_CART_ITEMS = "DELETE FROM cart_item";
 	private static final String INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER = "INSERT INTO transaction VALUES(?,?,?,?,?,?,?,?,?)";
@@ -76,7 +77,8 @@ public class UserCartServlet extends HttpServlet {
 		try {
 			switch (action) {
 			case "/UserCartServlet/delete":
-				deleteCartItem(request, response);
+//				deleteCartItem(request, response);
+				updateItemFromCart(request, response);
 				break;
 			case "/UserCartServlet/wipe":
 //				deleteAllCartItems(request, response);
@@ -110,9 +112,13 @@ public class UserCartServlet extends HttpServlet {
 				double totalPrice = rs.getDouble("totalPrice");
 				String image = rs.getString("image");
 				String name = rs.getString("name");
+				String description = rs.getString("description");
+				Integer pricing = rs.getInt("pricing");
 				Integer quantity = rs.getInt("quantity");
 				Integer userId = rs.getInt("userId");
-				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, image, name, quantity, userId));
+				String dateListed = rs.getString("dateListed");
+//				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, image, name, quantity, userId));
+				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, name, description, image, pricing, quantity, userId, dateListed));
 			}
 
 		} catch (SQLException e) {
@@ -150,6 +156,47 @@ public class UserCartServlet extends HttpServlet {
 //
 //		return sum;
 //	}
+	
+	// To update the quantity of a selected item by user after removing from their user cart
+		private void updateItemFromCart(HttpServletRequest request, HttpServletResponse response)
+				throws SQLException, IOException, ServletException {
+			// Step 1: Retrieve value from the request
+
+			String oriId = request.getParameter("oriId");
+			String id = request.getParameter("id");
+			String itemname = request.getParameter("name");			
+			String itemdescription = request.getParameter("description");
+			String itemimage = request.getParameter("image");
+			String itempricing = request.getParameter("pricing");
+			Integer itemquantity = Integer.parseInt(request.getParameter("quantity"));
+			String itemuserId = request.getParameter("userId");
+			String itemdateListed = request.getParameter("dateListed");
+			
+			Integer plusquantity = Integer.parseInt(request.getParameter("itemquantity"));
+			
+			Integer calculatedquantity = Math.addExact(itemquantity, plusquantity);
+			
+			String resultquantity = String.valueOf(calculatedquantity);
+			
+			// Step 2: Attempt connection with database and execute update user SQL query
+			try (Connection connection = getConnection();
+					PreparedStatement statement = connection.prepareStatement(UPDATE_CART_ITEM_BY_ID);) {
+
+				statement.setString(1, id);
+				statement.setString(2, itemname);
+				statement.setString(3, itemdescription);
+				statement.setString(4, itemimage);
+				statement.setString(5, itempricing);
+				statement.setString(6, resultquantity);
+				statement.setString(7, itemuserId);
+				statement.setString(8, itemdateListed);
+				statement.setString(9, oriId);
+
+				int i = statement.executeUpdate();
+
+			}
+			
+		}
 
 	// The function to delete one cart item from user cart
 	private void deleteCartItem(HttpServletRequest request, HttpServletResponse response)

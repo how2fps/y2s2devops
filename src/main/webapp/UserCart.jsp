@@ -58,7 +58,20 @@ request.setAttribute("dcf", dcf);
 				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
 				<!-- <button type="submit">CHECKOUT</button> -->
 			</div>
-			
+			</form>
+			<!-- To add the quantity back returned to the original stock of an item -->
+			<form action="UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>" method="post">
+			<div style="display:none">
+				<input type="text" name="oriId" value="${cartitem.itemId}">
+				<input type="text" name="id" value="${cartitem.itemId}">
+				<input type="text" name="itemname" value="${cartitem.name}">
+				<input type="text" name="itemdescription" value="${cartitem.description}">
+				<input type="text" name="itemimage" value="${cartitem.name}">
+				<input type="text" name="itempricing" value="${cartitem.pricing}">
+				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+				<input type="text" name="itemuserId" value="${cartitem.userId}">
+				<input type="text" name="itemdateListed" value="${cartitem.dateListed}">
+			</div>
 			</form>
 		</c:forEach>
 	</table>

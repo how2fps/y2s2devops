@@ -68,8 +68,8 @@
 							<input type="number" min="0" max="99" class="shopadditemamount" name="additemquantityofuser" required>
 							<br>
 								<!-- ---------------------------------------- -->
-							<input type="submit" class="btn btn-danger shopitembutton2" value="Add to Cart" />
-						</form>
+							<input type="submit" class="btn btn-danger shopitembutton2" value="Add to Cart" onclick="return confirm('Do you wish to proceed to add this item to your cart?')">
+							</form>
 					</div>
 				</div>
 				<br>
