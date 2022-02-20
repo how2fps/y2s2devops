@@ -45,8 +45,8 @@
 						<p class="card-text">${displayName}</p>
 						<h5 class="card-title">Phone Number:</h5>
 						<p class="card-text">${phoneNumber}</p>
-						<a class="btn btn-primary w-100 mt-4"
-							style="background: #EF6F6C; color: white; font-size: 18px;"
+						<a class="btn btn-primary w-100 mt-4 edit-profile"
+							style="background: #EF6F6C; color: white; font-size: 18px;" id="edit-profile"
 							href="http://localhost:8090/devopsproject/EditProfileServlet">
 							Edit Profile</a>
 					</div>

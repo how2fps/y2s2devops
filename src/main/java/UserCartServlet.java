@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 
 /**
  * Servlet implementation class UserCartServlet
@@ -34,9 +38,10 @@ public class UserCartServlet extends HttpServlet {
 
 	private static final String SELECT_CART_ITEM_BY_ID = "SELECT cart_item.id, shoppingCartId, itemId, itemAmount, totalPrice FROM cart_item WHERE id = ?";
 	private static final String SELECT_ALL_CART_ITEMS = "SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id";
-	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE cart_item set cart_item.id = ?, shoppingCartId= ?, itemId =?, itemAmount =?, totalPrice =? WHERE id = ?;";
+	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE cart_item set id = ?, shoppingCartId = ?, itemId = ?, itemAmount = ?, totalPrice = ? WHERE id = ?;";
 	private static final String DELETE_CART_ITEM_BY_ID = "DELETE FROM cart_item WHERE id = ?";
 	private static final String DELETE_ALL_CART_ITEMS = "DELETE FROM cart_item";
+	private static final String INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER = "INSERT INTO transaction VALUES(?,?,?,?,?,?,?,?,?)";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -74,20 +79,15 @@ public class UserCartServlet extends HttpServlet {
 				deleteCartItem(request, response);
 				break;
 			case "/UserCartServlet/wipe":
-				deleteAllCartItems(request, response);
-				break;	
-			case "/UserCartServlet/edit":
-				addDeliveryChargeForm(request, response);
-				break;
-			case "/UserCartServlet/update":
-				updateCartItem(request, response);
+//				deleteAllCartItems(request, response);
+				insertTransactionByUser(request, response);
 				break;
 			case "/UserCartServlet":
 				listCartItems(request, response);
 				break;
 			}
 		} catch (SQLException ex) {
-			
+
 			throw new ServletException(ex);
 		}
 
@@ -110,7 +110,9 @@ public class UserCartServlet extends HttpServlet {
 				double totalPrice = rs.getDouble("totalPrice");
 				String image = rs.getString("image");
 				String name = rs.getString("name");
-				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, image, name));
+				Integer quantity = rs.getInt("quantity");
+				Integer userId = rs.getInt("userId");
+				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, image, name, quantity, userId));
 			}
 
 		} catch (SQLException e) {
@@ -149,77 +151,6 @@ public class UserCartServlet extends HttpServlet {
 //		return sum;
 //	}
 
-	private void addDeliveryChargeForm(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-		// get parameter passed in the URL
-		String id = request.getParameter("id");
-		UpdateUserCart existingUserCart = new UpdateUserCart("", "", "", "", "");
-		// Step 1: Establishing a Connection
-		try (Connection connection = getConnection();
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CART_ITEM_BY_ID);) {
-			preparedStatement.setString(1, id);
-			// Step 3: Execute the query or update query
-			ResultSet rs = preparedStatement.executeQuery();
-			// Step 4: Process the ResultSet object
-			while (rs.next()) {
-				String string = rs.getString("id");			
-				String string2 = rs.getString("shoppingCartId");
-				String string3 = rs.getString("itemId");
-				String string4 = rs.getString("itemAmount");
-				String string5 = rs.getString("totalPrice");
-				existingUserCart = new UpdateUserCart(string, string2, string3, string4, string5);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		// Step 5: Set existingUserCart to request and serve up the AddDeliveryCharge
-		// form
-		request.setAttribute("existingUserCart", existingUserCart);
-		request.getRequestDispatcher("/AddDeliveryCharge.jsp").forward(request, response);
-	}
-
-	// method to update the cart_item table base on the form data
-	private void updateCartItem(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		// Step 1: Retrieve value from the request
-		
-//		String id = request.getParameter("id");			
-//		String shoppingCartId = request.getParameter("shoppingCartId");
-//		String itemId = request.getParameter("itemId");
-//		String itemAmount = request.getParameter("itemAmount");
-//		String totalPrice = request.getParameter("totalPrice");
-		
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		Integer shoppingCartId = Integer.parseInt(request.getParameter("shoppingCartId"));
-		Integer itemId = Integer.parseInt(request.getParameter("itemId"));
-		Integer itemAmount = Integer.parseInt(request.getParameter("itemAmount"));
-		double totalPrice = Double.parseDouble("totalPrice");
-
-		// Step 2: Attempt connection with database and execute update user SQL query
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_CART_ITEM_BY_ID);) {
-			
-//			statement.setString(1, id);
-//			statement.setString(2, shoppingCartId);
-//			statement.setString(3, itemId);
-//			statement.setString(4, itemAmount);
-//			statement.setString(5, totalPrice);
-			
-			statement.setInt(1, id);
-			statement.setInt(2, shoppingCartId);
-			statement.setInt(3, itemId);
-			statement.setInt(4, itemAmount);
-			statement.setDouble(5, totalPrice);
-			
-			int i = statement.executeUpdate();
-			
-		}
-		// Step 3: redirect back to UserServlet (note: remember to change the url to
-		// your project name)
-		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
-	}
-
 	// The function to delete one cart item from user cart
 	private void deleteCartItem(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -235,8 +166,9 @@ public class UserCartServlet extends HttpServlet {
 		// url to your project name)
 		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
 	}
-	
-	// The function to delete all cart items from user cart once user proceeded to check out
+
+	// The function to delete all cart items from user cart once user proceeded to
+	// check out
 	private void deleteAllCartItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		try (Connection connection = getConnection();
@@ -244,6 +176,60 @@ public class UserCartServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 		response.sendRedirect("http://localhost:8090/devopsproject/UserTransaction.jsp");
+	}
+	
+	// The function to insert a transaction from user cart once user proceeded to
+	// check out
+	private void insertTransactionByUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		
+		response.setContentType("text/html");
+
+		String buyinguserid = request.getParameter("buyinguserid");
+		String sellinguserid = request.getParameter("sellinguserid");
+		String itemid = request.getParameter("itemid");
+		String itemname = request.getParameter("name");
+		String itemquantity = request.getParameter("quantity");
+		String itemimage = request.getParameter("image");
+		String totalamount = request.getParameter("totalamount");
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String time = dtf.format(now);
+
+		try {
+			Connection connection = getConnection();
+//			Class.forName("com.mysql.jdbc.Driver");
+//			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
+
+			PreparedStatement ps = connection.prepareStatement(INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER);
+
+			ps.setInt(1, 0);
+			ps.setString(2, buyinguserid);
+			ps.setString(3, sellinguserid);
+			ps.setString(4, itemid);
+			ps.setString(5, itemname);
+			ps.setString(6, itemimage);
+			ps.setString(7, itemquantity);
+			ps.setString(8, totalamount);
+			ps.setString(9, time);
+
+			int i = ps.executeUpdate();
+
+			// to execute the deleteAllCartItems function
+//			if (i > 0) {
+//				deleteAllCartItems(request, response);
+//			}
+
+		}
+
+		catch (Exception exception) {
+			System.out.println(exception);
+			System.out.close();
+		}
+		
+//		deleteAllCartItems(request, response);
+		
 	}
 
 	/**
@@ -254,6 +240,7 @@ public class UserCartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 	}
 
 }

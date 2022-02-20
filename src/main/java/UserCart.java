@@ -10,6 +10,8 @@ public class UserCart {
 	// Joined variables from 'item' table
 	protected String Image;
 	protected String Name;
+	protected Integer Quantity;
+	protected Integer UserId;
 	
 	protected String String;
 	protected String String2;
@@ -19,8 +21,9 @@ public class UserCart {
 	protected String Image2;
 	protected String Name2;
 
+	
 	public UserCart(Integer id, Integer shoppingCartId, Integer itemId, Integer itemAmount, double totalPrice,
-			String image, String name) {
+			java.lang.String image, java.lang.String name, Integer quantity, Integer userId) {
 		super();
 		Id = id;
 		ShoppingCartId = shoppingCartId;
@@ -29,9 +32,9 @@ public class UserCart {
 		TotalPrice = totalPrice;
 		Image = image;
 		Name = name;
+		Quantity = quantity;
+		UserId = userId;
 	}
-	
-	
 
 	public UserCart(java.lang.String string, java.lang.String string2, java.lang.String string3,
 			java.lang.String string4, java.lang.String string5, java.lang.String image2, java.lang.String name2) {
@@ -112,6 +115,22 @@ public class UserCart {
 	public void setName(String name) {
 		Name = name;
 	}
+	
+	public Integer getQuantity() {
+		return Quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		Quantity = quantity;
+	}
+
+	public Integer getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(Integer userId) {
+		UserId = userId;
+	}
 
 	public String getString() {
 		return String;
@@ -170,6 +189,4 @@ public class UserCart {
 	}	
 	
 	
-	
-
 }
