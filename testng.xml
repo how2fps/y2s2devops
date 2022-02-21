@@ -5,9 +5,9 @@
     <classes>
       <class name="RegisterTest"/>
       <class name="LoginTest"/>
+      <class name="AddItemTest"/>
       <class name="EditProfileTest"/>
       <class name="DeleteUserTest"/>
-      <class name="AddItemTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
