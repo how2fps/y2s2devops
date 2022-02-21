@@ -42,7 +42,7 @@
 						<c:out value="${item.name}" />
 					</div>
 					<div class="datetime-bought d-flex justify-content-center align-items-center">
-						<a class="btn btn-primary" href="ItemViewServlet?itemId=${item.id}">See Item Details</a>
+						<a class="btn btn-primary" href="ItemViewServlet?itemId=${item.id}" id="${item.name}seeDetailsBtn">See Item Details</a>
 					</div>
 					<div
 						class="datetime-bought d-flex justify-content-center align-items-center">
