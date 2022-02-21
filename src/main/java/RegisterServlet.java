@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -72,25 +74,38 @@ public class RegisterServlet extends HttpServlet {
 				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
 				return;
 			} else {
+				String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 				PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, 0);
 				ps.setString(2, email);
-				ps.setString(3, password);
+				ps.setString(3, hashedPassword);
 				int i = ps.executeUpdate();
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
 					int userId = rs.getInt(1);
 					if (i > 0) {
-						PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
+						PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)",
+								PreparedStatement.RETURN_GENERATED_KEYS);
 						ps2.setInt(1, 0);
 						ps2.setString(2, displayName);
 						ps2.setString(3, phoneNumber);
 						ps2.setInt(4, userId);
 						int x = ps2.executeUpdate();
-						if (x > 0) {
-							request.setAttribute("alert", "Registration Successful!");
-							request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+						ResultSet rs2 = ps2.getGeneratedKeys();
+						if (rs2.next()) {
+							if (x > 0) {
+								int detailsId = rs2.getInt(1);
+								System.out.println(detailsId);
+								PreparedStatement ps4 = con.prepareStatement("insert into shopping_cart values(?, ?)");
+								ps4.setInt(1, 0);
+								ps4.setInt(2, detailsId);
+								int y = ps4.executeUpdate();
+								if (y > 0) {
+									request.setAttribute("alert", "Registration Successful!");
+									request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+								}
+							}
 						}
 					}
 				}
