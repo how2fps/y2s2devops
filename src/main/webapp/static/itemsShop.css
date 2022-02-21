@@ -23,6 +23,13 @@
 .shopitemtitle {
 	text-align: left;
 	font-family: arial;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.shopitemquantity {
+	text-align: left;
+	font-family: arial;
 	font-size: 15px;
 	font-weight: bold;
 }
@@ -32,16 +39,6 @@
 }
 
 .shopitembutton {
-	width: 150px;
-	font-size: 20px;
-	font-weight: bold;
-	color: white;
-	background-color: #ff5d73;
-	border-radius: 20px;
-}
-
-.shopitembutton2 {
-	margin-top: 20px;
 	width: 150px;
 	font-size: 20px;
 	font-weight: bold;

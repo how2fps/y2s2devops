@@ -70,32 +70,31 @@ public class EditProfileServlet extends HttpServlet {
 			ps.setString(1, displayName);
 			ps.setString(2, phoneNumber);
 			ps.setInt(3, detailsId);
-			ps.executeUpdate();
-			ResultSet rs = ps.getGeneratedKeys();
-
-			if (rs.next()) {
-
-				PreparedStatement ps2 = con.prepareStatement("select * from user_login_information WHERE Id = ?",
+			int check = ps.executeUpdate();
+			System.out.println(check);
+			if (check == 1) {
+				PreparedStatement ps2 = con.prepareStatement("select * from user_details where Id = ?",
 						PreparedStatement.RETURN_GENERATED_KEYS);
 				ps2.setInt(1, detailsId);
 				ResultSet rs2 = ps2.executeQuery();
-
+				
 				if (rs2.next()) {
-
-					int userLoginInfoId = rs2.getInt("id");
+					System.out.println(rs2);
+					int userLoginInfoId = rs2.getInt("UserAuthId");
+					System.out.println(userLoginInfoId);
 					PreparedStatement ps3 = con.prepareStatement(
 							"UPDATE user_login_information SET Email = ? WHERE Id = ?",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 					ps3.setString(1, email);
 					ps3.setInt(2, userLoginInfoId);
-					ps3.executeUpdate();
-					ResultSet rs3 = ps3.getGeneratedKeys();
-
-					if (rs3.next()) {
-
+					int check2 = ps3.executeUpdate();
+					if (check2 == 1) {
+						session.setAttribute("displayName", displayName);
+						session.setAttribute("email", email);
+						session.setAttribute("phoneNumber", phoneNumber);
 						request.setAttribute("displayName", displayName);
-						request.setAttribute("phoneNumber", phoneNumber);
 						request.setAttribute("email", email);
+						request.setAttribute("phoneNumber", phoneNumber);
 						request.setAttribute("detailsId", detailsId);
 						request.getRequestDispatcher("/UserServlet").forward(request, response);
 					}

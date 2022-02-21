@@ -32,7 +32,6 @@ public class ItemsShopServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
-	private static final String SELECT_ITEM_BY_ID = "SELECT id, name, description, image, pricing, quantity, userId, dateListed FROM item WHERE id =?";
 	private static final String SELECT_ALL_ITEMS_LISTED = "SELECT * FROM item";
 
 	protected Connection getConnection() {
@@ -72,17 +71,6 @@ public class ItemsShopServlet extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
-	
-	// The function to redirects to the user cart page after user adds an item to their user cart
-	protected void addCartItem(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, SQLException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-
-		String action = request.getServletPath();
-		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
-
-	}
 
 	// The function to get all items listed to the items shop
 	private void listItems(HttpServletRequest request, HttpServletResponse response)
@@ -120,52 +108,9 @@ public class ItemsShopServlet extends HttpServlet {
 	 *      response)
 	 */
 	
-	// the function to add cart item by user to their user cart
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		response.setContentType("text/html");
-
-		PrintWriter out = response.getWriter();
-
-		Integer shoppingcartid = Integer.parseInt(request.getParameter("shoppingcartid"));
-		Integer itemid = Integer.parseInt(request.getParameter("itemid"));
-		String pricing = request.getParameter("pricing");
-		String totalamount = request.getParameter("totalamount");
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "password");
-
-			PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
-			PreparedStatement ps2 = con.prepareStatement("INSERT into shopping_cart values(?,?)");
-
-			ps.setInt(1, 0);
-			ps.setInt(2, shoppingcartid);
-			ps.setInt(3, itemid);
-			ps.setString(4, pricing);
-			ps.setString(5, totalamount);
-
-			
-			// to insert the current user of their shopping cart id to shopping_cart table for key relationships
-			ps2.setInt(1, 0);
-			ps2.setInt(2, shoppingcartid);
-
-			int i = ps.executeUpdate();
-			int i2 = ps2.executeUpdate();
-
-			// to execute the addCartItem function
-			if (i > 0 && i2 > 0) {
-				addCartItem(request, response);
-			}
-
-		}
-
-		catch (Exception exception) {
-			System.out.println(exception);
-			out.close();
-		}
 
 	}
 

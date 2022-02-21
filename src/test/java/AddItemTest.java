@@ -14,7 +14,7 @@ public class AddItemTest {
 	// I want to enter all form fields to create a new item
 	@Test
 	public void fillAddItemForm() {
-		// we need to firstly login first.
+		// we need to firstly login.
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
@@ -39,13 +39,13 @@ public class AddItemTest {
 
 		// Adds things in the form.
 		itemName.sendKeys("KELL Keyboard");
-		itemImage.sendKeys("C:\\Users\\User\\Pictures\\aesthetically pleasing background.png");
+		itemImage.sendKeys("C:\\aesthetically pleasing background.png");
 		itemDescription.sendKeys("This is a very nice keyboard. 75% layout. Membrane Switches");
 		itemPricing.sendKeys("12.89");
 		itemQuantity.sendKeys("3");
 
 //		try {
-//			Thread.sleep(1000);
+//			Thread.sleep(2000);
 //		} catch (InterruptedException e) {
 //			System.out.println("got interrupted!");
 //		}
@@ -79,7 +79,6 @@ public class AddItemTest {
 	public void afterTest() {
 		// Quit the ChromeDriver and close all associated window at the end of test
 		webDriver.close();
-		webDriver.quit();
 	}
 
 }

@@ -1,0 +1,52 @@
+.right-hand {
+  padding: 5%;
+}
+
+.left-hand {
+  padding-left: 5%;
+  padding-top: 10%;
+}
+
+.item-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item-pricing,
+.item-pricing-number {
+  font-weight: 900;
+  font-size: 2.8rem;
+}
+
+.item-name {
+  font-size: 1.3rem;
+  letter-spacing: 0.02rem;
+}
+
+.stocks-left {
+  font-size: 1.2rem;
+}
+
+.item-description {
+  width: 80%;
+  margin-top: 30px;
+}
+
+.review-card {
+  padding: 2.5%;
+  margin-bottom: 20px;
+}
+
+.review-username {
+  font-weight: 700;
+}
+
+.ar-text{
+	text-decoration: underline;
+}
+
+.shopadditemamount {
+	width: 70px;
+	border: 3px solid black;
+	text-align: center;
+}

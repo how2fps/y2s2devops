@@ -53,33 +53,45 @@ public class RegisterServlet extends HttpServlet {
 		if (password.length() < 8) {
 			request.setAttribute("alert", "Password needs to have at least 8 characters!");
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			return;
 		}
 		if (!password.equals(confirmPassword)) {
 			request.setAttribute("alert", "Passwords are not the same!");
 			request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			return;
 		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
-			PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)",
+			PreparedStatement ps3 = con.prepareStatement("select * from user_details where DisplayName = ?",
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, 0);
-			ps.setString(2, email);
-			ps.setString(3, password);
-			int i = ps.executeUpdate();
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				int userId = rs.getInt(1);
-				if (i > 0) {
-					PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
-					ps2.setInt(1, 0);
-					ps2.setString(2, displayName);
-					ps2.setString(3, phoneNumber);
-					ps2.setInt(4, userId);
-					int x = ps2.executeUpdate();
-					if (x > 0) {
-						request.setAttribute("alert", "Registration Successful!");
-						request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+			ps3.setString(1, displayName);
+			ResultSet rs3 = ps3.executeQuery();
+			if (rs3.next()) {
+				request.setAttribute("alert", "The display name " + displayName + " is already in use!");
+				request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+				return;
+			} else {
+				PreparedStatement ps = con.prepareStatement("insert into user_login_information values(?,?,?)",
+						PreparedStatement.RETURN_GENERATED_KEYS);
+				ps.setInt(1, 0);
+				ps.setString(2, email);
+				ps.setString(3, password);
+				int i = ps.executeUpdate();
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					int userId = rs.getInt(1);
+					if (i > 0) {
+						PreparedStatement ps2 = con.prepareStatement("insert into user_details values(?,?,?,?)");
+						ps2.setInt(1, 0);
+						ps2.setString(2, displayName);
+						ps2.setString(3, phoneNumber);
+						ps2.setInt(4, userId);
+						int x = ps2.executeUpdate();
+						if (x > 0) {
+							request.setAttribute("alert", "Registration Successful!");
+							request.getRequestDispatcher("/SignUp.jsp").forward(request, response);
+						}
 					}
 				}
 			}
