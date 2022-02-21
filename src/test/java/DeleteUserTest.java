@@ -48,6 +48,7 @@ public class DeleteUserTest {
 
 	@AfterTest
 	public void afterTest() {
+		webDriver.close();
 	}
 
 }
