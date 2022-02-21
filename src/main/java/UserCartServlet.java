@@ -27,6 +27,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Console;
 @WebServlet("/UserCartServlet")
 public class UserCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	//Global variable for Current User Logged In
+	private static int currentuserloggedin;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -36,9 +39,8 @@ public class UserCartServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
-	private static final String SELECT_CART_ITEM_BY_ID = "SELECT cart_item.id, shoppingCartId, itemId, itemAmount, totalPrice FROM cart_item WHERE id = ?";
+//	private static final String SELECT_CART_ITEM_BY_ID = "SELECT cart_item.id, shoppingCartId, itemId, itemAmount, totalPrice FROM cart_item WHERE id = ?";
 	private static final String SELECT_ALL_CART_ITEMS = "SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id";
-//	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE cart_item set id = ?, shoppingCartId = ?, itemId = ?, itemAmount = ?, totalPrice = ? WHERE id = ?;";
 	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 	private static final String DELETE_CART_ITEM_BY_ID = "DELETE FROM cart_item WHERE id = ?";
 	private static final String DELETE_ALL_CART_ITEMS = "DELETE FROM cart_item";
@@ -69,6 +71,10 @@ public class UserCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		// To get the Id of current user logged in
+		HttpSession session = request.getSession();
+		currentuserloggedin = Integer.parseInt(session.getAttribute("detailsId").toString());
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
@@ -117,7 +123,13 @@ public class UserCartServlet extends HttpServlet {
 				Integer quantity = rs.getInt("quantity");
 				Integer userId = rs.getInt("userId");
 				String dateListed = rs.getString("dateListed");
-//				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, image, name, quantity, userId));
+				System.out.println(shoppingCartId);
+				// To check the current user logged in about their cart items belongs to their shopping cart
+				if (currentuserloggedin == shoppingCartId) {
+					request.setAttribute("isShoppingCartUser", "true");
+				} else {
+					request.setAttribute("isShoppingCartUser", "false");
+				}
 				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, name, description, image, pricing, quantity, userId, dateListed));
 			}
 

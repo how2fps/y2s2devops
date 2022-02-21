@@ -16,7 +16,8 @@ public class Item {
 
 	protected int UserId;
 
-	// I'll use SQL Date instead of Java Date. This means that there will only
+	// I'll use SQL Date instead of Java Date. This means that there will only be
+	// date and no time
 	protected Date DateListed;
 
 	public int getId() {

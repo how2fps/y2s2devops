@@ -44,3 +44,9 @@
 .ar-text{
 	text-decoration: underline;
 }
+
+.shopadditemamount {
+	width: 70px;
+	border: 3px solid black;
+	text-align: center;
+}

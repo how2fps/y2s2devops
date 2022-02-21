@@ -28,6 +28,8 @@ request.setAttribute("dcf", dcf);
 	</div>
 	<br>
 	<br>
+	<!-- If current user logged in has cart items that they added to their shopping cart, they can see their cart items -->
+	<c:if test="${isShoppingCartUser == 'true'}">
 	<table>
 		<tr>
 			<th>Item Photo</th>
@@ -38,7 +40,7 @@ request.setAttribute("dcf", dcf);
 		</tr>
 		<c:forEach var="cartitem" items="${listCartItems}">
 			<tr>
-				<td><img width=150px height=150px src="${cartitem.image}"
+				<td><img width=150px height=150px src="DisplayImageServlet?path=${cartitem.image}"
 					alt="Item Image"></td>
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
@@ -75,7 +77,11 @@ request.setAttribute("dcf", dcf);
 			</form>
 		</c:forEach>
 	</table>
-
+	</c:if>
+	<!-- If current user logged in has no cart items that they added to their shopping cart, they cannot see the cart items from other users shopping carts -->
+	<c:if test="${isShoppingCartUser == 'false'}">
+	<!-- No cart items -->
+	</c:if>
 	<div>
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">

@@ -26,7 +26,7 @@
 		<c:forEach var="item" items="${itemsShopList}">
 			<div class="card">
 				<img class="card-img-top" width=100px height=200px
-					src="${item.image}" alt="Item Image">
+					src="DisplayImageServlet?path=${item.image}" alt="Item Image">
 				<div class="card-body">
 					<h5 class="shopitemtitle">
 						<c:out value="${item.name}" />

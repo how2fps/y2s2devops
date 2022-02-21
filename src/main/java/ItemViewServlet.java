@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,6 +31,8 @@ public class ItemViewServlet extends HttpServlet {
 	private static final String GET_ITEM_INFORMATION = "SELECT * FROM item WHERE Id = ?";
 	// jing yan pls change this if it is wrong for you.
 	private static final String GET_ITEM_REVIEWS = "SELECT * FROM review WHERE itemId = ?";
+	// To update the item information
+	private static final String UPDATE_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -110,9 +113,112 @@ public class ItemViewServlet extends HttpServlet {
 		}
 	}
 
+	// The function to redirects to the user cart page after user adds an item to
+	// their user cart
+	protected void addCartItem(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		updateItem(request, response);
+		String action = request.getServletPath();
+		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
+
+	}
+
+	// To update the quantity of a selected item by user after adding to their user
+	// cart
+	private void updateItem(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		// Step 1: Retrieve value from the request
+
+		String oriId = request.getParameter("oriId");
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String description = request.getParameter("description");
+		String image = request.getParameter("image");
+		String pricing = request.getParameter("pricing");
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+		String userId = request.getParameter("userId");
+		String dateListed = request.getParameter("dateListed");
+
+		Integer minusquantity = Integer.parseInt(request.getParameter("additemquantityofuser"));
+
+		Integer calculatedquantity = Math.subtractExact(quantity, minusquantity);
+
+		String resultquantity = String.valueOf(calculatedquantity);
+
+		// Step 2: Attempt connection with database and execute update user SQL query
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_ITEM_BY_ID);) {
+
+			statement.setString(1, id);
+			statement.setString(2, name);
+			statement.setString(3, description);
+			statement.setString(4, image);
+			statement.setString(5, pricing);
+			statement.setString(6, resultquantity);
+			statement.setString(7, userId);
+			statement.setString(8, dateListed);
+			statement.setString(9, oriId);
+
+			int i = statement.executeUpdate();
+
+		}
+
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+//		doGet(request, response);
+		// TODO Auto-generated method stub
+
+		response.setContentType("text/html");
+
+		PrintWriter out = response.getWriter();
+
+		// To get one item information after user add the item to their user cart
+		String pricing = request.getParameter("pricing");
+
+		// To get input quantity set by the current user from item quantity
+		Integer additemquantity = Integer.parseInt(request.getParameter("additemquantityofuser"));
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
+
+			PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
+			PreparedStatement ps2 = con.prepareStatement("SELECT * FROM shopping_cart WHERE Id = ?");
+			
+			//To set the specified target shopping cart id of the current user logged in
+			ps2.setInt(1, userId);
+			
+			ResultSet rs = ps2.executeQuery();
+
+			ps.setInt(1, 0);
+			ps.setInt(2, userId);
+			ps.setInt(3, itemId);
+			ps.setInt(4, additemquantity);
+			ps.setString(5, pricing);
+			
+			// To get the shopping cart id by the current user logged in
+			while (rs.next()) { 
+			rs.getInt(userId);
+			}
+
+			int i = ps.executeUpdate();
+			
+			if (i > 0) {
+				addCartItem(request, response);
+			}
+
+		}
+
+		catch (Exception exception) {
+			System.out.println(exception);
+			out.close();
+		}
+
 	}
 
 }
