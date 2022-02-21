@@ -6,6 +6,9 @@
       <class name="RegisterTest"/>
       <class name="LoginTest"/>
       <class name="AddItemTest"/>
+      <class name="ReadItemTest"/>
+      <class name="EditItemTest"/>
+      <class name="DeleteItemTest"/>
       <class name="EditProfileTest"/>
       <class name="DeleteUserTest"/>
     </classes>
