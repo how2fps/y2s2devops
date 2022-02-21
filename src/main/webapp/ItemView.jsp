@@ -49,12 +49,12 @@
 	<c:if test="${isListedUser == 'false'}">
 		<div class="d-flex flex-row p-3">
 			<section class="w-50 d-flex flex-column left-hand">
-				<img src="${item.image}" class="item-img" />
+				<img src="DisplayImageServlet?path=${item.image}" class="item-img" />
 			</section>
 			<section class="w-50 right-hand">
-				<form action="ItemsShopServlet?id=${item.id}">
+				<form action="ItemViewServlet?itemId=${item.id}" method="post">
 					<div style="display: none">
-						<!-- Fetch user ID of current user logged in -->
+						<!-- Fetch user ID of current user logged in of their shopping cart -->
 						<input type="text" name="shoppingcartid" value="${item.userId}">
 						<!-- --------------------------------------- -->
 						<!-- Fetch current item information to update the quantity-->
@@ -72,6 +72,7 @@
 						<input type="text" name="sellinguserid" value="${item.userId}">
 						<input type="text" name="itemid" value="${item.id}"> <input
 							type="text" name="pricing" value="${item.pricing}">
+						<!-- ---------------------------------------- -->
 					</div>
 					<p class="item-name">${item.name}</p>
 					<div class="item-pricing d-flex flex-row">
@@ -88,7 +89,7 @@
 						<label for="additemamount">How Many? </label> <input type="number"
 							min="0" max="99" class="shopadditemamount"
 							name="additemquantityofuser" required> <input
-							type="submit" class="btn btn-primary mt-3" value="Add to Cart">
+							type="submit" class="btn btn-primary" value="Add to Cart" onclick="return confirm('Do you wish to add the item to your cart?')">
 					</div>
 				</form>
 				<p class="mt-3 ar-text">All Reviews:</p>
