@@ -39,7 +39,7 @@ public class AddItemTest {
 
 		// Adds things in the form.
 		itemName.sendKeys("KELL Keyboard");
-		itemImage.sendKeys("C:\\Users\\User\\Pictures\\aesthetically pleasing background.png");
+		itemImage.sendKeys("C:\\aesthetically pleasing background.png");
 		itemDescription.sendKeys("This is a very nice keyboard. 75% layout. Membrane Switches");
 		itemPricing.sendKeys("12.89");
 		itemQuantity.sendKeys("3");
