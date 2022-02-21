@@ -18,10 +18,11 @@
 	<jsp:include page="/NavBar.jsp"/>
 	<div class="d-flex flex-column align-items-center">
 		<p class="ei-title mt-5">Edit Item Details</p> 
-		<div class="edit-item-container"><form action="EditItemServlet/update" action="update">
+		<div class="edit-item-container">
+		<form action="EditItemServlet/update" method="post" enctype="multipart/form-data">
 			<div class="d-flex">
 				<section class="aic-left d-flex flex-column">
-					<label for="">Add Image</label> <input type="file" name="itemImage"/>
+					<label for="">Add Image</label> <input type="file" name="itemImage" />
 				</section>
 				<section class="aic-right d-flex flex-column">
 					<div class="form-group">

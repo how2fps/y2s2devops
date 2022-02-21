@@ -28,17 +28,19 @@ request.setAttribute("dcf", dcf);
 	</div>
 	<br>
 	<br>
+	<!-- If current user logged in has cart items that they added to their shopping cart, they can see their cart items -->
+	<c:if test="${isShoppingCartUser == 'true'}">
 	<table>
 		<tr>
 			<th>Item Photo</th>
 			<th>Item Name</th>
 			<th>Item Amount</th>
-			<th>Total Price of Item</th>
+			<th>Price of Item</th>
 			<th>Remove Item</th>
 		</tr>
 		<c:forEach var="cartitem" items="${listCartItems}">
 			<tr>
-				<td><img width=150px height=150px src="${cartitem.image}"
+				<td><img width=150px height=150px src="DisplayImageServlet?path=${cartitem.image}"
 					alt="Item Image"></td>
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
@@ -58,11 +60,28 @@ request.setAttribute("dcf", dcf);
 				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
 				<!-- <button type="submit">CHECKOUT</button> -->
 			</div>
-			
+			</form>
+			<!-- To add the quantity back returned to the original stock of an item -->
+			<form action="UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>" method="post">
+			<div style="display:none">
+				<input type="text" name="oriId" value="${cartitem.itemId}">
+				<input type="text" name="id" value="${cartitem.itemId}">
+				<input type="text" name="itemname" value="${cartitem.name}">
+				<input type="text" name="itemdescription" value="${cartitem.description}">
+				<input type="text" name="itemimage" value="${cartitem.name}">
+				<input type="text" name="itempricing" value="${cartitem.pricing}">
+				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+				<input type="text" name="itemuserId" value="${cartitem.userId}">
+				<input type="text" name="itemdateListed" value="${cartitem.dateListed}">
+			</div>
 			</form>
 		</c:forEach>
 	</table>
-
+	</c:if>
+	<!-- If current user logged in has no cart items that they added to their shopping cart, they cannot see the cart items from other users shopping carts -->
+	<c:if test="${isShoppingCartUser == 'false'}">
+	<!-- No cart items -->
+	</c:if>
 	<div>
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">

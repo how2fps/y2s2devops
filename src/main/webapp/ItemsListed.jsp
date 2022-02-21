@@ -38,14 +38,11 @@
 				<div
 					class="item-block d-flex flex-row align-self-center align-items-center">
 					<div class="item-info d-flex flex-row align-items-center">
-						<img class="item-pic" src="${item.image}"/>
+						<img class="item-pic" src="DisplayImageServlet?path=${item.image}"/>
 						<c:out value="${item.name}" />
 					</div>
 					<div class="datetime-bought d-flex justify-content-center align-items-center">
-						<a class="btn btn-primary" href="EditItemServlet?itemId=${item.id}">Edit Details</a>
-					</div>
-					<div class="datetime-bought d-flex justify-content-center align-items-center">
-						<a class="btn btn-danger" href="DeleteItemServlet?itemId=${item.id}">Delete Item</a>
+						<a class="btn btn-primary" href="ItemViewServlet?itemId=${item.id}" id="${item.name}seeDetailsBtn">See Item Details</a>
 					</div>
 					<div
 						class="datetime-bought d-flex justify-content-center align-items-center">

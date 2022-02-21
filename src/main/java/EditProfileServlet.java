@@ -79,7 +79,6 @@ public class EditProfileServlet extends HttpServlet {
 				ResultSet rs2 = ps2.executeQuery();
 				
 				if (rs2.next()) {
-
 					System.out.println(rs2);
 					int userLoginInfoId = rs2.getInt("UserAuthId");
 					System.out.println(userLoginInfoId);
@@ -90,7 +89,6 @@ public class EditProfileServlet extends HttpServlet {
 					ps3.setInt(2, userLoginInfoId);
 					int check2 = ps3.executeUpdate();
 					if (check2 == 1) {
-
 						session.setAttribute("displayName", displayName);
 						session.setAttribute("email", email);
 						session.setAttribute("phoneNumber", phoneNumber);
