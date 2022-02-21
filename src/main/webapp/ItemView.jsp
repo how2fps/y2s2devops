@@ -36,6 +36,7 @@
 					<a class="btn btn-warning mt-3" id="editItemDetailsBtn"
 						href="EditItemServlet?itemId=${item.id}">Edit Item Details</a> <a
 						class="btn btn-danger mt-3"
+						id="deleteItemBtn"
 						href="DeleteItemServlet?itemId=${item.id}"
 						onclick="return confirm('Are you sure you want to delete this item? THIS ACTION IS IRREVERSIBLE!')">Delete
 						Item</a>
