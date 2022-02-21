@@ -95,6 +95,7 @@ public class RegisterTest {
 
 	@AfterTest
 	public void afterTest() {
+		webDriver.close();
 	}
 
 }

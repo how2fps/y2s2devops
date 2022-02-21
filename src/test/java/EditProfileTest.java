@@ -58,6 +58,7 @@ public class EditProfileTest {
 
 	@AfterTest
 	public void afterTest() {
+		webDriver.close();
 	}
 
 }
