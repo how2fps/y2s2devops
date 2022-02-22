@@ -17,8 +17,8 @@ public class DeleteItemTest {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("user@mail.com");
-		password.sendKeys("Password123");
+		email.sendKeys("test@test.com");
+		password.sendKeys("password");
 
 		webDriver.findElement(By.id("submit")).submit();
 

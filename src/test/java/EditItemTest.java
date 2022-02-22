@@ -18,8 +18,8 @@ public class EditItemTest {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("user@mail.com");
-		password.sendKeys("Password123");
+		email.sendKeys("test@test.com");
+		password.sendKeys("password");
 
 		webDriver.findElement(By.id("submit")).submit();
 
@@ -33,6 +33,8 @@ public class EditItemTest {
 		// from AddItemTest
 		Assert.assertTrue(!webDriver.findElements(By.id("KELL KeyboardseeDetailsBtn")).isEmpty(),
 				"Newly added item is not found!");
+
+		// ----- Need to add sleep timer here as data is loading
 
 		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
 		seeDetailsBtn.click();

@@ -18,8 +18,8 @@ public class ReadItemTest {
 		Assert.assertEquals(webDriver.getTitle(), "Login");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("user@mail.com");
-		password.sendKeys("Password123");
+		email.sendKeys("test@test.com");
+		password.sendKeys("password");
 
 		webDriver.findElement(By.id("submit")).submit();
 
