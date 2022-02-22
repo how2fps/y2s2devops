@@ -1,7 +1,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -138,10 +137,6 @@ public class ItemViewServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String image = request.getParameter("image");
-		// we need to decode the image back to ISO in order to display it
-		byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
-		String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
-
 		String pricing = request.getParameter("pricing");
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		String userId = request.getParameter("userId");
@@ -166,7 +161,7 @@ public class ItemViewServlet extends HttpServlet {
 				statement.setString(1, id);
 				statement.setString(2, name);
 				statement.setString(3, description);
-				statement.setString(4, isoimage);
+				statement.setString(4, image);
 				statement.setString(5, pricing);
 				statement.setString(6, resultquantity);
 				statement.setString(7, userId);
