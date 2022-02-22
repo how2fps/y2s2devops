@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;  
 
@@ -21,6 +22,9 @@ import java.time.LocalDateTime;
 @WebServlet("/AddReviewServlet")
 public class AddReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	// global item id variable
+	private static int globalItemId;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +39,11 @@ public class AddReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// itemId from itemView.jsp
+        int itemId = Integer.parseInt(request.getParameter("itemId"));
+        globalItemId = itemId;
+    	request.getRequestDispatcher("/AddReview.jsp").forward(request, response);
 	}
 
 	/**
@@ -53,6 +61,10 @@ public class AddReviewServlet extends HttpServlet {
 		//These parameters can only be retrieved after user login
 		HttpSession session = request.getSession();
         int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
+        String displayName = session.getAttribute("displayName").toString();
+        
+        // get item id from the global variable
+        int itemReviewId = globalItemId;
 		 
 		 //Current Time parameter
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -66,20 +78,22 @@ public class AddReviewServlet extends HttpServlet {
 			 "jdbc:mysql://localhost:3306/devops", "root", "");
 			 
 			//Implement the sql query using prepared statement 
-			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?)");
+			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?,?,?)");
 			 
 			//Parsed in the data retrieved from the review form request into the prepared statement
-			 ps.setInt(1, userId);
-			 ps.setString(2, content);
-			 ps.setInt(3, itemId);
-			 ps.setString(4, time);
+			 ps.setInt(1, 0);
+			 ps.setInt(2, userId);
+			 ps.setString(3, displayName);
+			 ps.setString(4, content);
+			 ps.setInt(5, itemReviewId);
+			 ps.setString(6, time);
 			 
 			//Perform the query on the database using the prepared statement
 			 int i = ps.executeUpdate();
 			 
 			//Check if the query had been successfully executed and redirect
 			 if (i > 0){
-				 response.sendRedirect("http://localhost:8090/devopsproject/ItemView.jsp");
+				 response.sendRedirect("http://localhost:8090/devopsproject/ItemsShopServlet");
 			 }
 			 
 		}
@@ -87,7 +101,6 @@ public class AddReviewServlet extends HttpServlet {
 		catch (Exception exception) {
 			 System.out.println(exception);
 			 out.close();
-		}
-        doGet(request, response);
-        }		       
+		}	       
+	}
 }

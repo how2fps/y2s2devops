@@ -25,7 +25,7 @@
        </fieldset>
        <div style="text-align:center;">
          <button type="submit" class="btn review-form-btn">Post</button>
-         <p><a href="<%=request.getContextPath()%>/ReviewsManagement.jsp">Back</a></p>
+         <p><a href="http://localhost:8090/devopsproject/ItemsShopServlet">Back</a></p>
        </div>
      </form>
    </div>
