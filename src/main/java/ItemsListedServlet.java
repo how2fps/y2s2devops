@@ -89,6 +89,14 @@ public class ItemsListedServlet extends HttpServlet {
 		request.getRequestDispatcher("/ItemsListed.jsp").forward(request, response);
 	}
 
+	// To encode the entire img src
+	private static String encodeImgUrl(String imgUrl) {
+		byte[] bytes = imgUrl.getBytes(StandardCharsets.UTF_8);
+		String encodedImgUrl = new String(bytes, StandardCharsets.UTF_8);
+
+		return encodedImgUrl;
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
