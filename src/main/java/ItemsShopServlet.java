@@ -84,15 +84,11 @@ public class ItemsShopServlet extends HttpServlet {
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				String image = rs.getString("image");
-				// we need to decode the image back to ISO in order to display it
-				byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
-				String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
 				double pricing = rs.getDouble("pricing");
 				Integer quantity = rs.getInt("quantity");
 				Integer userId = rs.getInt("userId");
 				java.sql.Date dateListed = rs.getDate("dateListed");
-				itemsShopList
-						.add(new ItemsShop(id, name, description, isoimage, pricing, quantity, userId, dateListed));
+				itemsShopList.add(new ItemsShop(id, name, description, image, pricing, quantity, userId, dateListed));
 			}
 
 		} catch (SQLException e) {
