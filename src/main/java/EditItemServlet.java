@@ -178,7 +178,6 @@ public class EditItemServlet extends HttpServlet {
 						String fieldvalue = item.getString();
 						if (fieldname.equals("itemName")) {
 							System.out.println("Im in itemName");
-							// logic goes here...
 							newItemName = fieldvalue;
 						} else if (fieldname.equals("itemDescription")) {
 							System.out.println("Im in itemDescription");
