@@ -3,6 +3,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -25,8 +26,8 @@ public class DisplayImageServlet extends HttpServlet {
 		response.setContentType("image/jpeg");
 		ServletOutputStream out;
 		out = response.getOutputStream();
-		FileInputStream fin = new FileInputStream(request.getParameter("path"));
-
+		byte[] bytes = request.getParameter("path").getBytes(StandardCharsets.ISO_8859_1);
+		FileInputStream fin = new FileInputStream(new String(bytes, StandardCharsets.ISO_8859_1));
 		BufferedInputStream bin = new BufferedInputStream(fin);
 		BufferedOutputStream bout = new BufferedOutputStream(out);
 		int ch = 0;
