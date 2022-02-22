@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -56,9 +58,9 @@ public class LoginServlet extends HttpServlet {
 			ps.setString(1, email);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				String actualPassword = rs.getString("password");
+				String hashedPassword = rs.getString("password");
 				int userAuthId = rs.getInt("id");
-				if (password.trim().equals(actualPassword)) {
+				if (BCrypt.checkpw(password, hashedPassword)) {
 					PreparedStatement ps2 = con.prepareStatement("select * from user_details where UserAuthId = ?",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 					ps2.setInt(1, userAuthId);

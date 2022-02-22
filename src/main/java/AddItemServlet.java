@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -50,6 +51,7 @@ public class AddItemServlet extends HttpServlet {
 		String itemImage = null;
 		String itemName = null;
 		String itemDescription = null;
+		String utf8EncodedItemImage = null;
 		double itemPricing = 0.0;
 		int itemQuantity = 0;
 
@@ -107,6 +109,12 @@ public class AddItemServlet extends HttpServlet {
 						fileName1 += fileName;
 						String filePath = uploadPath + File.separator + fileName;
 						itemImage = filePath;
+
+						// we need to encode in another encoding called UTF-8, so that Tomcat9.0 will
+						// accept the file path.
+						byte[] bytes = itemImage.getBytes(StandardCharsets.UTF_8);
+						utf8EncodedItemImage = new String(bytes, StandardCharsets.UTF_8);
+
 						File storeFile = new File(filePath);
 						// saves the file on disk
 						item.write(storeFile);
@@ -138,7 +146,7 @@ public class AddItemServlet extends HttpServlet {
 			out.println(ex.getMessage());
 		}
 
-		System.out.println(itemImage);
+		System.out.println(utf8EncodedItemImage);
 
 		java.sql.Date itemDateListed = new java.sql.Date(System.currentTimeMillis()); // current DateTime in SQL Date
 
@@ -151,7 +159,7 @@ public class AddItemServlet extends HttpServlet {
 
 			System.out.println(itemName);
 			System.out.println(itemDescription);
-			System.out.println(itemImage);
+			System.out.println(utf8EncodedItemImage);
 			System.out.println(itemPricing);
 			System.out.println(itemQuantity);
 
@@ -159,7 +167,7 @@ public class AddItemServlet extends HttpServlet {
 			ps.setInt(1, 0);
 			ps.setString(2, itemName);
 			ps.setString(3, itemDescription);
-			ps.setString(4, itemImage);
+			ps.setString(4, utf8EncodedItemImage);
 			ps.setDouble(5, itemPricing);
 			ps.setInt(6, itemQuantity);
 			ps.setInt(7, itemUserId);
