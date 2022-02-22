@@ -144,7 +144,12 @@ public class EditItemServlet extends HttpServlet {
 
 		// constructs the directory path to store upload file
 		// this path is relative to application's directory
-		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+		// String uploadPath = getServletContext().getRealPath("") + File.separator +
+		// UPLOAD_DIRECTORY;
+
+		// we cannot use the previously used .getRealPath as images will get lost
+		// whenever the WAR is redeployed.
+		String uploadPath = "C:\\DevOpsImageFolder";
 
 		// creates the directory if it does not exist
 		File uploadDir = new File(uploadPath);
