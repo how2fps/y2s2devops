@@ -22,6 +22,29 @@ public class DisplayImageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+//		response.setContentType("image/jpeg");
+//		ServletOutputStream out;
+//		out = response.getOutputStream();
+//		FileInputStream fin = new FileInputStream(request.getParameter("path"));
+//		BufferedInputStream bin = new BufferedInputStream(fin);
+//		BufferedOutputStream bout = new BufferedOutputStream(out);
+//		int ch = 0;
+//		;
+//		while ((ch = bin.read()) != -1) {
+//			bout.write(ch);
+//		}
+//
+//		bin.close();
+//		fin.close();
+//		bout.close();
+//		out.close();
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+
 		response.setContentType("image/jpeg");
 		ServletOutputStream out;
 		out = response.getOutputStream();
@@ -38,12 +61,6 @@ public class DisplayImageServlet extends HttpServlet {
 		fin.close();
 		bout.close();
 		out.close();
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }
