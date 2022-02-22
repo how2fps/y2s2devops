@@ -68,6 +68,8 @@ public class ItemViewServlet extends HttpServlet {
 				String itemName = rs.getString("name");
 				String itemDescription = rs.getString("description");
 				String itemImage = rs.getString("image");
+				System.out.println("The image fetched from the DB is:");
+				System.out.println(itemImage);
 				double itemPrice = rs.getDouble("pricing");
 				int itemQuantity = rs.getInt("quantity");
 				System.out.println(itemQuantity);
@@ -138,8 +140,6 @@ public class ItemViewServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String image = request.getParameter("image");
-		System.out.println("The image fetched from the DB is:");
-		System.out.println(image);
 		// we need to decode the image back to ISO in order to display it
 		byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
 		String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
