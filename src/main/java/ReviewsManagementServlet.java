@@ -61,6 +61,12 @@ public class ReviewsManagementServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		 try {
+			 listReviews(request, response);
+		 }
+		 catch (SQLException ex) {
+		 throw new ServletException(ex);
+		 }
 	}
 	
 	// listItems function to connect to the database and retrieve all items listed by 
@@ -82,8 +88,9 @@ public class ReviewsManagementServlet extends HttpServlet {
 	   
 	   // Process the ResultSet object.
 	   while (rs.next()) {
-	   String id = rs.getString("id")
+	   String id = rs.getString("id");
 	   String content = rs.getString("content");
+	   String itemId = rs.getString("itemId");
 	   String date = rs.getString("time");
 	   reviews.add(new Review(id, userId, content, itemId, date));
 	   }

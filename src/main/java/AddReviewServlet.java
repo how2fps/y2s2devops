@@ -44,7 +44,7 @@ public class AddReviewServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		//Step 1: Initialize a PrintWriter object to return the html values via the response
+		//Initialize a PrintWriter object to return the html values via the response
 		PrintWriter out = response.getWriter();
 		
 		 //Retrieve parameters from the request from the review form
@@ -69,8 +69,8 @@ public class AddReviewServlet extends HttpServlet {
 			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?)");
 			 
 			//Parsed in the data retrieved from the review form request into the prepared statement
-			 ps.setString(1, content);
-			 ps.setInt(2, userId);
+			 ps.setInt(1, userId);
+			 ps.setString(2, content);
 			 ps.setInt(3, itemId);
 			 ps.setString(4, time);
 			 
@@ -79,7 +79,7 @@ public class AddReviewServlet extends HttpServlet {
 			 
 			//Check if the query had been successfully executed and redirect
 			 if (i > 0){
-				 response.sendRedirect("http://localhost:8090/devopsproject/ReviewsPage.jsp");
+				 response.sendRedirect("http://localhost:8090/devopsproject/ItemView.jsp");
 			 }
 			 
 		}

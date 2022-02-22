@@ -29,8 +29,8 @@ public class ItemViewServlet extends HttpServlet {
 
 	// Prepared SQL Statements to perform CRUD operations
 	private static final String GET_ITEM_INFORMATION = "SELECT * FROM item WHERE Id = ?";
-	// jing yan pls change this if it is wrong for you.
-	private static final String GET_ITEM_REVIEWS = "SELECT * FROM review WHERE itemId = ?";
+	// TO get all reviews by item id
+	private static final String GET_REVIEWS_BY_ITEM = "SELECT * FROM review WHERE itemId = ?";
 	// To update the item information
 	private static final String UPDATE_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 
@@ -96,8 +96,7 @@ public class ItemViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		userId = Integer.parseInt(session.getAttribute("detailsId").toString()); // changed this to detailsId
-																					// from userAuthId
-		String action = request.getServletPath();
+																				 // from userAuthId
 
 		// I need to get the following things:
 		// the itemid via url params
@@ -121,7 +120,6 @@ public class ItemViewServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		updateItem(request, response);
-		String action = request.getServletPath();
 		response.sendRedirect("http://localhost:8090/devopsproject/UserCartServlet");
 
 	}

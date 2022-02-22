@@ -35,7 +35,7 @@
                    <c:out value="${review.content}" />
                  </td>
                  <td>
-                   <c:out value="${review.dateListed}" />
+                   <c:out value="${review.time}" />
                  </td>
                  <td>
                    <a href="#" class="btn btn-primary">Edit Review</a>

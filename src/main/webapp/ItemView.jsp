@@ -41,7 +41,9 @@
 						Item</a>
 				</div>
 				<p class="mt-3 ar-text">All Reviews:</p>
-				<div class="review-container"></div>
+				<div class="review-container">
+				  <a href="AddReviewServlet?itemId=${item.id}"><button>Add Review</button></a>
+				</div>
 			</section>
 		</div>
 	</c:if>
@@ -93,7 +95,8 @@
 					</div>
 				</form>
 				<p class="mt-3 ar-text">All Reviews:</p>
-				<div class="review-container"></div>
+				<div class="review-container">
+                </div>
 			</section>
 		</div>
 	</c:if>
