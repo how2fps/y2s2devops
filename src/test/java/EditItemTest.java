@@ -91,8 +91,6 @@ public class EditItemTest {
 		// If ran locally, then the image will be saved on the Tomcat 9.0 server, and
 		// the code is below:
 		// WebElement newItemImage = webDriver.findElement(By.id());
-		WebElement newItemImage = webDriver.findElement(By.id("This should make the code fail."));
-
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed Description"),
 				"Item Description was not changed!");
 		Assert.assertTrue(webDriver.getPageSource().contains("9999.99"), "Item Pricing was not changed!");
