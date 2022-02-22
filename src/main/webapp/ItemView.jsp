@@ -15,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="/NavBar.jsp" />
-	<!-- If current user is the one listing the item, then he can edit or delete the item. -->
+	<!-- If current user is the one listing the item, then they can edit or delete the item. -->
 	<c:if test="${isListedUser == 'true'}">
 		<div class="d-flex flex-row p-3">
 			<section class="w-50 d-flex flex-column left-hand">
@@ -46,7 +46,18 @@
 			</section>
 		</div>
 	</c:if>
-	<!--If current user is not the one listing the item, then he can buy the item  -->
+	<div class="container d-flex flex-column align-items-center">
+	<br>
+	<c:if test="${alert != null}">
+			<div class="alert alert-warning" role="alert">
+  				<h4 class="alert-heading">${alert}</h4>
+ 				<p>Press "OK" button to restart from Items Shop if issues persist on this page!</p>
+  				<hr>
+  				<button class="buttonalert btn btn-primary" onclick="location.href='ItemsShopServlet'">OK</button>
+			</div>
+	</c:if>
+	</div>
+	<!--If current user is not the one listing the item, then they can buy the item  -->
 	<c:if test="${isListedUser == 'false'}">
 		<div class="d-flex flex-row p-3">
 			<section class="w-50 d-flex flex-column left-hand">
@@ -90,7 +101,7 @@
 						<label for="additemamount">How Many? </label> <input type="number"
 							min="0" max="99" class="shopadditemamount"
 							name="additemquantityofuser" required> <input
-							type="submit" class="btn btn-primary" value="Add to Cart" onclick="return confirm('Do you wish to add the item to your cart?')">
+							type="submit" class="btn btn-primary" value="Add to Cart" onclick="return confirm('Do you wish to add the item with reserved quantity to your cart?')">
 					</div>
 				</form>
 				<p class="mt-3 ar-text">All Reviews:</p>
