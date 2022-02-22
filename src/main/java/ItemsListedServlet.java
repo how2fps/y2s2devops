@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -68,11 +69,14 @@ public class ItemsListedServlet extends HttpServlet {
 				String image = rs.getString("image");
 				System.out.println("The image fetched from the DB is:");
 				System.out.println(image);
-				// we need to decode the image back to ISO in order to display it
+				// we need to encode the image to UTF-8 again
+				byte[] bytes = image.getBytes(StandardCharsets.UTF_8);
+				String utf8image = new String(bytes, StandardCharsets.UTF_8);
+
 				double amountPaid = rs.getDouble("pricing");
 				int quantity = rs.getInt("quantity");
 				java.sql.Date date = rs.getDate("dateListed");
-				itemsListedList.add(new Item(itemId, name, "", image, amountPaid, quantity, userId, date));
+				itemsListedList.add(new Item(itemId, name, "", utf8image, amountPaid, quantity, userId, date));
 			}
 		} catch (SQLException e) {
 			System.out.println(GET_LISTED_ITEMS);
