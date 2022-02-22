@@ -26,7 +26,6 @@ public class DisplayImageServlet extends HttpServlet {
 		ServletOutputStream out;
 		out = response.getOutputStream();
 		FileInputStream fin = new FileInputStream(request.getParameter("path"));
-
 		BufferedInputStream bin = new BufferedInputStream(fin);
 		BufferedOutputStream bout = new BufferedOutputStream(out);
 		int ch = 0;

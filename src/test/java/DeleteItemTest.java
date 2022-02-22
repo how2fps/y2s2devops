@@ -7,15 +7,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class ReadItemTest {
+public class DeleteItemTest {
 	// declare Selenium WebDriver
 	private WebDriver webDriver;
 
 	@Test
-	public void readItem() {
-		// we need to firstly login first.
+	public void deleteItem() {
+		// we need to firstly login.
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
-		Assert.assertEquals(webDriver.getTitle(), "Login");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
 		email.sendKeys("test@test.com");
@@ -23,18 +22,40 @@ public class ReadItemTest {
 
 		webDriver.findElement(By.id("submit")).submit();
 
-		// go to the itemsListed page.
+		// check if we have successfully login as user
+		Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
+
+		// go to the ItemsListedPage
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsListedServlet");
 		Assert.assertEquals(webDriver.getTitle(), "Items Listed");
-		// find the item that we have newly entered from the add item test
-		Assert.assertTrue(webDriver.getPageSource().contains("KELL Keyboard"), "Item that was added is not found!");
+		// Locate the "See Details" button that is in the same as the newly edited item
+		// from EditItemTest
+		Assert.assertTrue(!webDriver.findElements(By.id("ChangedseeDetailsBtn")).isEmpty(),
+				"Newly editted item is not found!");
 
+		WebElement seeDetailsBtn = webDriver.findElement(By.id("ChangedseeDetailsBtn"));
+		seeDetailsBtn.click();
+
+		// Check if we are in the itemview page.
+		Assert.assertEquals(webDriver.getTitle(), "Item View");
+
+		// Click on the delete item button
+		WebElement deleteItemBtn = webDriver.findElement(By.id("deleteItemBtn"));
+		deleteItemBtn.click();
+		// Need to click on the confirm button on the alert popup.
+		webDriver.switchTo().alert().accept();
+
+		// Check if we are directed to the correct page or not
+		Assert.assertEquals(webDriver.getTitle(), "Items Listed");
 	}
 
 	@BeforeTest
 	public void beforeTest() {
 		String chromeDriverDir = "C:\\Program Files\\Google\\Chrome\\chromedriver.exe";
+
 		System.setProperty("webdriver.chrome.driver", chromeDriverDir);
+
+		// initialize FirefoxDriver at the start of test
 		webDriver = new ChromeDriver();
 	}
 

@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -111,6 +112,7 @@ public class EditItemServlet extends HttpServlet {
 		String newItemImage = null;
 		String newItemName = null;
 		String newItemDescription = null;
+		String newutf8EncodedItemImage = null;
 		double newItemPricing = 0.0;
 		int newItemQuantity = 0;
 
@@ -162,6 +164,11 @@ public class EditItemServlet extends HttpServlet {
 						fileName1 += fileName;
 						String filePath = uploadPath + File.separator + fileName;
 						newItemImage = filePath;
+
+						// we need to encode the image to UTF-8
+						byte[] bytes = newItemImage.getBytes(StandardCharsets.UTF_8);
+						newutf8EncodedItemImage = new String(bytes, StandardCharsets.UTF_8);
+
 						File storeFile = new File(filePath);
 						// saves the file on disk
 						item.write(storeFile);
@@ -171,7 +178,6 @@ public class EditItemServlet extends HttpServlet {
 						String fieldvalue = item.getString();
 						if (fieldname.equals("itemName")) {
 							System.out.println("Im in itemName");
-							// logic goes here...
 							newItemName = fieldvalue;
 						} else if (fieldname.equals("itemDescription")) {
 							System.out.println("Im in itemDescription");
@@ -199,7 +205,7 @@ public class EditItemServlet extends HttpServlet {
 				PreparedStatement statement = connection.prepareStatement(UPDATE_ITEM_INFORMATION);) {
 			statement.setString(1, newItemName);
 			statement.setString(2, newItemDescription);
-			statement.setString(3, newItemImage);
+			statement.setString(3, newutf8EncodedItemImage);
 			statement.setDouble(4, newItemPricing);
 			statement.setInt(5, newItemQuantity);
 			statement.setDate(6, newItemDateListed);

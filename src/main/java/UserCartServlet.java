@@ -83,7 +83,7 @@ public class UserCartServlet extends HttpServlet {
 		try {
 			switch (action) {
 			case "/UserCartServlet/delete":
-//				deleteCartItem(request, response);
+				deleteCartItem(request, response);
 				updateItemFromCart(request, response);
 				break;
 			case "/UserCartServlet/wipe":
@@ -169,28 +169,25 @@ public class UserCartServlet extends HttpServlet {
 //		return sum;
 //	}
 	
-	// To update the quantity of a selected item by user after removing from their user cart
+	// To retrieve and update the quantity of a selected item reserved by user after removing from their shopping cart
 		private void updateItemFromCart(HttpServletRequest request, HttpServletResponse response)
 				throws SQLException, IOException, ServletException {
-			// Step 1: Retrieve value from the request
 
 			String oriId = request.getParameter("oriId");
 			String id = request.getParameter("id");
-			String itemname = request.getParameter("name");			
-			String itemdescription = request.getParameter("description");
-			String itemimage = request.getParameter("image");
-			String itempricing = request.getParameter("pricing");
-			Integer itemquantity = Integer.parseInt(request.getParameter("quantity"));
-			String itemuserId = request.getParameter("userId");
-			String itemdateListed = request.getParameter("dateListed");
-			
-			Integer plusquantity = Integer.parseInt(request.getParameter("itemquantity"));
+			String itemname = request.getParameter("itemname");			
+			String itemdescription = request.getParameter("itemdescription");
+			String itemimage = request.getParameter("itemimage");
+			String itempricing = request.getParameter("itempricing");
+			Integer itemquantity = Integer.parseInt(request.getParameter("itemquantity"));
+			String itemuserId = request.getParameter("itemuserId");
+			String itemdateListed = request.getParameter("itemdateListed");
+			Integer plusquantity = Integer.parseInt(request.getParameter("currentstockitemquantity"));
 			
 			Integer calculatedquantity = Math.addExact(itemquantity, plusquantity);
 			
 			String resultquantity = String.valueOf(calculatedquantity);
 			
-			// Step 2: Attempt connection with database and execute update user SQL query
 			try (Connection connection = getConnection();
 					PreparedStatement statement = connection.prepareStatement(UPDATE_CART_ITEM_BY_ID);) {
 

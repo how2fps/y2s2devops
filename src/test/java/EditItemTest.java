@@ -18,8 +18,8 @@ public class EditItemTest {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("user@mail.com");
-		password.sendKeys("Password123");
+		email.sendKeys("test@test.com");
+		password.sendKeys("password");
 
 		webDriver.findElement(By.id("submit")).submit();
 
@@ -33,6 +33,8 @@ public class EditItemTest {
 		// from AddItemTest
 		Assert.assertTrue(!webDriver.findElements(By.id("KELL KeyboardseeDetailsBtn")).isEmpty(),
 				"Newly added item is not found!");
+
+		// ----- Need to add sleep timer here as data is loading
 
 		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
 		seeDetailsBtn.click();
@@ -79,8 +81,18 @@ public class EditItemTest {
 
 		// Check if the changed itemDetails is reflected.
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed"), "Item Name was not changed!");
+
+		// Depending on where you run this test, the image path will be different:
+		// If ran locally, then the image will be saved on the ecpilse workspace, and
+		// the code is below:
+		// WebElement newItemImage = webDriver.findElement(By.id(
+		// "C:\\Users\\User\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp4\\wtpwebapps\\y2s2devops\\image_upload\\painting.jpg"));
+
+		// If ran using Jenkins, then the image will be saved on the Tomcat 9.0
+		// server,and
+		// the code is below:
 		WebElement newItemImage = webDriver.findElement(By.id(
-				"C:\\Users\\User\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp4\\wtpwebapps\\y2s2devops\\image_upload\\painting.jpg"));
+				"C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject\\\\image_upload\\aesthetically pleasing background.png"));
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed Description"),
 				"Item Description was not changed!");
 		Assert.assertTrue(webDriver.getPageSource().contains("9999.99"), "Item Pricing was not changed!");

@@ -66,6 +66,9 @@ public class ItemsListedServlet extends HttpServlet {
 				String name = rs.getString("name");
 				// we need to get the image here.
 				String image = rs.getString("image");
+				System.out.println("The image fetched from the DB is:");
+				System.out.println(image);
+				// we need to decode the image back to ISO in order to display it
 				double amountPaid = rs.getDouble("pricing");
 				int quantity = rs.getInt("quantity");
 				java.sql.Date date = rs.getDate("dateListed");
