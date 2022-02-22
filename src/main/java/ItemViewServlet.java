@@ -138,6 +138,8 @@ public class ItemViewServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String image = request.getParameter("image");
+		System.out.println("The image fetched from the DB is:");
+		System.out.println(image);
 		// we need to decode the image back to ISO in order to display it
 		byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
 		String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
