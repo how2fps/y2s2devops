@@ -25,9 +25,7 @@ public class DisplayImageServlet extends HttpServlet {
 		response.setContentType("image/jpeg");
 		ServletOutputStream out;
 		out = response.getOutputStream();
-		// byte[] bytes = request.getParameter("path").getBytes(StandardCharsets.UTF_8);
-		FileInputStream fin = new FileInputStream(
-				new String(request.getParameter("path").getBytes("ISO-8859-1"), "UTF-8"));
+		FileInputStream fin = new FileInputStream(request.getParameter("path"));
 		BufferedInputStream bin = new BufferedInputStream(fin);
 		BufferedOutputStream bout = new BufferedOutputStream(out);
 		int ch = 0;
