@@ -70,6 +70,7 @@ public class ItemsListedServlet extends HttpServlet {
 				// we need to decode the image back to ISO in order to display it
 				byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
 				String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
+				System.out.println(isoimage);
 
 				double amountPaid = rs.getDouble("pricing");
 				int quantity = rs.getInt("quantity");
