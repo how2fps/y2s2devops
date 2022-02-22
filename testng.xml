@@ -10,6 +10,7 @@
       <class name="EditItemTest"/>
       <class name="DeleteItemTest"/>
       <class name="EditProfileTest"/>
+      <class name="ChangePasswordTest"/>
       <class name="DeleteUserTest"/>
     </classes>
   </test> <!-- Test -->
