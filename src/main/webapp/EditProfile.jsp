@@ -51,8 +51,13 @@
 				</div>
 			</form>
 		</div>
+		<form action="ChangePasswordServlet" method="get">
+			<button id="changePasswordButton" type="submit"
+				class="btn btn-warning mt-4">Change Password</button>
+		</form>
 		<form action="DeleteUserServlet" method="get">
-			<button id="deleteUserButton" type="submit" value="delete" class="btn btn-danger mt-4"
+			<button id="deleteUserButton" type="submit" value="delete"
+				class="btn btn-danger mt-4"
 				onclick="return confirm('Are you sure you want to delete your account? This action is IRREVERSIBLE!')">Delete
 				Account</button>
 		</form>
