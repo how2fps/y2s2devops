@@ -81,8 +81,18 @@ public class EditItemTest {
 
 		// Check if the changed itemDetails is reflected.
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed"), "Item Name was not changed!");
-		WebElement newItemImage = webDriver.findElement(By.id(
-				"C:\\Users\\User\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp4\\wtpwebapps\\y2s2devops\\image_upload\\painting.jpg"));
+
+		// Depending on where you run this test, the image path will be different:
+		// If ran locally, then the image will be saved on the ecpilse workspace, and
+		// the code is below:
+		// WebElement newItemImage = webDriver.findElement(By.id(
+		// "C:\\Users\\User\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp4\\wtpwebapps\\y2s2devops\\image_upload\\painting.jpg"));
+
+		// If ran locally, then the image will be saved on the Tomcat 9.0 server, and
+		// the code is below:
+		// WebElement newItemImage = webDriver.findElement(By.id());
+		WebElement newItemImage = webDriver.findElement(By.id("This should make the code fail."));
+
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed Description"),
 				"Item Description was not changed!");
 		Assert.assertTrue(webDriver.getPageSource().contains("9999.99"), "Item Pricing was not changed!");
