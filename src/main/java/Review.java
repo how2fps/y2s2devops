@@ -1,14 +1,16 @@
 public class Review {
-	public Review(int id, int userId, String content, int itemId, String time) {
+	public Review(int id, int userId, String displayName, String content, int itemId, String time) {
 		super();
 		Id = id;
 		UserId = userId;
+		DisplayName = displayName;
 		Content = content;
 		ItemId = itemId;
 		Time = time;
 	}
 	protected int Id;
 	protected int UserId;
+	protected String DisplayName;
 	protected String Content;
 	protected int ItemId;
 	protected String Time;
@@ -24,6 +26,12 @@ public class Review {
 	}
 	public void setUserId(int userId) {
 		UserId = userId;
+	}
+	public String getDisplayName() {
+		return DisplayName;
+	}
+	public void setDisplayName(String displayName) {
+		DisplayName = displayName;
 	}
 	public String getContent() {
 		return Content;
