@@ -27,7 +27,6 @@ request.setAttribute("dcf", dcf);
 		<h1 class="fontcenterUserCart">Your Cart</h1>
 	</div>
 	<br>
-	<br>
 	<!-- If current user logged in has cart items that they added to their shopping cart, they can see their cart items -->
 	<table>
 		<tr>
@@ -45,9 +44,25 @@ request.setAttribute("dcf", dcf);
 				<td><c:out value="${cartitem.name}" /></td>
 				<td><c:out value="${cartitem.itemAmount}" /></td>
 				<td><c:out value="${cartitem.totalPrice}" /></td>
-				<td><a
-					href="<%=request.getContextPath()%>/UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>"><button
-							type="button" class="btn btn-danger">X</button></a></td>
+				<td>
+				<!-- To add the quantity back returned to the original stock of an item -->
+				<form action="UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>" method="post">
+				<button type="submit" class="btn btn-danger" onclick="return confirm('Do you wish to removed the item from your cart? Note: The reserved quantity will be returned.')">X</button>
+				<div style="display:none">
+					<input type="text" name="oriId" value="${cartitem.itemId}">
+					<input type="text" name="id" value="${cartitem.itemId}">
+					<input type="text" name="itemname" value="${cartitem.name}">
+					<input type="text" name="itemdescription" value="${cartitem.description}">
+					<input type="text" name="itemimage" value="${cartitem.image}">
+					<input type="text" name="itempricing" value="${cartitem.pricing}">
+					<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+					<input type="text" name="itemuserId" value="${cartitem.userId}">
+					<input type="text" name="itemdateListed" value="${cartitem.dateListed}">
+					<input type="text" name="currentstockitemquantity" value="${cartitem.quantity}">
+				</div>
+				</form>
+				<!-- ------------------------------------------------------------------- -->		
+				</td>
 			</tr>
 			<form action="UserCartServlet/wipe" method="post">
 			<div style="display:none">
@@ -61,20 +76,6 @@ request.setAttribute("dcf", dcf);
 				<!-- <button type="submit">CHECKOUT</button> -->
 			</div>
 			</form>
-			<!-- To add the quantity back returned to the original stock of an item -->
-			<form action="UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>" method="post">
-			<div style="display:none">
-				<input type="text" name="oriId" value="${cartitem.itemId}">
-				<input type="text" name="id" value="${cartitem.itemId}">
-				<input type="text" name="itemname" value="${cartitem.name}">
-				<input type="text" name="itemdescription" value="${cartitem.description}">
-				<input type="text" name="itemimage" value="${cartitem.name}">
-				<input type="text" name="itempricing" value="${cartitem.pricing}">
-				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
-				<input type="text" name="itemuserId" value="${cartitem.userId}">
-				<input type="text" name="itemdateListed" value="${cartitem.dateListed}">
-			</div>
-			</form>
 		</c:forEach>
 		</c:if>
 	</table>
@@ -86,11 +87,14 @@ request.setAttribute("dcf", dcf);
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
 				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
-				<th><a
-					href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
-							type="button" class="btn buttoncentertable2">Checkout</button></a></th>
+				<%-- <th><a href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
+							type="button" class="btn buttoncentertable2">Checkout</button></a>	
+				</th> --%>
 			</tr>
 		</table>
+		<p>
+		
+		</p>
 	</div>
 </body>
 </html>
