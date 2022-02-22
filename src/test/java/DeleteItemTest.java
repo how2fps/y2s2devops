@@ -14,7 +14,6 @@ public class DeleteItemTest {
 	@Test
 	public void deleteItem() {
 		// we need to firstly login.
-		WebElement newItemImage = webDriver.findElement(By.id("This should make the code fail."));
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
