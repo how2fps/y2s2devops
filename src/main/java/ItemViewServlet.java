@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -137,6 +138,10 @@ public class ItemViewServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String image = request.getParameter("image");
+		// we need to decode the image back to ISO in order to display it
+		byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
+		String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
+
 		String pricing = request.getParameter("pricing");
 		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		String userId = request.getParameter("userId");
@@ -155,7 +160,7 @@ public class ItemViewServlet extends HttpServlet {
 			statement.setString(1, id);
 			statement.setString(2, name);
 			statement.setString(3, description);
-			statement.setString(4, image);
+			statement.setString(4, isoimage);
 			statement.setString(5, pricing);
 			statement.setString(6, resultquantity);
 			statement.setString(7, userId);
@@ -189,10 +194,10 @@ public class ItemViewServlet extends HttpServlet {
 
 			PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
 			PreparedStatement ps2 = con.prepareStatement("SELECT * FROM shopping_cart WHERE Id = ?");
-			
-			//To set the specified target shopping cart id of the current user logged in
+
+			// To set the specified target shopping cart id of the current user logged in
 			ps2.setInt(1, userId);
-			
+
 			ResultSet rs = ps2.executeQuery();
 
 			ps.setInt(1, 0);
@@ -200,14 +205,14 @@ public class ItemViewServlet extends HttpServlet {
 			ps.setInt(3, itemId);
 			ps.setInt(4, additemquantity);
 			ps.setString(5, pricing);
-			
+
 			// To get the shopping cart id by the current user logged in
-			while (rs.next()) { 
-			rs.getInt(userId);
+			while (rs.next()) {
+				rs.getInt(userId);
 			}
 
 			int i = ps.executeUpdate();
-			
+
 			if (i > 0) {
 				addCartItem(request, response);
 			}

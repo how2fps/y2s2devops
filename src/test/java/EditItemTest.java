@@ -92,7 +92,7 @@ public class EditItemTest {
 		// server,and
 		// the code is below:
 		WebElement newItemImage = webDriver.findElement(By.id(
-				"C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject\\\\image_upload\\painting.png"));
+				"C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject\\\\image_upload\\aesthetically pleasing background.png"));
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed Description"),
 				"Item Description was not changed!");
 		Assert.assertTrue(webDriver.getPageSource().contains("9999.99"), "Item Pricing was not changed!");

@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,10 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
-
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,8 +64,7 @@ public class ItemsShopServlet extends HttpServlet {
 		try {
 			listItems(request, response);
 
-		} 
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 	}
@@ -77,21 +74,25 @@ public class ItemsShopServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		List<ItemsShop> itemsShopList = new ArrayList<>();
 		try (Connection connection = getConnection();
-				
+
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ITEMS_LISTED);) {
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
-			
+
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				String image = rs.getString("image");
+				// we need to decode the image back to ISO in order to display it
+				byte[] bytes = image.getBytes(StandardCharsets.ISO_8859_1);
+				String isoimage = new String(bytes, StandardCharsets.ISO_8859_1);
 				double pricing = rs.getDouble("pricing");
 				Integer quantity = rs.getInt("quantity");
 				Integer userId = rs.getInt("userId");
 				java.sql.Date dateListed = rs.getDate("dateListed");
-				itemsShopList.add(new ItemsShop(id, name, description, image, pricing, quantity, userId, dateListed));
+				itemsShopList
+						.add(new ItemsShop(id, name, description, isoimage, pricing, quantity, userId, dateListed));
 			}
 
 		} catch (SQLException e) {
@@ -107,7 +108,7 @@ public class ItemsShopServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
