@@ -1,3 +1,7 @@
 /build/
 /target/
+<<<<<<< HEAD
 /test-output/
+=======
+/test-output/
+>>>>>>> branch 'master' of https://github.com/how2fps/y2s2devops.git

@@ -29,7 +29,8 @@
 					style="background: #FF5D73; color: white; font-size: 18px;"
 					href="http://localhost:8090/devopsproject/AddItem.jsp"> List
 					New Item</a> <a class="btn btn-primary m-3 w-75"
-					style="background: #FF5D73; color: white; font-size: 18px;">
+					style="background: #FF5D73; color: white; font-size: 18px;" 
+					href="http://localhost:8090/devopsproject/ReviewsManagement.jsp">
 					Manage Reviews</a> <a class="btn btn-primary m-3 mb-0 w-75"
 					style="background: #FF5D73; color: white; font-size: 18px;"
 					href="http://localhost:8090/devopsproject/ItemsListedServlet">
