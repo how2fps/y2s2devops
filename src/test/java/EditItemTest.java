@@ -91,8 +91,7 @@ public class EditItemTest {
 		// If ran using Jenkins, then the image will be saved on the Tomcat 9.0
 		// server,and
 		// the code is below:
-		WebElement newItemImage = webDriver.findElement(By.id(
-				"C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject\\\\image_upload\\aesthetically pleasing background.png"));
+		WebElement newItemImage = webDriver.findElement(By.id("C:\\DevOpsImageFolder\\painting.jpg"));
 		Assert.assertTrue(webDriver.getPageSource().contains("Changed Description"),
 				"Item Description was not changed!");
 		Assert.assertTrue(webDriver.getPageSource().contains("9999.99"), "Item Pricing was not changed!");
