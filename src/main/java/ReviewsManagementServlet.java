@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class ReviewsManagementServlet extends HttpServlet {
 
 	// Prepared list of variables used for database connections
-	private String jdbcURL = "jdbc:mysql://localhost:3306/userdetails_devops";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
@@ -106,6 +106,42 @@ public class ReviewsManagementServlet extends HttpServlet {
 		request.setAttribute("listReviews", reviews);
 		request.getRequestDispatcher("/ReviewsManagement.jsp").forward(request, response);
 	}
+
+	// listItems function to connect to the database and retrieve all items listed by 
+	private void listReviews(HttpServletRequest request, HttpServletResponse response) 
+	  throws SQLException, IOException, ServletException {
+		
+	  HttpSession session = request.getSession();
+	  int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
+		
+	  List <Review> reviews = new ArrayList <>();
+	  try (Connection connection = getConnection();
+			   
+	   // Create a statement using connection object
+	  PreparedStatement preparedStatement = 
+	  connection.prepareStatement(SELECT_REVIEWS_BY_USER);) {
+	  preparedStatement.setInt(1, userId);
+		   
+	   // Execute the query or update query
+	   ResultSet rs = preparedStatement.executeQuery();
+	   
+	   // Process the ResultSet object.
+	   while (rs.next()) {
+	   int id = rs.getInt("id");
+	   String displayName = rs.getString("displayName");
+	   String content = rs.getString("content");
+	   int itemId = rs.getInt("itemId");
+	   String time = rs.getString("time");
+	   reviews.add(new Review(id, userId, displayName, content, itemId, time));
+	   }
+	   } catch (SQLException e) {
+	   System.out.println(e.getMessage());
+	   }
+	   
+	  // Set the items list into the listItems attribute to be pass to the ReviewsManagement.jsp
+	  request.setAttribute("listReviews", reviews);
+	  request.getRequestDispatcher("/ReviewsManagement.jsp").forward(request, response);
+	  }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
