@@ -109,8 +109,6 @@ public class UserCartServlet extends HttpServlet {
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CART_ITEMS_BY_USER);) {
 				preparedStatement.setInt(1, currentuserloggedin);
 			ResultSet rs = preparedStatement.executeQuery();
-			
-			System.out.println(preparedStatement);
 
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
@@ -146,35 +144,7 @@ public class UserCartServlet extends HttpServlet {
 		request.getRequestDispatcher("/UserCart.jsp").forward(request, response);
 	}
 
-	// To compute the total amount of all items from user shopping cart
-
-//	public double getTotalCartPrice(List<UserCart> cartitems) {
-//		double sum = 0;
-//
-//		try (Connection connection = getConnection()) {
-//			if (cartitems.size() > 0) {
-//				for (UserCart item : cartitems) {
-//					String query = "select ItemAmount from cart_item where Id=?";
-//					PreparedStatement preparedStatement = connection.prepareStatement(query);
-//					preparedStatement.setInt(1, item.getId());
-//					ResultSet rs = preparedStatement.executeQuery();
-//					rs = preparedStatement.executeQuery();
-//
-//					while (rs.next()) {
-//						sum += rs.getDouble("TotalPrice") * item.getItemAmount();
-//					}
-//				}
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return sum;
-//	}
-
-	// To retrieve and update the quantity of a selected item reserved by user after
-	// removing from their shopping cart
+	// To retrieve and update the quantity of a selected item reserved by user after removing from their shopping cart
 	private void updateItemFromCart(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 

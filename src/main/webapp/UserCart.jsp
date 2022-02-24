@@ -18,6 +18,12 @@ request.setAttribute("dcf", dcf);
 <link rel="stylesheet" href="static/userCart.css" />
 <link rel="stylesheet" href="static/navbar.css" />
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+int total = 0;
+for (CalculatedTotalPrice calculatedtotalPrice : list) {
+    total += calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount;
+}
+</script>
 <title>User Cart</title>
 </head>
 <body>
@@ -74,7 +80,11 @@ request.setAttribute("dcf", dcf);
 	<div>
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
-				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
+				<c:set var="total" value="${0}"/>
+					<c:forEach var="calculatedtotalPrice" items="${listCartItems}">
+    			<c:set var="total" value="${total + calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount}" />
+					</c:forEach>
+				<th var="total">Total Amount: $ ${total + calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount}</th>	
 				<th>
 				<form action="UserCartServlet/wipe?shoppingcartid=<c:out value='${currentUserLoggedInShoppingCart}'/>" method="post">
 				<c:forEach var="cartitem" items="${listCartItems}">
@@ -88,7 +98,7 @@ request.setAttribute("dcf", dcf);
 				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
 			    </div>
 			    </c:forEach>
-			    <button class="btn buttoncentertable2" type="submit">CHECKOUT</button>
+			    <button class="btn buttoncentertable2" type="submit" onclick="return confirm('Do you wish to proceed for checkout?')">CHECKOUT</button>
 				</form>
 				</th>
 			</tr>
