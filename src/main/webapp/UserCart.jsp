@@ -1,11 +1,5 @@
-<%@page import="java.util.*"%>
-<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%
-DecimalFormat dcf = new DecimalFormat("#.##");
-request.setAttribute("dcf", dcf);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +12,12 @@ request.setAttribute("dcf", dcf);
 <link rel="stylesheet" href="static/userCart.css" />
 <link rel="stylesheet" href="static/navbar.css" />
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+int total = 0;
+for (CalculatedTotalPrice calculatedtotalPrice : list) {
+    total += calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount;
+}
+</script>
 <title>User Cart</title>
 </head>
 <body>
@@ -64,18 +64,6 @@ request.setAttribute("dcf", dcf);
 				<!-- ------------------------------------------------------------------- -->		
 				</td>
 			</tr>
-			<form action="UserCartServlet/wipe" method="post">
-			<div style="display:none">
-				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
-				<input type="text" name="sellinguserid" value="${cartitem.userId}">
-				<input type="text" name="itemid" value="${cartitem.itemId}">
-				<input type="text" name="itemname" value="${cartitem.name}">
-				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
-				<input type="text" name="itemimage" value="${cartitem.image}">
-				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
-				<!-- <button type="submit">CHECKOUT</button> -->
-			</div>
-			</form>
 		</c:forEach>
 		</c:if>
 	</table>
@@ -86,10 +74,27 @@ request.setAttribute("dcf", dcf);
 	<div>
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
-				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
-				<%-- <th><a href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
-							type="button" class="btn buttoncentertable2">Checkout</button></a>	
-				</th> --%>
+				<c:set var="total" value="${0}"/>
+					<c:forEach var="calculatedtotalPrice" items="${listCartItems}">
+    			<c:set var="total" value="${total + calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount}" />
+					</c:forEach>
+				<th var="total">Total Amount: $ ${total + calculatedtotalPrice.totalPrice * calculatedtotalPrice.itemAmount}</th>	
+				<th>
+				<form action="UserCartServlet/wipe?shoppingcartid=<c:out value='${currentUserLoggedInShoppingCart}'/>" method="post">
+				<c:forEach var="cartitem" items="${listCartItems}">
+				<div style="display:none">
+				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
+				<input type="text" name="sellinguserid" value="${cartitem.userId}">
+				<input type="text" name="itemid" value="${cartitem.itemId}">
+				<input type="text" name="itemname" value="${cartitem.name}">
+				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+				<input type="text" name="itemimage" value="${cartitem.image}">
+				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
+			    </div>
+			    </c:forEach>
+			    <button class="btn buttoncentertable2" type="submit" onclick="return confirm('Do you wish to proceed for checkout?')">CHECKOUT</button>
+				</form>
+				</th>
 			</tr>
 		</table>
 		<p>

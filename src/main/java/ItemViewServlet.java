@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/ItemViewServlet")
 public class ItemViewServlet extends HttpServlet {
@@ -30,7 +32,7 @@ public class ItemViewServlet extends HttpServlet {
 
 	// Prepared SQL Statements to perform CRUD operations
 	private static final String GET_ITEM_INFORMATION = "SELECT * FROM item WHERE Id = ?";
-	// TO get all reviews by item id
+	// To get all reviews by item id
 	private static final String GET_REVIEWS_BY_ITEM = "SELECT * FROM review WHERE itemId = ?";
 	// To update the item information
 	private static final String UPDATE_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
@@ -84,12 +86,33 @@ public class ItemViewServlet extends HttpServlet {
 				item = new Item(itemId, itemName, itemDescription, itemImage, itemPrice, itemQuantity, itemUserId,
 						itemDateListed);
 			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 			// Now that we have the itemId, we can now get it's reviews here
-
+			List <Review> reviews = new ArrayList <>();
+			 try (Connection connection = getConnection();
+			 // Create a statement using connection object
+			 PreparedStatement preparedStatement = 
+			 connection.prepareStatement(GET_REVIEWS_BY_ITEM);) {
+		     preparedStatement.setInt(1, itemId);
+			 // Execute the query or update query
+			 ResultSet rs = preparedStatement.executeQuery();
+			 // Process the ResultSet object.
+			 while (rs.next()) {
+			 int id = rs.getInt("id");
+			 int userId = rs.getInt("userId");
+			 String displayName = rs.getString("displayName");
+			 String content = rs.getString("content");
+			 int itemId = rs.getInt("itemId");
+			 String time = rs.getString("time");
+			 reviews.add(new Review(id, userId, displayName, content, itemId, time));
+			 }
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		request.setAttribute("item", item);
+		request.setAttribute("reviews", reviews);
 		request.getRequestDispatcher("/ItemView.jsp").forward(request, response);
 	}
 
@@ -194,6 +217,10 @@ public class ItemViewServlet extends HttpServlet {
 		
 		if (quantitytest == 0) {
 			request.setAttribute("alert","Item is out of stock!");
+			getItemInformationAndReviews(request,response);
+			return;
+		} else if(0 == additemquantity) {
+			request.setAttribute("alert","Input at least 1 quantity!");
 			getItemInformationAndReviews(request,response);
 			return;
 		} else if(quantitytest < additemquantity) {
