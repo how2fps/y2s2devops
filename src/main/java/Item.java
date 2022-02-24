@@ -1,4 +1,5 @@
 import java.sql.Date;
+import java.util.Comparator;
 
 public class Item {
 
@@ -96,5 +97,13 @@ public class Item {
 		UserId = userId;
 		DateListed = dateListed;
 	}
+
+	// This is the function that will sort the functional
+	public static Comparator<Item> priceComparator = new Comparator<Item>() {
+		@Override
+		public int compare(Item i1, Item i2) {
+			return Double.compare(i1.getPricing(), i2.getPricing());
+		}
+	};
 
 }
