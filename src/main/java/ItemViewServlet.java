@@ -229,6 +229,7 @@ public class ItemViewServlet extends HttpServlet {
 			return;
 		} else {
 			try {
+
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
 
@@ -248,7 +249,7 @@ public class ItemViewServlet extends HttpServlet {
 
 				// To get the shopping cart id by the current user logged in
 				while (rs.next()) {
-					rs.getInt(userId);
+					rs.getInt(1);
 				}
 
 				int i = ps.executeUpdate();
