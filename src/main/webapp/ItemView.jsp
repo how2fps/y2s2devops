@@ -43,6 +43,13 @@
 				</div>
 				<p class="mt-3 ar-text">All Reviews:</p>
 				<div class="review-container">
+				  <c:forEach var="review" items="${reviews}">
+				    <article class="review-card border rounded">
+                      <p class="review-username mr-2"><c:out value="${review.displayName}"/></p>
+                      <p class="review-content"><c:out value="${review.content}"/></p>
+                      <p class="review-time"><c:out value="${review.time}"/></p>
+                    </article> 
+                  </c:forEach>
 				</div>
 			</section>
 		</div>
@@ -108,6 +115,13 @@
 				<p class="mt-3 ar-text">All Reviews:</p>
 				<div class="review-container">
 				  <a href="AddReviewServlet?itemId=${item.id}"><button>Add Review</button></a>
+				  <c:forEach var="review" items="${reviews}">
+				    <article class="review-card border rounded">
+                      <p class="review-username mr-2"><c:out value="${review.displayName}"/></p>
+                      <p class="review-content"><c:out value="${review.content}"/></p>
+                      <p class="review-time"><c:out value="${review.time}"/></p>
+                    </article> 
+                  </c:forEach>
                 </div>
 			</section>
 		</div>

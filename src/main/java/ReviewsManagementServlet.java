@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class ReviewsManagementServlet extends HttpServlet {
 	
 	// Prepared list of variables used for database connections
-	private String jdbcURL = "jdbc:mysql://localhost:3306/userdetails_devops";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 	
@@ -77,22 +77,24 @@ public class ReviewsManagementServlet extends HttpServlet {
 	  int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
 		
 	  List <Review> reviews = new ArrayList <>();
-	   try (Connection connection = getConnection();
+	  try (Connection connection = getConnection();
 			   
 	   // Create a statement using connection object
-	   PreparedStatement preparedStatement = 
+	  PreparedStatement preparedStatement = 
 	  connection.prepareStatement(SELECT_REVIEWS_BY_USER);) {
+	  preparedStatement.setInt(1, userId);
 		   
 	   // Execute the query or update query
 	   ResultSet rs = preparedStatement.executeQuery();
 	   
 	   // Process the ResultSet object.
 	   while (rs.next()) {
-	   String id = rs.getString("id");
+	   int id = rs.getInt("id");
+	   String displayName = rs.getString("displayName");
 	   String content = rs.getString("content");
-	   String itemId = rs.getString("itemId");
-	   String date = rs.getString("time");
-	   reviews.add(new Review(id, userId, content, itemId, date));
+	   int itemId = rs.getInt("itemId");
+	   String time = rs.getString("time");
+	   reviews.add(new Review(id, userId, displayName, content, itemId, time));
 	   }
 	   } catch (SQLException e) {
 	   System.out.println(e.getMessage());
