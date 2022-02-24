@@ -47,7 +47,7 @@ for (CalculatedTotalPrice calculatedtotalPrice : list) {
 				<td>
 				<!-- To add the quantity back returned to the original stock of an item -->
 				<form action="UserCartServlet/delete?id=<c:out value='${cartitem.id}'/>" method="post">
-				<button type="submit" class="btn btn-danger" id="${cartitem.name}seeDetailsBtn" onclick="return confirm('Do you wish to removed the item from your cart? Note: The reserved quantity will be returned.')">X</button>
+				<button type="submit" class="btn btn-danger" id="${cartitem.name}deleteItemFromCartBtn" onclick="return confirm('Do you wish to removed the item from your cart? Note: The reserved quantity will be returned.')">X</button>
 				<div style="display:none">
 					<input type="text" name="oriId" value="${cartitem.itemId}">
 					<input type="text" name="id" value="${cartitem.itemId}">
@@ -92,7 +92,7 @@ for (CalculatedTotalPrice calculatedtotalPrice : list) {
 				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
 			    </div>
 			    </c:forEach>
-			    <button class="btn buttoncentertable2" type="submit" id="${cartitem.name}seeDetailsBtn" onclick="return confirm('Do you wish to proceed for checkout?')">CHECKOUT</button>
+			    <button class="btn buttoncentertable2" type="submit" id="checkOutBtn" onclick="return confirm('Do you wish to proceed for checkout?')">CHECKOUT</button>
 				</form>
 				</th>
 			</tr>
