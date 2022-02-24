@@ -196,6 +196,10 @@ public class ItemViewServlet extends HttpServlet {
 			request.setAttribute("alert","Item is out of stock!");
 			getItemInformationAndReviews(request,response);
 			return;
+		} else if(0 == additemquantity) {
+			request.setAttribute("alert","Input at least 1 quantity!");
+			getItemInformationAndReviews(request,response);
+			return;
 		} else if(quantitytest < additemquantity) {
 			request.setAttribute("alert","Your reserved quantity is more than the current stock of this item!");
 			getItemInformationAndReviews(request,response);

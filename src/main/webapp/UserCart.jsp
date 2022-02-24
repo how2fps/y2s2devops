@@ -64,18 +64,6 @@ request.setAttribute("dcf", dcf);
 				<!-- ------------------------------------------------------------------- -->		
 				</td>
 			</tr>
-			<form action="UserCartServlet/wipe" method="post">
-			<div style="display:none">
-				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
-				<input type="text" name="sellinguserid" value="${cartitem.userId}">
-				<input type="text" name="itemid" value="${cartitem.itemId}">
-				<input type="text" name="itemname" value="${cartitem.name}">
-				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
-				<input type="text" name="itemimage" value="${cartitem.image}">
-				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
-				<!-- <button type="submit">CHECKOUT</button> -->
-			</div>
-			</form>
 		</c:forEach>
 		</c:if>
 	</table>
@@ -87,9 +75,22 @@ request.setAttribute("dcf", dcf);
 		<table class="tablemargin" width=100%>
 			<tr class="thnoborder">
 				<th>Total Amount: $ ${(total>0)?dcf.format(total):0}</th>
-				<%-- <th><a href="<%=request.getContextPath()%>/UserCartServlet/wipe"><button
-							type="button" class="btn buttoncentertable2">Checkout</button></a>	
-				</th> --%>
+				<th>
+				<form action="UserCartServlet/wipe?shoppingcartid=<c:out value='${currentUserLoggedInShoppingCart}'/>" method="post">
+				<c:forEach var="cartitem" items="${listCartItems}">
+				<div style="display:none">
+				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
+				<input type="text" name="sellinguserid" value="${cartitem.userId}">
+				<input type="text" name="itemid" value="${cartitem.itemId}">
+				<input type="text" name="itemname" value="${cartitem.name}">
+				<input type="text" name="itemquantity" value="${cartitem.itemAmount}">
+				<input type="text" name="itemimage" value="${cartitem.image}">
+				<input type="text" name="totalamount" value="${cartitem.totalPrice}">
+			    </div>
+			    </c:forEach>
+			    <button class="btn buttoncentertable2" type="submit">CHECKOUT</button>
+				</form>
+				</th>
 			</tr>
 		</table>
 		<p>
