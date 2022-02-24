@@ -9,7 +9,7 @@ pipeline {
 
     stage('Maven Build 0') {
       steps {
-        sh 'mvn clean install test'
+        bat 'mvn clean install test'
       }
     }
 
