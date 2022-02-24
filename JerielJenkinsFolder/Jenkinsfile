@@ -2,7 +2,7 @@ pipeline {
   agent {
      node { 
         label ''
-        customWorkspace "C:\Users\User\Documents\DevopsPart2JenkinsWorkspace"
+        customWorkspace "C:\\Users\\User\\Documents\\DevopsPart2JenkinsWorkspace"
         } 
   }
   stages {
