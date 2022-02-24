@@ -98,7 +98,6 @@ public class Item {
 		DateListed = dateListed;
 	}
 
-	// This is the function that will sort the functional
 	public static Comparator<Item> priceComparator = new Comparator<Item>() {
 		@Override
 		public int compare(Item i1, Item i2) {
