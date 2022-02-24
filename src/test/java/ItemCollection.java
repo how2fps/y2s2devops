@@ -27,10 +27,18 @@ public class ItemCollection {
 				java.sql.Date.valueOf("2020-03-15")));
 		items.add(new Item(6, "Item1", "Description it is", "This image Rofl", 2.09, 10, 1,
 				java.sql.Date.valueOf("2020-03-16")));
+
+		this.capacity = 6;
 	}
 
 	public ItemCollection(int capacity) {
 		this.capacity = capacity;
+	}
+
+	public void addItem(Item item) {
+		if (items.size() != capacity) {
+			items.add(item);
+		}
 	}
 
 	public List<Item> getItems() {
