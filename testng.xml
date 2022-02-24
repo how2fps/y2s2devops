@@ -12,6 +12,8 @@
       <class name="EditProfileTest"/>
       <class name="ChangePasswordTest"/>
       <class name="DeleteUserTest"/>
+      <class name="ReadItemsShopTest"/>  <!-- Jered's Test -->
+      <class name="ItemViewTest"/> <!-- Jered's Test -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
