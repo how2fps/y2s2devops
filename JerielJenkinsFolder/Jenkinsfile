@@ -1,0 +1,35 @@
+pipeline {
+  agent {
+     node { 
+        label ''
+        customWorkspace "C:\Users\User\Documents\DevopsPart2JenkinsWorkspace"
+        } 
+  }
+  stages {
+    stage('Checkout Scm') {
+      steps {
+        git(url: 'https://github.com/how2fps/y2s2devops.git', credentialsId: 'd3d9dd13-bc35-4bf2-aff4-8b3583b66acc')
+      }
+    }
+
+    stage('Maven Build 0') {
+      steps {
+        sh 'mvn clean install test'
+      }
+    }
+
+  }
+  tools {
+    maven 'maven 3.8.2'
+    jdk 'JDK 1.8'
+  }
+  post {
+    always {
+      echo 'No converter for Publisher: hudson.plugins.deploy.DeployPublisher'
+    }
+
+  }
+  triggers {
+    pollSCM('* * * * *')
+  }
+}
