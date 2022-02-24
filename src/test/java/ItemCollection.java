@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ItemCollection {
@@ -45,8 +44,4 @@ public class ItemCollection {
 		return items;
 	}
 
-	public ArrayList<Item> sortItemByPricing() {
-		Collections.sort(items, Item.priceComparator);
-		return items;
-	}
 }
