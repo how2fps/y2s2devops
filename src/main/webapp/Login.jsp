@@ -44,7 +44,7 @@
 								class="form-control" name="password" required />
 						</div>
 						<button id="submit" class="btn btn-primary mt-2 mb-0"
-							style="background: #FF5D73; color: white">Login</button>
+							style="background: #FF5D73; color: white">Log In</button>
 					</section>
 				</div>
 			</form>
