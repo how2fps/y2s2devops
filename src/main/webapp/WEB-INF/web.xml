@@ -97,6 +97,23 @@ id="WebApp_ID" version="3.1">
 		<url-pattern>/ReviewsManagementServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
+	  <servlet-name>DeleteReviewServlet</servlet-name>
+	  <servlet-class>DeleteReviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>DeleteReviewServlet</servlet-name>
+	  <url-pattern>/DeleteReviewServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	  <servlet-name>EditReviewServlet</servlet-name>
+	  <servlet-class>EditReviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>EditReviewServlet</servlet-name>
+	  <url-pattern>/EditReviewServlet</url-pattern>
+	  <url-pattern>/EditReviewServlet/update</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>LoginServlet</servlet-class>
 	</servlet>

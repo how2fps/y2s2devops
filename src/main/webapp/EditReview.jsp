@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="ISO-8859-1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -10,7 +11,6 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="static/reviewForm.css">
-<link rel="stylesheet" href="static/navbar.css" />
 <title>Edit Review</title>
 </head>
 <body>
@@ -18,18 +18,18 @@
 <div class="container col-md-6">
 <div class="card review-form-card">
 <div class="card-body">
-      <form action="">
-        <fieldset class="form-group">
-          <label for="comment">Comment</label>
-            <textarea class="form-control"></textarea>
-        </fieldset>
-        <div style="text-align:center;">
-          <button type="submit" class="btn review-form-btn">Confirm Changes</button>
-          <p><a href="<%=request.getContextPath()%>/ReviewsManagement.jsp">Back</a></p>
-        </div>
-      </form>
-      </div>
-      </div>
-      </div>
+     <form action="EditReviewServlet/update">
+       <fieldset class="form-group">
+         <label for="content">Comment</label>
+         <textarea name="content" class="form-control" required><c:out value='${review.content}'/></textarea>
+       </fieldset>
+       <div style="text-align:center;">
+         <button type="submit" class="btn review-form-btn">Save Changes</button>
+         <p><a href="http://localhost:8090/devopsproject/ReviewsManagementServlet">Back</a></p>
+       </div>
+     </form>
+   </div>
+   </div>
+   </div>
 </body>
 </html>
