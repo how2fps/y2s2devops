@@ -20,7 +20,7 @@ pipeline {
     
     stage('Deploying Application to Tomcat'){
       steps {
-        bat "copy C:\\Users\\User\\Documents\\DevopsPart2JenkinsWorkspace\\target\\devopsproject.war C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject.war"
+        bat "copy C:\\Users\\User\\Documents\\DevopsPart2JenkinsWorkspace\\target\\devopsproject.war C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject-0.0.1-SNAPSHOT.war"
       }
     }
 
