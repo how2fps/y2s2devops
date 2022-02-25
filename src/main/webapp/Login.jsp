@@ -30,7 +30,7 @@
 		<c:if test="${alert != null}">
 			<div id="alert" class="alert alert-dark mt-4" role="alert">${alert}</div>
 		</c:if>
-		<p class="my-4 h1">Login</p>
+		<p class="my-4 h1">Login Page</p>
 		<div class="login-container">
 			<form action="LoginServlet" method="post">
 				<div class="d-flex">
