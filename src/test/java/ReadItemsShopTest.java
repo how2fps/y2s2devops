@@ -19,8 +19,8 @@ public class ReadItemsShopTest {
 		Assert.assertEquals(webDriver.getTitle(), "Login");
 		WebElement email = webDriver.findElement(By.name("email"));
 		WebElement password = webDriver.findElement(By.name("password"));
-		email.sendKeys("testuser1@email.com");
-		password.sendKeys("password1");
+		email.sendKeys("test@test.com");
+		password.sendKeys("password");
 
 		webDriver.findElement(By.id("submit")).submit();
 		Assert.assertEquals(webDriver.getTitle(), "Shop-Wijs");
@@ -34,7 +34,7 @@ public class ReadItemsShopTest {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
 		Assert.assertEquals(webDriver.getTitle(), "Items Shop");
 		// Discover the item from Items Shop page
-		Assert.assertTrue(webDriver.getPageSource().contains("Bag"), "Item is in the Items Shop!");
+		Assert.assertTrue(webDriver.getPageSource().contains("KELL Keyboard"), "Item is in the Items Shop!");
 
 	}
 
