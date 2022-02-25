@@ -11,6 +11,12 @@ pipeline {
         git(url: 'https://github.com/how2fps/y2s2devops.git', credentialsId: 'd3d9dd13-bc35-4bf2-aff4-8b3583b66acc')
       }
     }
+    
+    stage('Starting Tomcat Server'){
+      steps{
+        bat "C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\bin\\startup.bat"
+      }    
+    }
 
     stage('Maven Build 0') {
       steps {
@@ -22,12 +28,6 @@ pipeline {
       steps {
         bat "copy target\\devopsproject-0.0.1-SNAPSHOT.war C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject.war"
       }
-    }
-
-    stage('Starting Tomcat Server'){
-      steps{
-        bat "C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\bin\\startup.bat"
-      }    
     }
 
   }
