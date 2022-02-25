@@ -192,7 +192,7 @@ public class UserCartServlet extends HttpServlet {
 			throws SQLException, IOException {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM cart_item WHERE id = ?");) {
+				PreparedStatement statement = connection.prepareStatement(DELETE_CART_ITEM_BY_ID);) {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}
@@ -206,7 +206,7 @@ public class UserCartServlet extends HttpServlet {
 			throws SQLException, IOException {
 		String id = request.getParameter("shoppingcartid");
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM cart_item WHERE shoppingCartId = ?");) {
+				PreparedStatement statement = connection.prepareStatement(DELETE_ALL_CART_ITEMS);) {
 			statement.setString(1, id);
 			int i = statement.executeUpdate();
 		}
@@ -243,20 +243,30 @@ public class UserCartServlet extends HttpServlet {
 		LocalDateTime now = LocalDateTime.now();
 		String transactiontime = dtf.format(now);
 
-		try {
-			Connection connection = getConnection();
+			try {
+				Connection connection = getConnection();
 
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO transaction VALUES(?,?,?,?,?,?,?,?,?)");
+				PreparedStatement ps = connection.prepareStatement(INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER);
 
-			for (int i = 0; i < buyinguserid.length; i++) {
-
-				ItemBuyingUserId2 = buyinguserid[i];
-				ItemSellingUserId3 = sellinguserid[i];
-				ItemId4 = itemid[i];
-				ItemName5 = itemname[i];
-				ItemImage6 = itemimage[i];
-				ItemQuantity7 = itemquantity[i];
-				ItemTotalAmount8 = totalamount[i];
+				for (int i = 0; i < buyinguserid.length; i++) {
+						
+						ItemBuyingUserId2 = buyinguserid[i];
+						ItemSellingUserId3 = sellinguserid[i];
+						ItemId4 = itemid[i];
+						ItemName5 = itemname[i];
+						ItemImage6 = itemimage[i];
+						ItemQuantity7 = itemquantity[i];
+						ItemTotalAmount8 = totalamount[i];
+						
+						ps.setInt(1, 0);
+						ps.setString(2, ItemBuyingUserId2);
+						ps.setString(3, ItemSellingUserId3);
+						ps.setString(4, ItemId4);
+						ps.setString(5, ItemName5);
+						ps.setString(6, ItemImage6);
+						ps.setString(7, ItemQuantity7);
+						ps.setString(8, ItemTotalAmount8);
+						ps.setString(9, transactiontime);
 
 				ps.setInt(1, 0);
 				ps.setString(2, ItemBuyingUserId2);
