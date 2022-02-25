@@ -89,25 +89,24 @@ public class ItemViewServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-			// Now that we have the itemId, we can now get it's reviews here
-			List <Review> reviews = new ArrayList <>();
-			 try (Connection connection = getConnection();
-			 // Create a statement using connection object
-			 PreparedStatement preparedStatement = 
-			 connection.prepareStatement(GET_REVIEWS_BY_ITEM);) {
-		     preparedStatement.setInt(1, itemId);
-			 // Execute the query or update query
-			 ResultSet rs = preparedStatement.executeQuery();
-			 // Process the ResultSet object.
-			 while (rs.next()) {
-			 int id = rs.getInt("id");
-			 int userId = rs.getInt("userId");
-			 String displayName = rs.getString("displayName");
-			 String content = rs.getString("content");
-			 int itemId = rs.getInt("itemId");
-			 String time = rs.getString("time");
-			 reviews.add(new Review(id, userId, displayName, content, itemId, time));
-			 }
+		// Now that we have the itemId, we can now get it's reviews here
+		List<Review> reviews = new ArrayList<>();
+		try (Connection connection = getConnection();
+				// Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(GET_REVIEWS_BY_ITEM);) {
+			preparedStatement.setInt(1, itemId);
+			// Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Process the ResultSet object.
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int userId = rs.getInt("userId");
+				String displayName = rs.getString("displayName");
+				String content = rs.getString("content");
+				int itemId = rs.getInt("itemId");
+				String time = rs.getString("time");
+				reviews.add(new Review(id, userId, displayName, content, itemId, time));
+			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -120,7 +119,7 @@ public class ItemViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		userId = Integer.parseInt(session.getAttribute("detailsId").toString()); // changed this to detailsId
-																				 // from userAuthId
+																					// from userAuthId
 
 		// I need to get the following things:
 		// the itemid via url params
@@ -168,14 +167,14 @@ public class ItemViewServlet extends HttpServlet {
 		Integer calculatedquantity = Math.subtractExact(quantity, minusquantity);
 
 		String resultquantity = String.valueOf(calculatedquantity);
-		
+
 		// To validate the current quantity of the item before updating the current item
 		if (quantity == 0) {
 //			ITEM IS NOT UPDATED
-		} else if(quantity < minusquantity) {
+		} else if (quantity < minusquantity) {
 //			ITEM IS NOT UPDATED
 		} else {
-			
+
 			try (Connection connection = getConnection();
 					PreparedStatement statement = connection.prepareStatement(UPDATE_ITEM_BY_ID);) {
 
@@ -192,7 +191,7 @@ public class ItemViewServlet extends HttpServlet {
 				int i = statement.executeUpdate();
 
 			}
-			
+
 		}
 
 	}
@@ -205,7 +204,7 @@ public class ItemViewServlet extends HttpServlet {
 		response.setContentType("text/html");
 
 		PrintWriter out = response.getWriter();
-		
+
 		// To get the current quantity of the item before adding the item
 		Integer quantitytest = Integer.parseInt(request.getParameter("quantity"));
 
@@ -214,18 +213,18 @@ public class ItemViewServlet extends HttpServlet {
 
 		// To get input quantity set by the current user from item quantity
 		Integer additemquantity = Integer.parseInt(request.getParameter("additemquantityofuser"));
-		
+
 		if (quantitytest == 0) {
-			request.setAttribute("alert","Item is out of stock!");
-			getItemInformationAndReviews(request,response);
+			request.setAttribute("alert", "Item is out of stock!");
+			getItemInformationAndReviews(request, response);
 			return;
-		} else if(0 == additemquantity) {
-			request.setAttribute("alert","Input at least 1 quantity!");
-			getItemInformationAndReviews(request,response);
+		} else if (0 == additemquantity) {
+			request.setAttribute("alert", "Input at least 1 quantity!");
+			getItemInformationAndReviews(request, response);
 			return;
-		} else if(quantitytest < additemquantity) {
-			request.setAttribute("alert","Your reserved quantity is more than the current stock of this item!");
-			getItemInformationAndReviews(request,response);
+		} else if (quantitytest < additemquantity) {
+			request.setAttribute("alert", "Your reserved quantity is more than the current stock of this item!");
+			getItemInformationAndReviews(request, response);
 			return;
 		} else {
 			try {
@@ -233,31 +232,36 @@ public class ItemViewServlet extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/devops", "root", "");
 
-				PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
-				PreparedStatement ps2 = con.prepareStatement("SELECT * FROM shopping_cart WHERE Id = ?");
+				HttpSession session = request.getSession();
+				Integer userId = (Integer) (session.getAttribute("detailsId"));
+				PreparedStatement preparedStatement2 = con
+						.prepareStatement("SELECT * FROM shopping_cart WHERE UserId = ?");
+				preparedStatement2.setInt(1, userId);
+				ResultSet rs2 = preparedStatement2.executeQuery();
+				while (rs2.next()) {
+					Integer shoppingCartId = rs2.getInt("Id");
+//					PreparedStatement ps3 = con.prepareStatement("SELECT * FROM shopping_cart WHERE Id = ?");
+//					// To set the specified target shopping cart id of the current user logged in
+//					ps3.setInt(1, shoppingCartId);
+//					ResultSet rs = ps3.executeQuery();
 
-				// To set the specified target shopping cart id of the current user logged in
-				ps2.setInt(1, userId);
+					PreparedStatement ps = con.prepareStatement("INSERT into cart_item values(?,?,?,?,?)");
+					ps.setInt(1, 0);
+					ps.setInt(2, shoppingCartId);
+					ps.setInt(3, itemId);
+					ps.setInt(4, additemquantity);
+					ps.setString(5, pricing);
 
-				ResultSet rs = ps2.executeQuery();
+					// To get the shopping cart id by the current user logged in
+//					while (rs.next()) {
+					rs2.getInt(1);
+//					}
 
-				ps.setInt(1, 0);
-				ps.setInt(2, userId);
-				ps.setInt(3, itemId);
-				ps.setInt(4, additemquantity);
-				ps.setString(5, pricing);
-
-				// To get the shopping cart id by the current user logged in
-				while (rs.next()) {
-					rs.getInt(1);
+					int i = ps.executeUpdate();
+					if (i > 0) {
+						addCartItem(request, response);
+					}
 				}
-
-				int i = ps.executeUpdate();
-
-				if (i > 0) {
-					addCartItem(request, response);
-				}
-
 			}
 
 			catch (Exception exception) {

@@ -88,11 +88,7 @@ public class CRUDUserCartTest {
 		Thread.sleep(5000);
 		webDriver.findElement(By.id("KELL KeyboarddeleteItemFromCartBtn")).submit();
 
-	}
-
-	@Test
-	public void CRUDItemByCurrentUserPart3() throws InterruptedException {
-
+		
 		// Update of quantity of a listed item
 		Thread.sleep(5000);
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
@@ -103,6 +99,21 @@ public class CRUDUserCartTest {
 
 		// Check Item View page
 		Assert.assertEquals(webDriver.getTitle(), "Item View");
+	}
+
+	@Test
+	public void CRUDItemByCurrentUserPart3() throws InterruptedException {
+
+//		// Update of quantity of a listed item
+//		Thread.sleep(5000);
+//		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
+//
+//		// Click the button based on target id of item
+//		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
+//		seeDetailsBtn.click();
+//
+//		// Check Item View page
+//		Assert.assertEquals(webDriver.getTitle(), "Item View");
 
 		// Declare form input for quantity
 		WebElement additemquantityofuser = webDriver.findElement(By.name("additemquantityofuser"));

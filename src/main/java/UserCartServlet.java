@@ -39,7 +39,7 @@ public class UserCartServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
-	private static final String SELECT_ALL_CART_ITEMS_BY_USER = "SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id WHERE cart_item.shoppingCartId = ?";
+	private static final String SELECT_ALL_CART_ITEMS_BY_SHOPPINGCARTID = "SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id WHERE cart_item.shoppingCartId = ?";
 	private static final String UPDATE_CART_ITEM_BY_ID = "UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;";
 	private static final String DELETE_CART_ITEM_BY_ID = "DELETE FROM cart_item WHERE id = ?";
 	private static final String DELETE_ALL_CART_ITEMS = "DELETE FROM cart_item WHERE shoppingCartId = ?";
@@ -102,17 +102,24 @@ public class UserCartServlet extends HttpServlet {
 
 	private void listCartItems(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		
+
 		List<UserCart> cartItems = new ArrayList<>();
-		try (Connection connection = getConnection();
+		Connection connection = getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CART_ITEMS_BY_USER);) {
-				preparedStatement.setInt(1, currentuserloggedin);
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) (session.getAttribute("detailsId"));
+		PreparedStatement preparedStatement2 = connection
+				.prepareStatement("SELECT * FROM shopping_cart WHERE UserId = ?");
+		preparedStatement2.setInt(1, userId);
+		ResultSet rs2 = preparedStatement2.executeQuery();
+		while (rs2.next()) {
+			Integer shoppingCartId = rs2.getInt("Id");
+			System.out.println(shoppingCartId);
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM cart_item LEFT JOIN item ON cart_item.itemId = item.id WHERE cart_item.shoppingCartId = ?");
+			preparedStatement.setInt(1, shoppingCartId);
 			ResultSet rs = preparedStatement.executeQuery();
-
 			while (rs.next()) {
 				Integer id = rs.getInt("id");
-				Integer shoppingCartId = rs.getInt("shoppingCartId");
 				Integer itemId = rs.getInt("itemId");
 				Integer itemAmount = rs.getInt("itemAmount");
 				double totalPrice = rs.getDouble("totalPrice");
@@ -121,30 +128,28 @@ public class UserCartServlet extends HttpServlet {
 				String description = rs.getString("description");
 				Integer pricing = rs.getInt("pricing");
 				Integer quantity = rs.getInt("quantity");
-				Integer userId = rs.getInt("userId");
 				String dateListed = rs.getString("dateListed");
 				System.out.println(shoppingCartId);
 				// To check the current user logged in about their cart items belongs to their
 				// shopping cart
-				if (currentuserloggedin == shoppingCartId && currentuserloggedin != userId) {
-					request.setAttribute("isShoppingCartUser", "true");
-					request.setAttribute("currentUserLoggedInShoppingCart", shoppingCartId);
-				} else {
-					request.setAttribute("isShoppingCartUser", "false");
-				}
+//				if (currentuserloggedin == shoppingCartId && currentuserloggedin != userId) {
+				request.setAttribute("isShoppingCartUser", "true");
+//					request.setAttribute("currentUserLoggedInShoppingCart", shoppingCartId);
+//				} else {
+//					request.setAttribute("isShoppingCartUser", "false");
+//				}
 				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, name, description, image,
 						pricing, quantity, userId, dateListed));
-			}
 
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			}
+			request.setAttribute("listCartItems", cartItems);
+			request.getRequestDispatcher("/UserCart.jsp").forward(request, response);
 		}
 
-		request.setAttribute("listCartItems", cartItems);
-		request.getRequestDispatcher("/UserCart.jsp").forward(request, response);
 	}
 
-	// To retrieve and update the quantity of a selected item reserved by user after removing from their shopping cart
+	// To retrieve and update the quantity of a selected item reserved by user after
+	// removing from their shopping cart
 	private void updateItemFromCart(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
@@ -164,7 +169,7 @@ public class UserCartServlet extends HttpServlet {
 		String resultquantity = String.valueOf(calculatedquantity);
 
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_CART_ITEM_BY_ID);) {
+				PreparedStatement statement = connection.prepareStatement("UPDATE item set id = ?, name = ?, description = ?, image = ?, pricing = ?, quantity = ?, userId = ?, dateListed = ? WHERE id = ?;");) {
 
 			statement.setString(1, id);
 			statement.setString(2, itemname);
@@ -187,7 +192,7 @@ public class UserCartServlet extends HttpServlet {
 			throws SQLException, IOException {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_CART_ITEM_BY_ID);) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM cart_item WHERE id = ?");) {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}
@@ -201,7 +206,7 @@ public class UserCartServlet extends HttpServlet {
 			throws SQLException, IOException {
 		String id = request.getParameter("shoppingcartid");
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_ALL_CART_ITEMS);) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM cart_item WHERE shoppingCartId = ?");) {
 			statement.setString(1, id);
 			int i = statement.executeUpdate();
 		}
@@ -238,40 +243,40 @@ public class UserCartServlet extends HttpServlet {
 		LocalDateTime now = LocalDateTime.now();
 		String transactiontime = dtf.format(now);
 
-			try {
-				Connection connection = getConnection();
+		try {
+			Connection connection = getConnection();
 
-				PreparedStatement ps = connection.prepareStatement(INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER);
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO transaction VALUES(?,?,?,?,?,?,?,?,?)");
 
-				for (int i = 0; i < buyinguserid.length; i++) {
-						
-						ItemBuyingUserId2 = buyinguserid[i];
-						ItemSellingUserId3 = sellinguserid[i];
-						ItemId4 = itemid[i];
-						ItemName5 = itemname[i];
-						ItemImage6 = itemimage[i];
-						ItemQuantity7 = itemquantity[i];
-						ItemTotalAmount8 = totalamount[i];
-						
-						ps.setInt(1, 0);
-						ps.setString(2, ItemBuyingUserId2);
-						ps.setString(3, ItemSellingUserId3);
-						ps.setString(4, ItemId4);
-						ps.setString(5, ItemName5);
-						ps.setString(6, ItemImage6);
-						ps.setString(7, ItemQuantity7);
-						ps.setString(8, ItemTotalAmount8);
-						ps.setString(9, transactiontime);
+			for (int i = 0; i < buyinguserid.length; i++) {
 
-						ps.addBatch();
-					}
-				
-				ps.executeBatch();
+				ItemBuyingUserId2 = buyinguserid[i];
+				ItemSellingUserId3 = sellinguserid[i];
+				ItemId4 = itemid[i];
+				ItemName5 = itemname[i];
+				ItemImage6 = itemimage[i];
+				ItemQuantity7 = itemquantity[i];
+				ItemTotalAmount8 = totalamount[i];
 
-			} catch (Exception exception) {
-				System.out.println(exception);
-				System.out.close();
+				ps.setInt(1, 0);
+				ps.setString(2, ItemBuyingUserId2);
+				ps.setString(3, ItemSellingUserId3);
+				ps.setString(4, ItemId4);
+				ps.setString(5, ItemName5);
+				ps.setString(6, ItemImage6);
+				ps.setString(7, ItemQuantity7);
+				ps.setString(8, ItemTotalAmount8);
+				ps.setString(9, transactiontime);
+
+				ps.addBatch();
 			}
+
+			ps.executeBatch();
+
+		} catch (Exception exception) {
+			System.out.println(exception);
+			System.out.close();
+		}
 
 	}
 
