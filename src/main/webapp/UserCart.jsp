@@ -83,7 +83,6 @@ for (CalculatedTotalPrice calculatedtotalPrice : list) {
 				<form action="UserCartServlet/wipe?shoppingcartid=<c:out value='${currentUserLoggedInShoppingCart}'/>" method="post">
 				<c:forEach var="cartitem" items="${listCartItems}">
 				<div style="display:none">
-				<input type="text" name="buyinguserid" value="${cartitem.shoppingCartId}">
 				<input type="text" name="sellinguserid" value="${cartitem.userId}">
 				<input type="text" name="itemid" value="${cartitem.itemId}">
 				<input type="text" name="itemname" value="${cartitem.name}">

@@ -30,7 +30,7 @@
 		<c:if test="${alert != null}">
 			<div id="alert" class="alert alert-dark mt-4" role="alert">${alert}</div>
 		</c:if>
-		<p class="my-4 h1">Login</p>
+		<p class="my-4 h1">Login Page</p>
 		<div class="login-container">
 			<form action="LoginServlet" method="post">
 				<div class="d-flex">
@@ -44,7 +44,7 @@
 								class="form-control" name="password" required />
 						</div>
 						<button id="submit" class="btn btn-primary mt-2 mb-0"
-							style="background: #FF5D73; color: white">Login</button>
+							style="background: #FF5D73; color: white">Log In</button>
 					</section>
 				</div>
 			</form>

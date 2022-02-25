@@ -38,7 +38,7 @@
                    <c:out value="${review.time}" />
                  </td>
                  <td>
-                   <a href="#" class="btn btn-primary">Edit Review</a>
+                   <a href="EditReviewServlet?id=${review.id}" class="btn btn-primary">Edit Review</a>
                    <a href="DeleteReviewServlet?id=${review.id}" class="btn btn-danger">Delete Review</a>
                  </td>
                </tr>
