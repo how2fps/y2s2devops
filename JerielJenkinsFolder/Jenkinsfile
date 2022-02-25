@@ -26,7 +26,7 @@ pipeline {
 
     stage('Starting Tomcat Server'){
       steps{
-        bat "C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\startup.bat"
+        bat "C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\bin\\startup.bat"
       }    
     }
 
