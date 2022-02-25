@@ -14,16 +14,20 @@ pipeline {
 
     stage('Maven Build 0') {
       steps {
-        bat 'mvn clean install'
+        bat 'mvn clean install test'
       }
     }
     
     stage('Deploying Application to Tomcat'){
+      steps {
         bat "copy target\\devopsproject.war \"C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\devopsproject.war\""
+      }
     }
 
     stage('Starting Tomcat Server'){
+      steps{
         bat "C:\\Users\\User\\Downloads\\apache-tomcat-9.0.58\\apache-tomcat-9.0.58\\webapps\\startup.bat"
+      }    
     }
 
   }
