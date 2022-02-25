@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +20,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/EditReviewServlet")
 public class EditReviewServlet extends HttpServlet {
+	    
+	    // Global variables
+	    private static int globalReviewId;
+	    private static int globalUserId;
+	    private static int globalItemId;
+	    private static String globalDisplayName;
 	
 	    // Prepared list of variables used for database connections
 		private String jdbcURL = "jdbc:mysql://localhost:3306/devops";
@@ -24,8 +33,8 @@ public class EditReviewServlet extends HttpServlet {
 		private String jdbcPassword = "";
 
 		// Prepared list of SQL prepared statements to perform Retrieve and Update to our database
-		private static final String SELECT_REVIEW_BY_ID = "select Id, UserId, DisplayName, Content, ItemId, Time from review where name = ?";
-		private static final String UPDATE_REVIEW_BY_ID = "update review set Id = ?, UserId = ?, DisplayName = ?, Content = ?, ItemId = ?, Time = ? where Id = ?;";
+		private static final String SELECT_REVIEW_BY_ID = "select Id, UserId, DisplayName, Content, ItemId, Time from review where Id = ?";
+		private static final String UPDATE_REVIEW_BY_ID = "update review set UserId = ?, DisplayName = ?, Content = ?, ItemId = ?, Time = ? where Id = ?;";
 
 		// Implement the getConnection method to facilitate connection to the database
 		// via JDBC
@@ -82,7 +91,7 @@ public class EditReviewServlet extends HttpServlet {
 		
 	// get parameter passed in the URL
 	int id = Integer.parseInt(request.getParameter("id"));
-	Review existingReview = new Review("", "", "", "", "", "");
+	Review existingReview = new Review(0, 0, "", "", 0, "");
 	
 	// Establishing a Connection
 	try (Connection connection = getConnection();
@@ -97,12 +106,17 @@ public class EditReviewServlet extends HttpServlet {
 	
 	// Process the ResultSet object 
 	while (rs.next()) {
-	int id = rs.getInt("id");
 	int userId = rs.getInt("userId");
 	String displayName = rs.getString("displayName");
 	String content = rs.getString("content");
 	int itemId = rs.getInt("itemId");
 	String time = rs.getString("time");
+	
+	// Pass the values to updateReview function
+	 globalReviewId = id;
+	 globalUserId = userId;
+	 globalItemId = itemId;
+	 globalDisplayName = displayName;
 	existingReview = new Review(id, userId, displayName, content, itemId, time);
 	}
 	} catch (SQLException e) {
@@ -114,27 +128,31 @@ public class EditReviewServlet extends HttpServlet {
 	request.getRequestDispatcher("/EditReview.jsp").forward(request, response);
 	}
 	
-	//method to update the review table base on the form data
+	// Method to update the review table base on the form data
 	private void updateReview(HttpServletRequest request, HttpServletResponse response)
 	throws SQLException, IOException {
 		
-	// Retrieve value from the request
-	int id = request.getParameter("id");
-	 int userId = request.getParameter("userId");
-	 String displayName = request.getParameter("displayName");
+	// Retrieve values from the request and global variables
+	int id = globalReviewId;
+	 int userId = globalUserId;
+	 String displayName = globalDisplayName;
 	 String content = request.getParameter("content");
-	 int itemId = request.getParameter("itemId");
-	 String time = request.getParameter("time");
+	 int itemId = globalItemId;
+	 
+	 // Generate time when user updates review
+	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+	 LocalDateTime now = LocalDateTime.now(); 
+	 String time = dtf.format(now);
 	 
 	 // Attempt connection with database and execute update review SQL query
-	 try (Connection connection = getConnection(); PreparedStatement statement = 
-	 connection.prepareStatement(UPDATE_REVIEW_BY_ID);) {
-	 statement.setInt(1, id);
-	 statement.setString(2, userId);
-	 statement.setString(3, displayName);
-	 statement.setString(4, content);
-	 statement.setString(4, itemId);
+	 try (Connection connection = getConnection(); 
+	 PreparedStatement statement = connection.prepareStatement(UPDATE_REVIEW_BY_ID);) {
+	 statement.setInt(1, userId);
+	 statement.setString(2, displayName);
+	 statement.setString(3, content);
+	 statement.setInt(4, itemId);
 	 statement.setString(5, time);
+	 statement.setInt(6, id);
 	 int i = statement.executeUpdate();
 	 }
 	 

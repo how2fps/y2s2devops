@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="ISO-8859-1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -17,10 +18,10 @@
 <div class="container col-md-6">
 <div class="card review-form-card">
 <div class="card-body">
-     <form action="update">
+     <form action="EditReviewServlet/update">
        <fieldset class="form-group">
          <label for="content">Comment</label>
-         <textarea name="content" class="form-control"></textarea>
+         <textarea name="content" class="form-control" required><c:out value='${review.content}'/></textarea>
        </fieldset>
        <div style="text-align:center;">
          <button type="submit" class="btn review-form-btn">Save Changes</button>
