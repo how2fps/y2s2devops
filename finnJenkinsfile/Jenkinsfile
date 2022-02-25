@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label ''
+            customWorkspace "C:\\Users\\Finn\\OneDrive\\Desktop\\WorkspaceLOL"
+        }
+    }
     stages {
         stage('Checkout Scm') {
             steps {
@@ -7,9 +12,21 @@ pipeline {
             }
         }
 
-        stage('Maven Build 0') {
+        stage('Build') {
             steps {
                 bat 'mvn clean install test'
+            }
+        }
+
+        stage('Deploying Application to Tomcat') {
+            steps {
+                bat "copy target\\devopsproject-0.0.1-SNAPSHOT.war C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\webapps\\devopsproject.war"
+            }
+        }
+
+        stage('Starting Tomcat Server') {
+            steps {
+                bat "C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\bin\\startup.bat"
             }
         }
     }
