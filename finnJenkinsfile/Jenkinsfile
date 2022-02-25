@@ -14,6 +14,7 @@ pipeline {
         
         stage('Starting Tomcat Server') {
             steps {
+                export BUILD_ID=dontKillMe
                 bat "C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\bin\\startup.bat"
             }
         }
