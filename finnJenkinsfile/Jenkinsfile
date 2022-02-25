@@ -11,6 +11,12 @@ pipeline {
                 git 'https://github.com/how2fps/y2s2devops'
             }
         }
+        
+        stage('Starting Tomcat Server') {
+            steps {
+                bat "C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\bin\\startup.bat"
+            }
+        }
 
         stage('Build') {
             steps {
@@ -21,12 +27,6 @@ pipeline {
         stage('Deploying Application to Tomcat') {
             steps {
                 bat "copy target\\devopsproject-0.0.1-SNAPSHOT.war C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\webapps\\devopsproject.war"
-            }
-        }
-
-        stage('Starting Tomcat Server') {
-            steps {
-                bat "C:\\Users\\Finn\\OneDrive\\Desktop\\DevOps\\apache-tomcat-9.0.58\\bin\\startup.bat"
             }
         }
     }
