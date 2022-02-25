@@ -26,7 +26,7 @@ public class ReviewsManagementServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "";
 
-	// Prepared list of SQL prepared statements to perform Retrieve from database
+	// Prepared SQL statement to perform Retrieve from database
 	private static final String SELECT_REVIEWS_BY_USER = "select * from review where UserId = ?";
 
 	// Implement the getConnection method to facilitate connection to the database

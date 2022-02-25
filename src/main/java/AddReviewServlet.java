@@ -55,32 +55,32 @@ public class AddReviewServlet extends HttpServlet {
 		//Initialize a PrintWriter object to return the html values via the response
 		PrintWriter out = response.getWriter();
 		
-		 //Retrieve parameters from the request from the review form
+		 // Retrieve parameters from the request from the review form
 		String content = request.getParameter("content");
 		
-		//These parameters can only be retrieved after user login
+		// These parameters can only be retrieved after user login
 		HttpSession session = request.getSession();
         int userId = Integer.parseInt(session.getAttribute("detailsId").toString());
         String displayName = session.getAttribute("displayName").toString();
         
-        // get item id from the global variable
+        // Get item id from the global variable
         int itemReviewId = globalItemId;
 		 
-		 //Current Time parameter
+		 // Generate current Time parameter
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		 LocalDateTime now = LocalDateTime.now(); 
 		 String time = dtf.format(now);
 		
-		//Attempt connection to database using JDBC
+		// Attempt connection to database using JDBC
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
 			 "jdbc:mysql://localhost:3306/devops", "root", "");
 			 
-			//Implement the sql query using prepared statement 
+			// Implement the sql query using prepared statement 
 			 PreparedStatement ps = con.prepareStatement("insert into REVIEW values(?,?,?,?,?,?)");
 			 
-			//Parsed in the data retrieved from the review form request into the prepared statement
+			// Parsed in the data retrieved from the review form request into the prepared statement
 			 ps.setInt(1, 0);
 			 ps.setInt(2, userId);
 			 ps.setString(3, displayName);
@@ -88,16 +88,15 @@ public class AddReviewServlet extends HttpServlet {
 			 ps.setInt(5, itemReviewId);
 			 ps.setString(6, time);
 			 
-			//Perform the query on the database using the prepared statement
+			// Perform the query on the database using the prepared statement
 			 int i = ps.executeUpdate();
 			 
-			//Check if the query had been successfully executed and redirect
+			// Check if the query had been successfully executed and redirect
 			 if (i > 0){
 				 response.sendRedirect("http://localhost:8090/devopsproject/ItemsShopServlet");
 			 }
-			 
 		}
-		//Step 8: catch and print out any exception
+		// Catch and print out any exception
 		catch (Exception exception) {
 			 System.out.println(exception);
 			 out.close();
