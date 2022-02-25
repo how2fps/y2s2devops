@@ -19,7 +19,8 @@
 	<c:if test="${isListedUser == 'true'}">
 		<div class="d-flex flex-row p-3">
 			<section class="w-50 d-flex flex-column left-hand">
-				<img src="DisplayImageServlet?path=${item.image}" class="item-img" id="${item.image}"/>
+				<img src="DisplayImageServlet?path=${item.image}" class="item-img"
+					id="${item.image}" />
 			</section>
 			<section class="w-50 right-hand">
 				<div class="item-name">${item.name}</div>
@@ -35,35 +36,42 @@
 				<div class="button-container d-flex flex-row justify-content-around">
 					<a class="btn btn-warning mt-3" id="editItemDetailsBtn"
 						href="EditItemServlet?itemId=${item.id}">Edit Item Details</a> <a
-						class="btn btn-danger mt-3"
-						id="deleteItemBtn"
+						class="btn btn-danger mt-3" id="deleteItemBtn"
 						href="DeleteItemServlet?itemId=${item.id}"
 						onclick="return confirm('Are you sure you want to delete this item? THIS ACTION IS IRREVERSIBLE!')">Delete
 						Item</a>
 				</div>
 				<p class="mt-3 ar-text">All Reviews:</p>
 				<div class="review-container">
-				  <c:forEach var="review" items="${reviews}">
-				    <article class="review-card border rounded">
-                      <p class="review-username mr-2"><c:out value="${review.displayName}"/></p>
-                      <p class="review-content"><c:out value="${review.content}"/></p>
-                      <p class="review-time"><c:out value="${review.time}"/></p>
-                    </article> 
-                  </c:forEach>
+					<c:forEach var="review" items="${reviews}">
+						<article class="review-card border rounded">
+							<p class="review-username mr-2">
+								<c:out value="${review.displayName}" />
+							</p>
+							<p class="review-content">
+								<c:out value="${review.content}" />
+							</p>
+							<p class="review-time">
+								<c:out value="${review.time}" />
+							</p>
+						</article>
+					</c:forEach>
 				</div>
 			</section>
 		</div>
 	</c:if>
 	<div class="container d-flex flex-column align-items-center">
-	<br>
-	<c:if test="${alert != null}">
+		<br>
+		<c:if test="${alert != null}">
 			<div class="alert alert-warning" role="alert">
-  				<h4 class="alert-heading">${alert}</h4>
- 				<p>Press "OK" button to restart from Items Shop if issues persist on this page!</p>
-  				<hr>
-  				<button class="buttonalert btn btn-primary" onclick="location.href='ItemsShopServlet'">OK</button>
+				<h4 class="alert-heading">${alert}</h4>
+				<p>Press "OK" button to restart from Items Shop if issues
+					persist on this page!</p>
+				<hr>
+				<button class="buttonalert btn btn-primary"
+					onclick="location.href='ItemsShopServlet'">OK</button>
 			</div>
-	</c:if>
+		</c:if>
 	</div>
 	<!--If current user is not the one listing the item, then they can buy the item  -->
 	<c:if test="${isListedUser == 'false'}">
@@ -109,20 +117,29 @@
 						<label for="additemamount">How Many? </label> <input type="number"
 							min="0" max="99" class="shopadditemamount"
 							name="additemquantityofuser" required> <input
-							type="submit" class="btn btn-primary" id="addItemToCartBtn" value="Add to Cart" onclick="return confirm('Do you wish to add the item with reserved quantity to your cart?')">
+							type="submit" class="btn btn-primary" id="addItemToCartBtn"
+							value="Add to Cart"
+							onclick="return confirm('Do you wish to add the item with reserved quantity to your cart?')">
 					</div>
 				</form>
 				<p class="mt-3 ar-text">All Reviews:</p>
 				<div class="review-container">
-				  <a href="AddReviewServlet?itemId=${item.id}"><button>Add Review</button></a>
-				  <c:forEach var="review" items="${reviews}">
-				    <article class="review-card border rounded">
-                      <p class="review-username mr-2"><c:out value="${review.displayName}"/></p>
-                      <p class="review-content"><c:out value="${review.content}"/></p>
-                      <p class="review-time"><c:out value="${review.time}"/></p>
-                    </article> 
-                  </c:forEach>
-                </div>
+					<a href="AddReviewServlet?itemId=${item.id}"><button>Add
+							Review</button></a>
+					<c:forEach var="review" items="${reviews}">
+						<article class="review-card border rounded">
+							<p class="review-username mr-2">
+								<c:out value="${review.displayName}" />
+							</p>
+							<p class="review-content">
+								<c:out value="${review.content}" />
+							</p>
+							<p class="review-time">
+								<c:out value="${review.time}" />
+							</p>
+						</article>
+					</c:forEach>
+				</div>
 			</section>
 		</div>
 	</c:if>

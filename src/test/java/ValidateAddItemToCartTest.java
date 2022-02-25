@@ -45,10 +45,10 @@ public class ValidateAddItemToCartTest {
 		Assert.assertEquals(webDriver.getTitle(), "Items Shop");
 
 		// Discover the item from Items Shop page
-		Assert.assertTrue(webDriver.getPageSource().contains("KELL Keyboard"), "Item is in the Items Shop!");
+		Assert.assertTrue(webDriver.getPageSource().contains("Changed"), "Item is in the Items Shop!");
 
 		// Click the button based on target id of item
-		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
+		WebElement seeDetailsBtn = webDriver.findElement(By.id("ChangedseeDetailsBtn"));
 		seeDetailsBtn.click();
 
 		// Check if we are in the itemview page.

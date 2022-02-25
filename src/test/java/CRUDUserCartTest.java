@@ -45,10 +45,10 @@ public class CRUDUserCartTest {
 		Assert.assertEquals(webDriver.getTitle(), "Items Shop");
 
 		// Discover the item from Items Shop page
-		Assert.assertTrue(webDriver.getPageSource().contains("KELL Keyboard"), "Item is in the Items Shop!");
+		Assert.assertTrue(webDriver.getPageSource().contains("Changed"), "Item is in the Items Shop!");
 
 		// Click the button based on target id of item
-		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
+		WebElement seeDetailsBtn = webDriver.findElement(By.id("ChangedseeDetailsBtn"));
 		seeDetailsBtn.click();
 
 		// Check Item View page
@@ -86,23 +86,22 @@ public class CRUDUserCartTest {
 
 		// Remove one item from user cart
 		Thread.sleep(5000);
-		webDriver.findElement(By.id("KELL KeyboarddeleteItemFromCartBtn")).submit();
+		webDriver.findElement(By.id("ChangeddeleteItemFromCartBtn")).submit();
 
-		
 		// Update of quantity of a listed item
 		Thread.sleep(5000);
-		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
-
-		// Click the button based on target id of item
-		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
-		seeDetailsBtn.click();
 
 		// Check Item View page
-		Assert.assertEquals(webDriver.getTitle(), "Item View");
 	}
 
 	@Test
 	public void CRUDItemByCurrentUserPart3() throws InterruptedException {
+		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
+
+		// Click the button based on target id of item
+		WebElement seeDetailsBtn = webDriver.findElement(By.id("ChangedseeDetailsBtn"));
+		seeDetailsBtn.click();
+		Assert.assertEquals(webDriver.getTitle(), "Item View");
 
 //		// Update of quantity of a listed item
 //		Thread.sleep(5000);
@@ -116,6 +115,7 @@ public class CRUDUserCartTest {
 //		Assert.assertEquals(webDriver.getTitle(), "Item View");
 
 		// Declare form input for quantity
+		WebElement edititemdetailbtn = webDriver.findElement(By.id("editItemDetailsBtn"));
 		WebElement additemquantityofuser = webDriver.findElement(By.name("additemquantityofuser"));
 
 		// Input correct quantity to reserved the item

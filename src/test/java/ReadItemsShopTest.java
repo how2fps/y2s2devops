@@ -34,7 +34,7 @@ public class ReadItemsShopTest {
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
 		Assert.assertEquals(webDriver.getTitle(), "Items Shop");
 		// Discover the item from Items Shop page
-		Assert.assertTrue(webDriver.getPageSource().contains("KELL Keyboard"), "Item is in the Items Shop!");
+		Assert.assertTrue(webDriver.getPageSource().contains("Changed"), "Item is in the Items Shop!");
 
 	}
 
