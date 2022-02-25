@@ -109,7 +109,7 @@
 						<label for="additemamount">How Many? </label> <input type="number"
 							min="0" max="99" class="shopadditemamount"
 							name="additemquantityofuser" required> <input
-							type="submit" class="btn btn-primary" value="Add to Cart" onclick="return confirm('Do you wish to add the item with reserved quantity to your cart?')">
+							type="submit" class="btn btn-primary" id="addItemToCartBtn" value="Add to Cart" onclick="return confirm('Do you wish to add the item with reserved quantity to your cart?')">
 					</div>
 				</form>
 				<p class="mt-3 ar-text">All Reviews:</p>

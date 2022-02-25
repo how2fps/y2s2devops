@@ -27,7 +27,7 @@ public class ReviewsManagementServlet extends HttpServlet {
 	private String jdbcPassword = "";
 
 	// Prepared list of SQL prepared statements to perform Retrieve from database
-	private static final String SELECT_REVIEWS_BY_USER = "select * from review where UserId =?";
+	private static final String SELECT_REVIEWS_BY_USER = "select * from review where UserId = ?";
 
 	// Implement the getConnection method to facilitate connection to the database
 	// via JDBC
@@ -69,7 +69,7 @@ public class ReviewsManagementServlet extends HttpServlet {
 		}
 	}
 
-	// listItems function to connect to the database and retrieve all items listed by 
+	// listReviews function to connect to the database and retrieve all reviews posted by user
 	private void listReviews(HttpServletRequest request, HttpServletResponse response) 
 	  throws SQLException, IOException, ServletException {
 		
@@ -100,7 +100,7 @@ public class ReviewsManagementServlet extends HttpServlet {
 	   System.out.println(e.getMessage());
 	   }
 	   
-	  // Set the items list into the listItems attribute to be pass to the ReviewsManagement.jsp
+	  // Set the reviews by userId into the listReviews attribute to be pass to the ReviewsManagement.jsp
 	  request.setAttribute("listReviews", reviews);
 	  request.getRequestDispatcher("/ReviewsManagement.jsp").forward(request, response);
 	  }

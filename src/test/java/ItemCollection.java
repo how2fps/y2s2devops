@@ -14,15 +14,24 @@ public class ItemCollection {
 		 * Song("0004","bad guy","Billie Eilish",3.14));
 		 */
 
-		this.capacity = 20;
+		items.add(new Item(0, "Item1", "Description it is", "This image Rofl", 13.01, 10, 1,
+				java.sql.Date.valueOf("2020-03-11")));
+		items.add(new Item(2, "Item1", "Description it is", "This image Rofl", 100.00, 10, 1,
+				java.sql.Date.valueOf("2020-03-12")));
+		items.add(new Item(3, "Item1", "Description it is", "This image Rofl", 1.90, 10, 1,
+				java.sql.Date.valueOf("2020-03-13")));
+		items.add(new Item(4, "Item1", "Description it is", "This image Rofl", 65.86, 10, 1,
+				java.sql.Date.valueOf("2020-03-14")));
+		items.add(new Item(5, "Item1", "Description it is", "This image Rofl", 67.90, 10, 1,
+				java.sql.Date.valueOf("2020-03-15")));
+		items.add(new Item(6, "Item1", "Description it is", "This image Rofl", 2.09, 10, 1,
+				java.sql.Date.valueOf("2020-03-16")));
+
+		this.capacity = 6;
 	}
 
 	public ItemCollection(int capacity) {
 		this.capacity = capacity;
-	}
-
-	public List<Item> getItems() {
-		return items;
 	}
 
 	public void addItem(Item item) {
@@ -30,4 +39,9 @@ public class ItemCollection {
 			items.add(item);
 		}
 	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
 }

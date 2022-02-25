@@ -78,7 +78,7 @@ public class RegisterTest {
 		WebElement confirmPassword = webDriver.findElement(By.name("confirmPassword"));
 		WebElement displayName = webDriver.findElement(By.name("displayName"));
 		WebElement phoneNumber = webDriver.findElement(By.name("phoneNumber"));
-		email.sendKeys("test2@test.com");
+		email.sendKeys("test3@test.com");
 		password.sendKeys("password");
 		confirmPassword.sendKeys("password");
 		displayName.sendKeys("testName123");

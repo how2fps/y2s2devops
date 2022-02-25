@@ -6,6 +6,9 @@
       <class name="RegisterTest"/>
       <class name="LoginTest"/>
       <class name="AddItemTest"/>
+      <class name="ReadItemsShopTest"/>
+      <class name="ValidateAddItemToCartTest"/>
+      <class name="CRUDUserCartTest"/>
       <class name="ReadItemTest"/>
       <class name="EditItemTest"/>
       <class name="DeleteItemTest"/>
