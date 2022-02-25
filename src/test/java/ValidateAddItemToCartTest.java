@@ -26,7 +26,6 @@ public class ValidateAddItemToCartTest {
 		regdisplayName.sendKeys("DummyTest");
 		regphoneNumber.sendKeys("99999999");
 		webDriver.findElement(By.id("submit")).submit();
-//		Assert.assertEquals(webDriver.findElement(By.id("alert")).getText(), "Registration Successful!");
 
 		// Login page to access
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
@@ -57,8 +56,6 @@ public class ValidateAddItemToCartTest {
 		// Declare form input for quantity
 		WebElement additemquantityofuser = webDriver.findElement(By.name("additemquantityofuser"));
 
-		Thread.sleep(5000);
-
 		// Input a wrong quantity to reserved the item
 		additemquantityofuser.sendKeys("0");
 
@@ -67,7 +64,6 @@ public class ValidateAddItemToCartTest {
 
 		// Alert popups to indicate the validation of current user reserved quantity
 		Assert.assertEquals(webDriver.getTitle(), "Item View");
-		Thread.sleep(5000);
 
 		// Delete a dummy account to end the testing
 		webDriver.navigate().to("http://localhost:8090/devopsproject/Login.jsp");
