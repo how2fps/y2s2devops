@@ -8,9 +8,6 @@
 			<class name="AddItemTest" />
 			<class name="ReadItemTest" />
 			<class name="EditItemTest" />
-			<class name="ReadItemsShopTest" />
-			<class name="ValidateAddItemToCartTest" />
-			<class name="CRUDUserCartTest" />
 			<class name="DeleteItemTest" />
 			<class name="EditProfileTest" />
 			<class name="ChangePasswordTest" />
