@@ -107,10 +107,9 @@ public class UserCartServlet extends HttpServlet {
 		Connection connection = getConnection();
 
 		HttpSession session = request.getSession();
-		Integer userId = (Integer) (session.getAttribute("detailsId"));
-		PreparedStatement preparedStatement2 = connection
-				.prepareStatement("SELECT * FROM shopping_cart WHERE UserId = ?");
-		preparedStatement2.setInt(1, userId);
+		Integer currentuserId = (Integer) (session.getAttribute("detailsId"));
+		PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT * FROM shopping_cart WHERE UserId = ?");
+		preparedStatement2.setInt(1, currentuserId);
 		ResultSet rs2 = preparedStatement2.executeQuery();
 		while (rs2.next()) {
 			Integer shoppingCartId = rs2.getInt("Id");
@@ -128,16 +127,12 @@ public class UserCartServlet extends HttpServlet {
 				String description = rs.getString("description");
 				Integer pricing = rs.getInt("pricing");
 				Integer quantity = rs.getInt("quantity");
+				Integer userId = rs.getInt("userId");
 				String dateListed = rs.getString("dateListed");
 				System.out.println(shoppingCartId);
-				// To check the current user logged in about their cart items belongs to their
-				// shopping cart
-//				if (currentuserloggedin == shoppingCartId && currentuserloggedin != userId) {
+				// To check the current user logged in about their cart items belongs to their shopping cart
 				request.setAttribute("isShoppingCartUser", "true");
-//					request.setAttribute("currentUserLoggedInShoppingCart", shoppingCartId);
-//				} else {
-//					request.setAttribute("isShoppingCartUser", "false");
-//				}
+				request.setAttribute("currentUserLoggedInShoppingCart", shoppingCartId);
 				cartItems.add(new UserCart(id, shoppingCartId, itemId, itemAmount, totalPrice, name, description, image,
 						pricing, quantity, userId, dateListed));
 
@@ -217,7 +212,9 @@ public class UserCartServlet extends HttpServlet {
 	// check out
 	private void insertTransactionByUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		String id = request.getParameter("shoppingcartid");
+		
+		HttpSession session = request.getSession();
+		Integer shoppingCartId = (Integer) (session.getAttribute("detailsId"));
 
 		response.setContentType("text/html");
 
@@ -230,8 +227,6 @@ public class UserCartServlet extends HttpServlet {
 		String ItemTotalAmount8 = " ";
 
 		// To get all the parameter values as of all cart items from current user login
-		// cart
-		String buyinguserid[] = request.getParameterValues("buyinguserid");
 		String sellinguserid[] = request.getParameterValues("sellinguserid");
 		String itemid[] = request.getParameterValues("itemid");
 		String itemname[] = request.getParameterValues("itemname");
@@ -244,32 +239,22 @@ public class UserCartServlet extends HttpServlet {
 		String transactiontime = dtf.format(now);
 
 			try {
+				request.setAttribute("currentUserLoggedInShoppingCart", shoppingCartId);
 				Connection connection = getConnection();
 
 				PreparedStatement ps = connection.prepareStatement(INSERT_ALL_CART_ITEMS_TO_TRANSACTION_BY_USER);
 
-				for (int i = 0; i < buyinguserid.length; i++) {
+				for (int i = 0; i < sellinguserid.length; i++) {
 						
-						ItemBuyingUserId2 = buyinguserid[i];
 						ItemSellingUserId3 = sellinguserid[i];
 						ItemId4 = itemid[i];
 						ItemName5 = itemname[i];
 						ItemImage6 = itemimage[i];
 						ItemQuantity7 = itemquantity[i];
 						ItemTotalAmount8 = totalamount[i];
-						
-						ps.setInt(1, 0);
-						ps.setString(2, ItemBuyingUserId2);
-						ps.setString(3, ItemSellingUserId3);
-						ps.setString(4, ItemId4);
-						ps.setString(5, ItemName5);
-						ps.setString(6, ItemImage6);
-						ps.setString(7, ItemQuantity7);
-						ps.setString(8, ItemTotalAmount8);
-						ps.setString(9, transactiontime);
 
 				ps.setInt(1, 0);
-				ps.setString(2, ItemBuyingUserId2);
+				ps.setInt(2, shoppingCartId);
 				ps.setString(3, ItemSellingUserId3);
 				ps.setString(4, ItemId4);
 				ps.setString(5, ItemName5);

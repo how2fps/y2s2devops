@@ -56,7 +56,7 @@ public class CRUDUserCartTest {
 
 		// Declare form input for quantity
 		WebElement additemquantityofuser = webDriver.findElement(By.name("additemquantityofuser"));
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 
 		// Input correct quantity to reserved the item
 		additemquantityofuser.sendKeys("1");
@@ -65,12 +65,12 @@ public class CRUDUserCartTest {
 		webDriver.findElement(By.id("addItemToCartBtn")).submit();
 
 		// Delay this page to show the user cart of current user logged in
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 
 		// Direct to user cart of current user logged in
 		Assert.assertEquals(webDriver.getTitle(), "User Cart");
 
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		// Update of quantity of a listed item
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
 
@@ -79,43 +79,36 @@ public class CRUDUserCartTest {
 	@Test
 	public void CRUDItemByCurrentUserPart2() throws InterruptedException {
 
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		// Direct back to user cart
 		webDriver.navigate().to("http://localhost:8090/devopsproject/UserCartServlet");
 		Assert.assertEquals(webDriver.getTitle(), "User Cart");
 
 		// Remove one item from user cart
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		webDriver.findElement(By.id("ChangeddeleteItemFromCartBtn")).submit();
 
-		// Update of quantity of a listed item
-		Thread.sleep(5000);
+//		// Update of quantity of a listed item
+//		Thread.sleep(5000);
 
-		// Check Item View page
 	}
 
 	@Test
 	public void CRUDItemByCurrentUserPart3() throws InterruptedException {
+		// Update of quantity of a listed item
+	    Thread.sleep(5000);
+		
+		// Check Item View page
 		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
 
 		// Click the button based on target id of item
 		WebElement seeDetailsBtn = webDriver.findElement(By.id("ChangedseeDetailsBtn"));
 		seeDetailsBtn.click();
+
+		// Check Item View page
 		Assert.assertEquals(webDriver.getTitle(), "Item View");
 
-//		// Update of quantity of a listed item
-//		Thread.sleep(5000);
-//		webDriver.navigate().to("http://localhost:8090/devopsproject/ItemsShopServlet");
-//
-//		// Click the button based on target id of item
-//		WebElement seeDetailsBtn = webDriver.findElement(By.id("KELL KeyboardseeDetailsBtn"));
-//		seeDetailsBtn.click();
-//
-//		// Check Item View page
-//		Assert.assertEquals(webDriver.getTitle(), "Item View");
-
 		// Declare form input for quantity
-		WebElement edititemdetailbtn = webDriver.findElement(By.id("editItemDetailsBtn"));
 		WebElement additemquantityofuser = webDriver.findElement(By.name("additemquantityofuser"));
 
 		// Input correct quantity to reserved the item
@@ -125,7 +118,7 @@ public class CRUDUserCartTest {
 		webDriver.findElement(By.id("addItemToCartBtn")).submit();
 
 		// Delay this page to show the user cart of current user logged in
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 
 		// Checkout items from user cart
 		webDriver.findElement(By.id("checkOutBtn")).submit();
