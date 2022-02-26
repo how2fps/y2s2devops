@@ -1,15 +1,27 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout Scm') {
+        stage('Launch SCM') {
             steps {
                 git 'https://github.com/how2fps/y2s2devops'
             }
         }
+        
+        stage('Start Tomcat Server 9.0') {
+            steps {
+                bat "C:\\Users\\jered\\Desktop\\My Education Things\\DevOps Essentials\\apache-tomcat-9.0.58\\bin\\startup.bat"
+            }
+        }
 
-        stage('Maven Build 0') {
+        stage('Build') {
             steps {
                 bat 'mvn clean install test'
+            }
+        }
+        
+        stage('Deploying Application to Tomcat Server 9.0') {
+            steps {
+                bat "copy target\\devops-project-0.0.1-SNAPSHOT.war C:\\Users\\jered\\Desktop\\My Education Things\\DevOps Essentials\\apache-tomcat-9.0.58\\webapps\\devops-project.war"
             }
         }
     }
@@ -23,6 +35,6 @@ pipeline {
         }
     }
     triggers {
-        pollSCM(* * * * *')
+        pollSCM('* * * * *')
     }
 }
