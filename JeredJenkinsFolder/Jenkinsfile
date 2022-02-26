@@ -9,10 +9,10 @@ pipeline {
         
         stage('Start Tomcat Server 9.0') {
             steps {
-                bat C:\Users\jered\Desktop\"My Education Things"\"DevOps Essentials"\apache-tomcat-9.0.58\bin\startup.bat
+                bat "C:\\Users\\jered\\Desktop\\MyEducationThings\\DevOpsEssentials\\apache-tomcat-9.0.58\\bin\\startup.bat"
             }
         }
-        
+
         stage('Build') {
             steps {
                 bat 'mvn clean install test'
@@ -21,10 +21,9 @@ pipeline {
         
         stage('Deploying Application to Tomcat Server 9.0') {
             steps {
-                bat copy target\devops-project-0.0.1-SNAPSHOT.war C:\Users\jered\Desktop\"My Education Things"\"DevOps Essentials"\apache-tomcat-9.0.58\webapps\devops-project.war
+                bat "copy target\\devops-project-0.0.1-SNAPSHOT.war C:\\Users\\jered\\Desktop\\MyEducationThings\\DevOpsEssentials\\apache-tomcat-9.0.58\\webapps\\devops-project.war"
             }
         }
-        
     }
     tools {
         maven 'maven 3.8.2'
