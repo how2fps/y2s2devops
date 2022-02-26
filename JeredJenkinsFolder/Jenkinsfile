@@ -26,7 +26,7 @@ pipeline {
         
         stage('Deploying Application to Tomcat Server 9.0') {
             steps {
-                bat "copy target\\devops-project-0.0.1-SNAPSHOT.war C:\\Users\\jered\\Desktop\\MyEducationThings\\DevOpsEssentials\\apache-tomcat-9.0.58\\webapps\\devops-project.war"
+                bat "copy target\\devopsproject-0.0.1-SNAPSHOT.war C:\\Users\\jered\\Desktop\\MyEducationThings\\DevOpsEssentials\\apache-tomcat-9.0.58\\webapps\\devopsproject.war"
             }
         }
     }
