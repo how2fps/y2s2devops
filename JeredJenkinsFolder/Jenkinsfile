@@ -12,7 +12,7 @@ pipeline {
                 bat "C:\\Users\\jered\\Desktop\\"My Education Things"\\"DevOps Essentials"\\apache-tomcat-9.0.58\\bin\\startup.bat"
             }
         }
-
+        
         stage('Build') {
             steps {
                 bat 'mvn clean install test'
@@ -24,6 +24,7 @@ pipeline {
                 bat "copy target\\devops-project-0.0.1-SNAPSHOT.war C:\\Users\\jered\\Desktop\\"My Education Things"\\"DevOps Essentials"\\apache-tomcat-9.0.58\\webapps\\devops-project.war"
             }
         }
+        
     }
     tools {
         maven 'maven 3.8.2'
