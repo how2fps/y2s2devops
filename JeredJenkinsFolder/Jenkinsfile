@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+    	node { 
+        	label ''
+        	customWorkspace "C:\Users\jered\Desktop\MyEducationThings\DevOpsEssentials\MyDevOpsProjects\workspace"
+        }
+    }
     stages {
         stage('Launch SCM') {
             steps {
