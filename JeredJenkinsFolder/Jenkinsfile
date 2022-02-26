@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('Launch SCM') {
+        stage('Checkout SCM') {
             steps {
                 git 'https://github.com/how2fps/y2s2devops'
             }
